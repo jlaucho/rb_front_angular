@@ -1,14 +1,14 @@
-# RbFrontAngular
+# RB Servicios, front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+Este sistema se encuentra realizado en Angular [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecutar `ng serve` para levantar el servidor. para visualizar el sistema es `http://localhost:4200/`. La aplicacion abrira y se recargara automaticamente al detectr algun cambio en el sistema.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module|component`.
 
 ## Build
 
