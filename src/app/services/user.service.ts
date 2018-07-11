@@ -10,8 +10,18 @@ export class UserService {
 
   constructor( private _http: HttpClient ) { }
 
-  storageUser( user: User) {
-   localStorage.setItem('user', JSON.stringify( user ));
+  storageUser( data) {
+    let user = {
+      token: data.token,
+      token_type: data.token_type,
+      user: {
+        name: data.user.name,
+        apellido: data.user.apellido,
+        email: data.user.email
+      }
+    // tslint:disable-next-line:semicolon
+    }
+    localStorage.setItem('user', JSON.stringify( user ));
   }
 
   loginUser( user: Login ) {
