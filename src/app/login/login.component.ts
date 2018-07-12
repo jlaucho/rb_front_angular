@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
   };
 
 
-  constructor( private _userService: UserService, private router: RouterLink ) {
+  constructor( private _userService: UserService) {
 
     this.forma = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.email]),

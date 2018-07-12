@@ -4,7 +4,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" [routerLink]="['/dashboard']">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
@@ -173,10 +173,11 @@
                                     <div class="card">
                                         <div class="card-header" role="tab" id="headingOne">
                                             <h5 class="mb-0">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                           Collapsible Group Item #1
                                         </a>
-                                      </h5> </div>
+                                            </h5>
+                                        </div>
                                         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                             <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high. </div>
                                         </div>
@@ -184,10 +185,11 @@
                                     <div class="card">
                                         <div class="card-header" role="tab" id="headingTwo">
                                             <h5 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                           Collapsible Group Item #2
                                         </a>
-                                      </h5> </div>
+                                            </h5>
+                                        </div>
                                         <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                             <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. </div>
                                         </div>
@@ -195,10 +197,11 @@
                                     <div class="card">
                                         <div class="card-header" role="tab" id="headingThree">
                                             <h5 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                           Collapsible Group Item #3
                                         </a>
-                                      </h5> </div>
+                                            </h5>
+                                        </div>
                                         <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
                                             <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. </div>
                                         </div>
@@ -241,7 +244,7 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right animated bounceInDown"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
+                    <div class="dropdown-menu dropdown-menu-right animated bounceInDown"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a>                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
                 </li>
                 <!-- ============================================================== -->
                 <!-- Profile -->

@@ -5,41 +5,127 @@ export class SidebarService {
 
   menu: any = [
     {
-      titulo: 'Principal',
+      titulo: 'Usuario',
       icono: 'mdi mdi-gauge',
       submenu: [
         {
-        titulo: 'Dashboard',
-        url: '/dashboard',
+        titulo: 'Registrar',
+        url: '/userregister',
         },
         {
-          titulo: 'Usuario',
-          url: '/progress',
+          titulo: 'Buscar',
+          url: '',
+          submenu: [
+            {
+              titulo: 'Todos',
+              url: '/interno1',
+            },
+            {
+              titulo: 'Cedula',
+              url: '/interno2',
+            },
+            {
+              titulo: 'Activos',
+              url: '/interno2',
+            },
+            {
+              titulo: 'Inactivos',
+              url: '/interno2',
+            }
+          ]
         }
       ]
     },
     {
-      titulo: 'Usuario',
+      titulo: 'Empresa',
       icono: 'mdi mdi-bullseye',
       submenu: [
         {
-          titulo: 'Listar',
-          url: '/listarUsuarios',
+          titulo: 'Registrar',
+          url: '/registercompany',
         },
         {
-          titulo: 'Subsmenus',
+          titulo: 'Buscar',
           url: '',
           submenu: [
             {
-              titulo: 'menuInterno',
+              titulo: 'Todas',
               url: '/interno1',
             },
             {
-              titulo: 'Sub menu interno',
+              titulo: 'Por RIF',
+              url: '/interno2',
+            },
+            {
+              titulo: 'Por Nombre',
               url: '/interno2',
             }
           ]
         },
+      ]
+    },
+    {
+      titulo: 'Servicios',
+      icono: 'mdi mdi-bullseye',
+      submenu: [
+        {
+          titulo: 'Registrar',
+          url: '/listarUsuarios',
+        },
+        {
+          titulo: 'Buscar',
+          url: '',
+          submenu: [
+            {
+              titulo: 'Todos',
+              url: '/interno1',
+            },
+            {
+              titulo: 'Por ODC',
+              url: '/interno2',
+            },
+            {
+              titulo: 'Por Facturar',
+              url: '/interno2',
+            },
+            {
+              titulo: 'Facturados',
+              url: '/interno2',
+            }
+          ]
+        },
+      ]
+    },
+    {
+      titulo: 'Factura',
+      icono: 'mdi mdi-gauge',
+      submenu: [
+        {
+          titulo: 'Registrar',
+          url: '/',
+        },
+        {
+          titulo: 'Buscar',
+          url: '/',
+          submenu: [
+            {
+              titulo: 'Todas',
+              url: '/'
+            },
+            {
+              titulo: 'Pendientes',
+              url: '/',
+            },
+            {
+              titulo: 'Numero de Factura',
+              url: '/'
+            },
+            {
+              titulo: 'Rango de Fecha',
+              url: '/'
+            }
+          ]
+        }
       ]
     }
   ];

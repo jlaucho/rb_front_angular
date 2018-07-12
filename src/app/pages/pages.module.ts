@@ -6,6 +6,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     PagesComponent,
     DashboardComponent,
     ProgressComponent,
-    Graficas1Component
+    Graficas1Component,
+    UserComponent
   ],
   exports: [
     DashboardComponent,

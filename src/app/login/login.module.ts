@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { RouterModule } from '@angular/router';
-// import { SidebarService } from '../services/sidebar.service';
 import { UserService } from '../services/user.service';
 
 @NgModule({
@@ -12,18 +10,13 @@ import { UserService } from '../services/user.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    // RouterModule
+    HttpClientModule
   ],
   declarations: [
-    LoginComponent,
+    LoginComponent
   ],
   providers: [
-    UserService,
-    // SidebarService
-  ],
-  exports: [
-    LoginComponent
+    UserService
   ]
 })
 export class LoginModule { }
