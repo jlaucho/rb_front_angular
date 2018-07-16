@@ -1,12 +1,17 @@
 import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Graficas1Component } from './graficas1/graficas1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { GraficaService } from '../services/grafica.service';
+import { ChartsModule } from 'ng2-charts';
+import { GraficasComponent } from './graficas/graficas.component';
+
+
+
 
 
 
@@ -14,20 +19,23 @@ import { UserComponent } from './user/user.component';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
   ],
-  providers: [],
+  providers: [
+    GraficaService
+  ],
   declarations: [
     PagesComponent,
     DashboardComponent,
     ProgressComponent,
-    Graficas1Component,
-    UserComponent
+    UserComponent,
+    GraficasComponent
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
-    Graficas1Component
+    GraficasComponent
   ]
 })
 export class PagesModule { }
