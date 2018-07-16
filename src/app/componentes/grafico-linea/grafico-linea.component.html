@@ -1,0 +1,43 @@
+<div class="card-body">
+    <div class="d-flex">
+        <div>
+            <h3 class="card-title m-b-5"><span class="lstick"></span> Grafica de ingresos </h3>
+        </div>
+        <div class="ml-auto">
+            <select (change)='actualizarMes( 4 )' class="custom-select b-0">
+                <option selected="">Enero {{ anio }}</option>
+                <option value="1">Febrero {{ anio }}</option>
+                <option value="2">Marzo {{ anio }}</option>
+                <option value="3">Abril {{ anio }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="bg-theme stats-bar">
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <div class="p-20 active">
+                <h6 class="text-white">Total Facturado</h6>
+                <h3 class="text-white m-b-0">23,410,345.00</h3>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+            <div class="p-20">
+                <h6 class="text-white">Este mes</h6>
+                <h3 class="text-white m-b-0">10,254,253.00</h3>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+            <div class="p-20">
+                <h6 class="text-white">Esta semana</h6>
+                <h3 class="text-white m-b-0"> 0 </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div style="display: block">
+        <canvas baseChart [datasets]='ChartData' [labels]='ChartLabels' [chartType]='ChartType' [legend]='ChartLegend' [colors]='ChartColors' [options]='ChartOptions'>
+        </canvas>
+    </div>
+</div>

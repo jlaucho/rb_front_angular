@@ -1,0 +1,13 @@
+<div class="card {{ clase }} text-white">
+    <div class="card-body">
+        <div class="d-flex">
+            <div class="stats">
+                <h1 class="text-white">{{ montoTotal | currency:'Bs ':'code'}}</h1>
+                <h6 class="text-white">Cantidad: {{ cantidadOrdenes }} Ordenes</h6>
+                <h6 class="text-white">Servicios pendientes por {{ tipo }}</h6>
+                <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Ver Lista</button>
+            </div>
+            <div class="stats-icon text-right ml-auto"><i class="fa fa-twitter display-5 op-3 text-dark"></i></div>
+        </div>
+    </div>
+</div>

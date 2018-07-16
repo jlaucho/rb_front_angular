@@ -1,3 +1,4 @@
+import { GraficasComponent } from './graficas/graficas.component';
 import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,11 +9,9 @@ import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { GraficaService } from '../services/grafica.service';
 import { ChartsModule } from 'ng2-charts';
-import { GraficasComponent } from './graficas/graficas.component';
-
-
-
-
+import { GraficoLineaComponent } from '../componentes/grafico-linea/grafico-linea.component';
+import { WidgateComponent } from '../componentes/widgate/widgate.component';
+import { WidgateService } from '../services/widgate.service';
 
 
 @NgModule({
@@ -23,19 +22,21 @@ import { GraficasComponent } from './graficas/graficas.component';
     ChartsModule
   ],
   providers: [
-    GraficaService
+    GraficaService,
+    WidgateService
   ],
   declarations: [
     PagesComponent,
     DashboardComponent,
+    GraficasComponent,
     ProgressComponent,
     UserComponent,
-    GraficasComponent
+    GraficoLineaComponent,
+    WidgateComponent
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
-    GraficasComponent
   ]
 })
 export class PagesModule { }
