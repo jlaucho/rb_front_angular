@@ -7,7 +7,7 @@ import { PagesComponent } from './pages/pages.component';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProgressComponent } from './pages/progress/progress.component';
-import { Graficas1Component } from './pages/graficas1/graficas1.component';
+import { GraficasComponent } from './pages/graficas/graficas.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { UserComponent } from './pages/user/user.component';
 
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     children: [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'progress', component: ProgressComponent },
-        { path: 'graficas', component: Graficas1Component },
+        { path: 'graficas', component: GraficasComponent },
         { path: 'userregister', component: UserComponent },
     ] },
     { path: '**', component: NopagefoundComponent },
