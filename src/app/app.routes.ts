@@ -17,10 +17,11 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
     children: [
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'progress', component: ProgressComponent },
-        { path: 'graficas', component: GraficasComponent },
-        { path: 'userregister', component: UserComponent },
+        // tslint:disable-next-line:max-line-length
+        { path: 'dashboard', component: DashboardComponent, data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
+        { path: 'progress', component: ProgressComponent, data: {title: 'Progreso'} },
+        { path: 'graficas', component: GraficasComponent , data: {title: 'Graficas'}},
+        { path: 'userregister', component: UserComponent, data: {title: 'Registro'} },
     ] },
     { path: '**', component: NopagefoundComponent },
 

@@ -50,7 +50,7 @@ export class GraficaService {
        options: { rsponsive: true }
     };
     this.data = data;
-    console.log(this.data);
+    // console.log(this.data);
    }
 
    actualizarMes( mes: Number ) {
