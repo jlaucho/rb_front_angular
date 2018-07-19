@@ -10,7 +10,7 @@ export class SidebarService {
       submenu: [
         {
         titulo: 'Registrar',
-        url: '/userregister',
+        url: '/user-register',
         },
         {
           titulo: 'Buscar',
@@ -131,7 +131,7 @@ export class SidebarService {
   ];
 
   constructor() {
-    console.log(this.menu[1].submenu[1].submenu[0].titulo);
+    // console.log(this.menu[1].submenu[1].submenu[0].titulo);
    }
 
 }

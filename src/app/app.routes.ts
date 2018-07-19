@@ -9,19 +9,24 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProgressComponent } from './pages/progress/progress.component';
 import { GraficasComponent } from './pages/graficas/graficas.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
-import { UserComponent } from './pages/user/user.component';
+
 
 import { LoginComponent } from './login/login.component';
-
+import { UserRegisterComponent } from './pages/user/register/user-register.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
     children: [
         // tslint:disable-next-line:max-line-length
-        { path: 'dashboard', component: DashboardComponent, data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
-        { path: 'progress', component: ProgressComponent, data: {title: 'Progreso'} },
-        { path: 'graficas', component: GraficasComponent , data: {title: 'Graficas'}},
-        { path: 'userregister', component: UserComponent, data: {title: 'Registro'} },
+        { path: 'dashboard', component: DashboardComponent,
+                data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
+        { path: 'progress', component: ProgressComponent,
+                data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'} },
+        { path: 'graficas', component: GraficasComponent ,
+                data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
+        { path: 'user-register', component: UserRegisterComponent, data:
+                {title: 'Usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
+        { path: '', component: DashboardComponent },
     ] },
     { path: '**', component: NopagefoundComponent },
 

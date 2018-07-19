@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registro de usuario</h5>
+                <h6 class="card-subtitle">Sistema de registro de usuarios al sistema</h6>
+                <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <select formControlName="select1" name="select1" class="form-control p-0" id="input6">
+                                    <option></option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                                <span class="bar"></span>
+                                <label for="input6">Gender</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <select formControlName="select2" name="select2" class="form-control p-0" id="input6">
+                                    <option></option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                                <span class="bar"></span>
+                                <label for="input6">Gender</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <select formControlName="type" name="type" class="form-control p-0" id="input6">
+                                    <option></option>
+                                    <option>Administrador</option>
+                                    <option>Cliente</option>
+                                    <option>Trabajador</option>
+                                </select>
+                                <span class="bar"></span>
+                                <label for="input6">Tipo</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="name" name="name" class="form-control">
+                                <span class="bar"></span>
+                                <label for="name">Nombre</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="apellido" name="apellido" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Apellido</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="cedula" name="cedula" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Cedula</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="direccion" name="direccion" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Direcci&oacute;n</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="email" formControlName="email" name="email" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Email</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <input type="password" formControlName="password" name="password" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Clave</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group m-b-40">
+                                <input type="password" formControlName="password_confirm" name="password_confirm" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Repita la clave</label>
+                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="button" class="btn btn-info waves-effect text-left " data-dismiss="modal">volver</button>
+                            <span class="pull-right">
+                                <button type="reset" (click)="bajarLabel();" class="btn btn-warning waves-effect text-left">Limpiar</button>
+                                <button type="submit" class="btn btn-primary waves-effect text-left">Registrar</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

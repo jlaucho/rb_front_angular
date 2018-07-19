@@ -24,7 +24,6 @@ export class BreadcrumbsComponent implements OnInit {
       map( (evento: ActivationEnd) => evento.snapshot.data )
     )
     .subscribe( event => {
-      console.log( event );
       this.getDataRoute( event );
 
     });
