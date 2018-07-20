@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login } from '../interfaces/login';
+import { User } from '../interfaces/user';
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -19,13 +21,17 @@ export class UserService {
         apellido: data.user.apellido,
         email: data.user.email
       }
-    // tslint:disable-next-line:semicolon
-    }
+    };
     localStorage.setItem('user', JSON.stringify( user ));
   }
 
   loginUser( user: Login ) {
     let url = `${ environment.basePath }/api/v1/auth/login`;
+    return this._http.post( url, user );
+  }
+  registerUser( user: User ) {
+    let url = `${ environment.basePath }/api/v1/user/store`;
+    console.log( user );
     return this._http.post( url, user );
   }
 }

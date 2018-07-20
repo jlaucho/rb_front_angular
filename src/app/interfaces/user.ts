@@ -1,10 +1,10 @@
 export interface User {
-    apellido: String;
-    cedula: String;
-    direccion: String;
+    apellido: string;
+    cedula: string;
+    direccion: string;
     telefono: string;
-    email: String;
+    email: string;
     id: Number;
-    name: String;
-    type: String;
+    name: string;
+    type: string;
 }

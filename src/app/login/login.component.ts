@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
 }
 
-export interface Recuerdame {
+interface Recuerdame {
   user: String;
   activo: Boolean;
 }
