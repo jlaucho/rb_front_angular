@@ -10,7 +10,7 @@
 
                         <div class="col-6">
                             <div class="form-group m-b-40">
-                                <input type="text" (change)="cambioNombre()" formControlName="name" name="name" class="form-control">
+                                <input type="text" formControlName="name" name="name" class="form-control">
                                 <span class="bar"></span>
                                 <label for="name">Nombre</label>
                                 <span class="help-block"><small>{{ forma.controls['name'].valid }}</small></span>
@@ -101,6 +101,7 @@
                             <span class="pull-right">
                                 <button type="reset" class="btn btn-warning waves-effect text-left">Limpiar</button>
                                 <button type="submit" class="btn btn-primary waves-effect text-left">Registrar</button>
+                                <button type="button" (click)="emailTaken()" class="btn btn-primary waves-effect text-left">verificar Email</button>
                             </span>
                         </div>
                     </div>

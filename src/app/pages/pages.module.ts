@@ -11,9 +11,11 @@ import { ChartsModule } from 'ng2-charts';
 import { GraficoLineaComponent } from '../componentes/grafico-linea/grafico-linea.component';
 import { WidgateComponent } from '../componentes/widgate/widgate.component';
 import { WidgateService } from '../services/widgate.service';
+import { ValidatorsService } from '../services/validators.service';
+
 import { UserRegisterComponent } from './user/register/user-register.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     GraficaService,
-    WidgateService
+    WidgateService,
+    ValidatorsService
   ],
   declarations: [
     PagesComponent,

@@ -31,7 +31,6 @@ export class UserService {
   }
   registerUser( user: User ) {
     let url = `${ environment.basePath }/api/v1/user/store`;
-    console.log( user );
     return this._http.post( url, user );
   }
 }
