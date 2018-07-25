@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { resolve } from 'path';
 
 @Component({
   selector: 'app-user-register',
@@ -18,11 +19,12 @@ export class UserRegisterComponent implements OnInit {
   ucedulaPattern = '^[0-9]+$';
   caracterMin = 4;
   caracterMax = 25;
+  email: string;
 
- 
 
-   constructor( private _userService: UserService,
-               private _validatorsService: ValidatorsService ) { }
+
+   constructor( public _userService: UserService,
+               public _validatorsService: ValidatorsService ) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -30,11 +32,11 @@ export class UserRegisterComponent implements OnInit {
                           Validators.maxLength( this.caracterMax ),
                           Validators.required,
                           Validators.pattern(this.unamePattern)]),
-      apellido: new FormControl('laucho', [Validators.minLength(this.caracterMin),
+      apellido: new FormControl(null, [Validators.minLength(this.caracterMin),
                           Validators.maxLength(this.caracterMax),
                           Validators.required,
                           Validators.pattern(this.unamePattern)]),
-      cedula: new FormControl('14136448', [Validators.minLength(7),
+      cedula: new FormControl(null, [Validators.minLength(7),
                           Validators.maxLength(8),
                           Validators.required,
                           Validators.pattern(this.ucedulaPattern),
@@ -42,10 +44,10 @@ export class UserRegisterComponent implements OnInit {
       direccion: new FormControl(null, [Validators.required,
                           Validators.minLength(6),
                           Validators.maxLength(250)]),
-      telefono:  new FormControl('04165608003', [Validators.required]),
+      telefono:  new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required,
-                          Validators.email]),
-      type: new FormControl('superAdmin', [Validators.required]),
+                          Validators.email], this.existeDB),
+      type: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required,
                           Validators.minLength(6),
                           Validators.maxLength(20)]),
@@ -71,29 +73,35 @@ export class UserRegisterComponent implements OnInit {
       if ( pass1 === pass2 ) {
         return null;
       }
-      return {Iguales: true};
+      return {iguales: true};
     };
+  }
+
+  existeDB ( group: FormControl ): Promise<any> | Observable<any> {
+
+    return this.emailTaken();
   }
 
   enviarFormulario() {
     this.user = this.forma.value;
-    console.log( this.forma.errors );
-    // this._userService.registerUser( this.user )
-    //   .subscribe( (respuesta: any ) => {
-    //     console.log( respuesta );
-    //   });
+    this._userService.registerUser( this.user )
+      .subscribe( (respuesta: any ) => {
+        console.log( respuesta );
+      });
 
   }
 
-  emailTaken(  ) {
-    let email = 'jlaucho@gmail.com';
+  emailTaken(  ): any {
+    let email = this.forma.controls['email'].value;
     // console.log( email, 'Correo enviado' );
     return this._validatorsService.emailTaken( email )
         .subscribe( (respuesta: any) => {
-          if (respuesta) {
-            return { existe: true };
+          let resp: Object = null;
+          if ( respuesta ) {
+            resp = { existe: true };
           }
-          return null;
+          console.log(resp);
+          return resp;
         });
   }
 }
