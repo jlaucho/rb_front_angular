@@ -13,7 +13,10 @@
                                 <input type="text" formControlName="name" name="name" class="form-control">
                                 <span class="bar"></span>
                                 <label for="name">Nombre</label>
-                                <span class="help-block"><small>{{ forma.controls['name'].valid }}</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.minlength && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.required && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre es obligatorio</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.maxlength && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.pattern && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El formato del nombre no es valido</small></span>
                             </div>
                         </div>
 
@@ -22,7 +25,10 @@
                                 <input type="text" formControlName="apellido" name="apellido" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Apellido</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['apellido'].errors?.minlength && !forma.controls['apellido'].pristine && forma.controls['apellido'].touched" class="inputlabel errorClass"> <small> El apellido debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['apellido'].errors?.required && !forma.controls['apellido'].pristine && forma.controls['apellido'].touched" class="inputlabel errorClass"> <small> El apellido es obligatorio</small></span>
+                                <span *ngIf="forma.controls['apellido'].errors?.maxlength && !forma.controls['apellido'].pristine && forma.controls['apellido'].touched" class="inputlabel errorClass"> <small> El apellido NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.controls['apellido'].errors?.pattern && !forma.controls['apellido'].pristine && forma.controls['apellido'].touched" class="inputlabel errorClass"> <small> El formato del apellido no es valido</small></span>
                             </div>
                         </div>
 
@@ -31,7 +37,7 @@
                                 <input type="text" formControlName="cedula" name="cedula" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Cedula</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span class="help-block"><small>{{ forma.controls['cedula'].valid }}</small></span>
                             </div>
                         </div>
 
@@ -104,6 +110,7 @@
                                 <button type="button" (click)="emailTaken()" class="btn btn-primary waves-effect text-left">verificar Email</button>
                             </span>
                         </div>
+                        {{ forma.errors | json}}
                     </div>
                 </form>
             </div>
