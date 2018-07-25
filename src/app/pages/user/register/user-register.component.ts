@@ -4,7 +4,6 @@ import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { Observable } from 'rxjs/Observable';
-import { resolve } from 'path';
 
 @Component({
   selector: 'app-user-register',
@@ -20,11 +19,12 @@ export class UserRegisterComponent implements OnInit {
   caracterMin = 4;
   caracterMax = 25;
   email: string;
+  debouncer: any;
 
 
 
    constructor( public _userService: UserService,
-               public _validatorsService: ValidatorsService ) { }
+               public _validatorsService: ValidatorsService) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -46,7 +46,7 @@ export class UserRegisterComponent implements OnInit {
                           Validators.maxLength(250)]),
       telefono:  new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required,
-                          Validators.email], this.existeDB),
+                          Validators.email], this.existeDB.bind( this )),
       type: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required,
                           Validators.minLength(6),
@@ -65,7 +65,11 @@ export class UserRegisterComponent implements OnInit {
     }
   }
 
-  sonIguales () {
+  limpiar(): void {
+    this.forma.reset();
+  }
+
+  sonIguales (): any {
     return  (group: FormGroup) => {
       let pass1 = group.controls['password'].value;
       let pass2 = group.controls['password_confirmation'].value;
@@ -77,31 +81,41 @@ export class UserRegisterComponent implements OnInit {
     };
   }
 
-  existeDB ( group: FormControl ): Promise<any> | Observable<any> {
-
-    return this.emailTaken();
+  // tslint:disable-next-line:member-ordering
+  existeDB ( group: FormControl): Promise<any> | Observable<any> {
+    let promesa = new Promise(
+      ( resolve ) => {
+          this._validatorsService.emailTaken( group.value )
+              .subscribe((respuesta) => {
+            if (respuesta) {
+              resolve({'existe': true});
+            } else {
+              resolve(null);
+            }
+          });
+      });
+    return promesa;
   }
 
   enviarFormulario() {
     this.user = this.forma.value;
-    this._userService.registerUser( this.user )
-      .subscribe( (respuesta: any ) => {
-        console.log( respuesta );
-      });
+    console.log( this.forma );
+    // this._userService.registerUser( this.user )
+    //   .subscribe( (respuesta: any ) => {
+    //     console.log( respuesta );
+    //   });
 
   }
 
-  emailTaken(  ): any {
-    let email = this.forma.controls['email'].value;
-    // console.log( email, 'Correo enviado' );
-    return this._validatorsService.emailTaken( email )
-        .subscribe( (respuesta: any) => {
-          let resp: Object = null;
-          if ( respuesta ) {
-            resp = { existe: true };
-          }
-          console.log(resp);
-          return resp;
-        });
-  }
+  // tslint:disable-next-line:member-ordering
+  // emailTaken( email: string ): any {
+  //   this._validatorsService.emailTaken( email )
+  //             .subscribe((respuesta) => {
+  //           if (respuesta) {
+  //             return {'existe': true};
+  //           } else {
+  //             return null;
+  //           }
+  //         });
+  // }
 }

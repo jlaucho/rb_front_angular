@@ -75,6 +75,7 @@
                                 <span *ngIf="forma.controls['email'].errors?.required && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El email es obligatorio</small></span>
                                 <br>
                                 <span *ngIf="forma.controls['email'].errors?.email && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El formato del email no es valido</small></span>
+                                <span *ngIf="forma.controls['email'].errors?.existe && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El correo ya se encuentra registrado</small></span>
                             </div>
                         </div>
 
@@ -120,16 +121,16 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <button type="button" class="btn btn-info waves-effect text-left " data-dismiss="modal">volver</button>
                             <span class="pull-right">
-                                <button type="reset" class="btn btn-warning waves-effect text-left">Limpiar</button>
+                                <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
                                 <button type="submit" [disabled]="forma.invalid" class="btn btn-primary waves-effect text-left">Registrar</button>
-                                <button type="button" (click)="emailTaken()">Ver respuesta</button>  
+                                <button type="button" (click)="enviarFormulario()">Ver respuesta</button>  
                             </span>
                         </div>
                     </div>
                     <div class="row container-fluid">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div *ngIf="forma.controls['name'].errors" class="alert alert-danger" role="alert">
-                                <strong>{{ forma.status }}</strong>
+                            <div *ngIf="true" class="alert alert-danger" role="alert">
+                                <strong>{{ forma.controls['email'].errors?.existe }}</strong>
                             </div>
                         </div>
                     </div>
