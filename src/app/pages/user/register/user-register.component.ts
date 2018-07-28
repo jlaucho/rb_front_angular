@@ -53,7 +53,7 @@ export class UserRegisterComponent implements OnInit {
                           Validators.minLength(6),
                           Validators.maxLength(20)]),
     }, { validators: this.sonIguales()});
-    // Se quita el autorrellenado de las casillas
+    // Se quita el autorellenado de las casillas
     let entradas = window.document.getElementById('form-register').getElementsByTagName('input');
     for (const key in entradas) {
       if (entradas.hasOwnProperty(key)) {
@@ -62,7 +62,9 @@ export class UserRegisterComponent implements OnInit {
       }
     }
   }
+  // fin de eliminacion de autorellenado
 
+// Validacion de password iguales
   sonIguales () {
     return  (group: FormGroup) => {
       let pass1 = group.controls['password'].value;
@@ -74,17 +76,18 @@ export class UserRegisterComponent implements OnInit {
       return {Iguales: true};
     };
   }
-
+// fin de la validacion de password iguales
+// se envia la data al servicio para que la grabe en la BD
   enviarFormulario() {
     this.user = this.forma.value;
-    console.log( this.forma.errors );
-    // this._userService.registerUser( this.user )
-    //   .subscribe( (respuesta: any ) => {
-    //     console.log( respuesta );
-    //   });
+    // console.log( this.forma.errors );
+    this._userService.registerUser( this.user )
+      .subscribe( (respuesta: any ) => {
+        console.log( respuesta );
+      });
 
   }
-
+// Validacion de verificacion si el email ya se encuentra registrado
   emailTaken(  ) {
     let email = 'jlaucho@gmail.com';
     // console.log( email, 'Correo enviado' );
@@ -96,4 +99,5 @@ export class UserRegisterComponent implements OnInit {
           return null;
         });
   }
+  // fin de la validacion del email
 }
