@@ -13,6 +13,7 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 
 import { LoginComponent } from './login/login.component';
 import { UserRegisterComponent } from './pages/user/register/user-register.component';
+import { UserListComponent } from './pages/user/user-list/user-list.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
@@ -25,7 +26,9 @@ const appRoutes: Routes = [
         { path: 'graficas', component: GraficasComponent ,
                 data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
         { path: 'user-register', component: UserRegisterComponent, data:
-                {title: 'Usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
+                {title: 'Registro de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
+        { path: 'user-list', component: UserListComponent, data:
+                {title: 'Lista de usuarios', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Listar'} },
         { path: '', component: DashboardComponent },
     ] },
     { path: '**', component: NopagefoundComponent },

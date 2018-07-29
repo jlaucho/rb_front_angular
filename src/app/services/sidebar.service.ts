@@ -18,7 +18,7 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todos',
-              url: '/interno1',
+              url: '/user-list',
             },
             {
               titulo: 'Cedula',

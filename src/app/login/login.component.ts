@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+
+declare function init_plugis();
 
 
 @Component({
@@ -17,7 +20,8 @@ export class LoginComponent implements OnInit {
   };
 
 
-  constructor( private _userService: UserService) {
+  constructor( private _userService: UserService,
+               private router: Router) {
 
     this.forma = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.email]),
@@ -35,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_plugis();
   }
   enviarLogin() {
     console.log(this.forma.value);
@@ -45,6 +50,7 @@ export class LoginComponent implements OnInit {
     }
     this._userService.loginUser( this.forma.value ).subscribe( (data: any) => {
       this._userService.storageUser( data );
+      this.router.navigate(['/dashboard']);
     });
   }
 

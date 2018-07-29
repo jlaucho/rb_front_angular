@@ -17,6 +17,10 @@ import { UserRegisterComponent } from './user/register/user-register.component';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TablaComponent } from '../componentes/tabla/tabla.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { DataTableModule } from 'angular5-data-table';
+
 
 @NgModule({
   imports: [
@@ -26,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTableModule.forRoot()
   ],
   providers: [
     GraficaService,
@@ -40,7 +45,9 @@ import { HttpClientModule } from '@angular/common/http';
     ProgressComponent,
     GraficoLineaComponent,
     WidgateComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    TablaComponent,
+    UserListComponent
   ],
   exports: [
     DashboardComponent,

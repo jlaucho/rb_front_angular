@@ -37,7 +37,10 @@
                                 <input type="text" formControlName="cedula" name="cedula" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Cedula</label>
-                                <span class="help-block"><small>{{ forma.controls['cedula'].valid }}</small></span>
+                                <span *ngIf="forma.controls['cedula'].errors?.minlength && !forma.controls['cedula'].pristine && forma.controls['cedula'].touched" class="inputlabel errorClass"> <small> El cedula debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['cedula'].errors?.required && !forma.controls['cedula'].pristine && forma.controls['cedula'].touched" class="inputlabel errorClass"> <small> El cedula es obligatorio</small></span>
+                                <span *ngIf="forma.controls['cedula'].errors?.maxlength && !forma.controls['cedula'].pristine && forma.controls['cedula'].touched" class="inputlabel errorClass"> <small> El cedula NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.controls['cedula'].errors?.pattern && !forma.controls['cedula'].pristine && forma.controls['cedula'].touched" class="inputlabel errorClass"> <small> El formato del cedula no es valido</small></span>
                             </div>
                         </div>
 
@@ -46,7 +49,9 @@
                                 <input type="text" formControlName="direccion" name="direccion" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Direcci&oacute;n</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['direccion'].errors?.minlength && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['direccion'].errors?.required && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion es obligatorio</small></span>
+                                <span *ngIf="forma.controls['direccion'].errors?.maxlength && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion NO debe exceder los {{ caracterMax }} caracteres</small></span>
                             </div>
                         </div>
 
@@ -55,7 +60,10 @@
                                 <input type="telefono" formControlName="telefono" name="telefono" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Telefono</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.minlength && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El telefono debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.required && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El telefono es obligatorio</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.maxlength && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El telefono NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.pattern && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El formato del telefono no es valido</small></span>
                             </div>
                         </div>
 
@@ -64,7 +72,10 @@
                                 <input type="email" formControlName="email" name="email" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Email</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['email'].errors?.required && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El email es obligatorio</small></span>
+                                <br>
+                                <span *ngIf="forma.controls['email'].errors?.email && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El formato del email no es valido</small></span>
+                                <span *ngIf="forma.controls['email'].errors?.existe && !forma.controls['email'].pristine && forma.controls['email'].touched" class="inputlabel errorClass"> <small> El correo ya se encuentra registrado</small></span>
                             </div>
                         </div>
 
@@ -73,12 +84,13 @@
                                 <select formControlName="type" name="type" class="form-control p-0" id="input7">
                                     <option></option>
                                     <option value="superAdmin">Administrador</option>
-                                    <option value="cliente">Cliente</option>
+                                    <option value="admin">Administrativo</option>
+                                    <option value="user">Usuario</option>
                                     <option value="conductor">Trabajador</option>
                                 </select>
                                 <span class="bar"></span>
                                 <label for="input6">Tipo</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['type'].errors?.required && !forma.controls['type'].pristine && forma.controls['type'].touched" class="inputlabel errorClass"> <small> La jerarquia es obligatoria</small></span>
                             </div>
                         </div>
 
@@ -87,7 +99,9 @@
                                 <input type="password" formControlName="password" name="password" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Clave</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['password'].errors?.minlength && !forma.controls['password'].pristine && forma.controls['password'].touched" class="inputlabel errorClass"> <small>  La clave debe contener mas de 6 caracteres</small></span>
+                                <span *ngIf="forma.controls['password'].errors?.required && !forma.controls['password'].pristine && forma.controls['password'].touched" class="inputlabel errorClass"> <small>  La clave es obligatorio</small></span>
+                                <span *ngIf="forma.controls['password'].errors?.maxlength && !forma.controls['password'].pristine && forma.controls['password'].touched" class="inputlabel errorClass"> <small>  La clave NO debe exceder los 20 caracteres</small></span>
                             </div>
                         </div>
 
@@ -96,7 +110,10 @@
                                 <input type="password" formControlName="password_confirmation" name="password_confirm" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Repita la clave</label>
-                                <span class="help-block"><small>A block of help text that breaks onto a new .</small></span>
+                                <span *ngIf="forma.controls['password_confirmation'].errors?.minlength && !forma.controls['password_confirmation'].pristine && forma.controls['password_confirmation'].touched" class="inputlabel errorClass"> <small> La clave debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['password_confirmation'].errors?.required && !forma.controls['password_confirmation'].pristine && forma.controls['password_confirmation'].touched" class="inputlabel errorClass"> <small> La clave es obligatorio</small></span>
+                                <span *ngIf="forma.controls['password_confirmation'].errors?.maxlength && !forma.controls['password_confirmation'].pristine && forma.controls['password_confirmation'].touched" class="inputlabel errorClass"> <small> La clave NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.errors?.iguales" class="inputlabel errorClass"> <small> Las claves NO coinciden</small></span>
                             </div>
                         </div>
 
@@ -105,12 +122,17 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <button type="button" class="btn btn-info waves-effect text-left " data-dismiss="modal">volver</button>
                             <span class="pull-right">
-                                <button type="reset" class="btn btn-warning waves-effect text-left">Limpiar</button>
-                                <button type="submit" class="btn btn-primary waves-effect text-left">Registrar</button>
-                                <button type="button" (click)="emailTaken()" class="btn btn-primary waves-effect text-left">verificar Email</button>
+                                <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
+                                <button type="submit" [disabled]="forma.invalid" class="btn btn-primary waves-effect text-left">Registrar</button>
                             </span>
                         </div>
-                        {{ forma.errors | json}}
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div *ngIf="true" class="alert alert-danger" role="alert">
+                                <strong>{{ forma.controls['email'].errors?.existe }}</strong>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-user-register',
@@ -18,11 +18,13 @@ export class UserRegisterComponent implements OnInit {
   ucedulaPattern = '^[0-9]+$';
   caracterMin = 4;
   caracterMax = 25;
+  email: string;
+  debouncer: any;
 
- 
 
-   constructor( private _userService: UserService,
-               private _validatorsService: ValidatorsService ) { }
+
+   constructor( public _userService: UserService,
+               public _validatorsService: ValidatorsService) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -30,11 +32,11 @@ export class UserRegisterComponent implements OnInit {
                           Validators.maxLength( this.caracterMax ),
                           Validators.required,
                           Validators.pattern(this.unamePattern)]),
-      apellido: new FormControl('laucho', [Validators.minLength(this.caracterMin),
+      apellido: new FormControl(null, [Validators.minLength(this.caracterMin),
                           Validators.maxLength(this.caracterMax),
                           Validators.required,
                           Validators.pattern(this.unamePattern)]),
-      cedula: new FormControl('14136448', [Validators.minLength(7),
+      cedula: new FormControl(null, [Validators.minLength(7),
                           Validators.maxLength(8),
                           Validators.required,
                           Validators.pattern(this.ucedulaPattern),
@@ -42,10 +44,10 @@ export class UserRegisterComponent implements OnInit {
       direccion: new FormControl(null, [Validators.required,
                           Validators.minLength(6),
                           Validators.maxLength(250)]),
-      telefono:  new FormControl('04165608003', [Validators.required]),
+      telefono:  new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required,
-                          Validators.email]),
-      type: new FormControl('superAdmin', [Validators.required]),
+                          Validators.email], this.existeDB.bind( this )),
+      type: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required,
                           Validators.minLength(6),
                           Validators.maxLength(20)]),
@@ -64,8 +66,14 @@ export class UserRegisterComponent implements OnInit {
   }
   // fin de eliminacion de autorellenado
 
-// Validacion de password iguales
-  sonIguales () {
+  // Limpiar el formulario
+  limpiar(): void {
+    this.forma.reset();
+  }
+  // fin de limpiar el formulario
+
+  // Validacion de password iguales
+  sonIguales (): any {
     return  (group: FormGroup) => {
       let pass1 = group.controls['password'].value;
       let pass2 = group.controls['password_confirmation'].value;
@@ -73,31 +81,37 @@ export class UserRegisterComponent implements OnInit {
       if ( pass1 === pass2 ) {
         return null;
       }
-      return {Iguales: true};
+      return {iguales: true};
     };
   }
-// fin de la validacion de password iguales
-// se envia la data al servicio para que la grabe en la BD
+  // Fin de la validacion de password iguales
+
+  // Validacion de correo existente en la BD
+  existeDB ( group: FormControl): Promise<any> | Observable<any> {
+    let promesa = new Promise(
+      ( resolve ) => {
+          this._validatorsService.emailTaken( group.value )
+              .subscribe((respuesta) => {
+            if (respuesta) {
+              resolve({'existe': true});
+            } else {
+              resolve(null);
+            }
+          });
+      });
+    return promesa;
+  }
+  // Fin de la validacion de correo existente
+
+  // Envo de formulario
   enviarFormulario() {
     this.user = this.forma.value;
-    // console.log( this.forma.errors );
+    console.log( this.forma );
     this._userService.registerUser( this.user )
       .subscribe( (respuesta: any ) => {
         console.log( respuesta );
       });
 
   }
-// Validacion de verificacion si el email ya se encuentra registrado
-  emailTaken(  ) {
-    let email = 'jlaucho@gmail.com';
-    // console.log( email, 'Correo enviado' );
-    return this._validatorsService.emailTaken( email )
-        .subscribe( (respuesta: any) => {
-          if (respuesta) {
-            return { existe: true };
-          }
-          return null;
-        });
-  }
-  // fin de la validacion del email
+
 }
