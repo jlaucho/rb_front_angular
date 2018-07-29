@@ -19,7 +19,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TablaComponent } from '../componentes/tabla/tabla.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { DataTableModule } from 'angular5-data-table';
 
 
 @NgModule({
@@ -31,7 +30,6 @@ import { DataTableModule } from 'angular5-data-table';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTableModule.forRoot()
   ],
   providers: [
     GraficaService,

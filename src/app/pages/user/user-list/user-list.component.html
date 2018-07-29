@@ -26,9 +26,9 @@
                             <th>Acci&oacute;n</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let usuario of usuarios">
+                    <tbody *ngFor="let usuario of usuarios; index as i">
                         <tr>
-                            <td>1</td>
+                            <td>{{ (i + 1) }}</td>
                             <td>{{ usuario.name }}</td>
                             <td>{{ usuario.apellido }}</td>
                             <td>{{ usuario.email }}</td>

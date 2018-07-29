@@ -7,10 +7,11 @@ declare function init_plugis();
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    init_plugis();
+   }
 
   ngOnInit() {
-    init_plugis();
   }
 
 }
