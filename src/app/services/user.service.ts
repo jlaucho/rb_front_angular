@@ -43,6 +43,4 @@ export class UserService {
     console.log( headers );
     return this._http.get(url, {headers});
   }
-  
-  }
 }

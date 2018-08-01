@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
+import { FuncionesGenericasService } from '../../../services/funciones.service';
+
+
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -24,7 +27,8 @@ export class UserRegisterComponent implements OnInit {
 
 
    constructor( public _userService: UserService,
-               public _validatorsService: ValidatorsService) { }
+               public _validatorsService: ValidatorsService,
+              private _funcionesService: FuncionesGenericasService) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -56,13 +60,14 @@ export class UserRegisterComponent implements OnInit {
                           Validators.maxLength(20)]),
     }, { validators: this.sonIguales()});
     // Se quita el autorellenado de las casillas
-    let entradas = window.document.getElementById('form-register').getElementsByTagName('input');
-    for (const key in entradas) {
-      if (entradas.hasOwnProperty(key)) {
-        const entrada = entradas[key];
-        entrada.setAttribute('autocomplete', 'off');
-      }
-    }
+    // let entradas = window.document.getElementById('form-register').getElementsByTagName('input');
+    // for (const key in entradas) {
+    //   if (entradas.hasOwnProperty(key)) {
+    //     const entrada = entradas[key];
+    //     entrada.setAttribute('autocomplete', 'off');
+    //   }
+    // }
+    this._funcionesService.limpiarCasillas('form-register');
   }
   // fin de eliminacion de autorellenado
 

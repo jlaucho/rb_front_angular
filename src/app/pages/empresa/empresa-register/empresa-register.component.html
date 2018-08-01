@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="card-title">Registro de empresa</h5>
+
+                <div *ngIf="mensajeExito" class="alert alert-primary">
+                    <h4 class="alert-heading">Registro exitoso</h4>
+                    El registro de la empresa {{ empresa.name }} fue exitoso
+                </div>
+
+                <h6 class="card-subtitle">Sistema de registro de EMPRESAS al sistema</h6>
+                <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="name" name="name" class="form-control">
+                                <span class="bar"></span>
+                                <label for="name">Nombre</label>
+                                <span *ngIf="forma.controls['name'].errors?.minlength && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.required && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre es obligatorio</small></span>
+                                <span *ngIf="forma.controls['name'].errors?.maxlength && !forma.controls['name'].pristine && forma.controls['name'].touched" class="inputlabel errorClass"> <small> El nombre NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="RIF" name="RIF" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">RIF</label>
+                                <span *ngIf="forma.controls['RIF'].errors?.minlength && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['RIF'].errors?.required && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF es obligatorio</small></span>
+                                <span *ngIf="forma.controls['RIF'].errors?.maxlength && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                                <span *ngIf="forma.controls['RIF'].errors?.existe && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF ya se encuentra registrado</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="direccion" name="direccion" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Direcci&oacute;n</label>
+                                <span *ngIf="forma.controls['direccion'].errors?.minlength && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['direccion'].errors?.required && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion es obligatorio</small></span>
+                                <span *ngIf="forma.controls['direccion'].errors?.maxlength && !forma.controls['direccion'].pristine && forma.controls['direccion'].touched" class="inputlabel errorClass"> <small> El direccion NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="descripcion" name="descripcion" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Descripcion</label>
+                                <span *ngIf="forma.controls['descripcion'].errors?.minlength && !forma.controls['descripcion'].pristine && forma.controls['descripcion'].touched" class="inputlabel errorClass"> <small> El descripcion debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['descripcion'].errors?.required && !forma.controls['descripcion'].pristine && forma.controls['descripcion'].touched" class="inputlabel errorClass"> <small> El descripcion es obligatorio</small></span>
+                                <span *ngIf="forma.controls['descripcion'].errors?.maxlength && !forma.controls['descripcion'].pristine && forma.controls['descripcion'].touched" class="inputlabel errorClass"> <small> El direccion NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="telefono" name="telefono" class="form-control">
+                                <span class="bar"></span>
+                                <label for="name">Telefono</label>
+                                <span *ngIf="forma.controls['telefono'].errors?.minlength && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El nombre debe contener mas de {{ caracterMin }} caracteres</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.required && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El nombre es obligatorio</small></span>
+                                <span *ngIf="forma.controls['telefono'].errors?.maxlength && !forma.controls['telefono'].pristine && forma.controls['telefono'].touched" class="inputlabel errorClass"> <small> El nombre NO debe exceder los {{ caracterMax }} caracteres</small></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="button" class="btn btn-info waves-effect text-left " data-dismiss="modal">volver</button>
+                            <span class="pull-right">
+                              <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
+                              <button type="submit" class="btn btn-primary waves-effect text-left">Registrar</button>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div *ngIf="true" class="alert alert-danger" role="alert">
+                                <strong>{{ forma.valid }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

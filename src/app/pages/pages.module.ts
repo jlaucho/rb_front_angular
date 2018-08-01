@@ -19,7 +19,11 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TablaComponent } from '../componentes/tabla/tabla.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { DataTableModule } from 'angular5-data-table';
+import { EmpresaRegisterComponent } from './empresa/empresa-register/empresa-register.component';
+import { FuncionesGenericasService } from '../services/funciones.service';
+import { EmpresaService } from '../services/empresa.service';
+import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.component';
+
 
 
 @NgModule({
@@ -31,12 +35,13 @@ import { DataTableModule } from 'angular5-data-table';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTableModule.forRoot()
   ],
   providers: [
     GraficaService,
     WidgateService,
-    ValidatorsService
+    ValidatorsService,
+    FuncionesGenericasService,
+    EmpresaService
   ],
   declarations: [
     PagesComponent,
@@ -47,7 +52,9 @@ import { DataTableModule } from 'angular5-data-table';
     WidgateComponent,
     UserRegisterComponent,
     TablaComponent,
-    UserListComponent
+    UserListComponent,
+    EmpresaRegisterComponent,
+    EmpresaListComponent
   ],
   exports: [
     DashboardComponent,
