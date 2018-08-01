@@ -10,8 +10,8 @@ import { UserService } from '../../../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  usuariosDB: any;
-  usuarios: any;
+  usuariosDB: any = [];
+  usuarios: any = [];
 
   constructor( private _userService: UserService ) { }
 

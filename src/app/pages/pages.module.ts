@@ -19,6 +19,11 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TablaComponent } from '../componentes/tabla/tabla.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { EmpresaRegisterComponent } from './empresa/empresa-register/empresa-register.component';
+import { FuncionesGenericasService } from '../services/funciones.service';
+import { EmpresaService } from '../services/empresa.service';
+import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.component';
+
 
 
 @NgModule({
@@ -34,7 +39,9 @@ import { UserListComponent } from './user/user-list/user-list.component';
   providers: [
     GraficaService,
     WidgateService,
-    ValidatorsService
+    ValidatorsService,
+    FuncionesGenericasService,
+    EmpresaService
   ],
   declarations: [
     PagesComponent,
@@ -45,7 +52,9 @@ import { UserListComponent } from './user/user-list/user-list.component';
     WidgateComponent,
     UserRegisterComponent,
     TablaComponent,
-    UserListComponent
+    UserListComponent,
+    EmpresaRegisterComponent,
+    EmpresaListComponent
   ],
   exports: [
     DashboardComponent,

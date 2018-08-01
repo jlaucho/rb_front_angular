@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="col-1"></div>
+    <div class="col-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6 m-t-20">
+                    <h6 class="card-subtitle">Lista de Empresas registradas es el sistema ({{ empresasDB.total }}) </h6>
+                </div>
+                <div class="col-6 floating-labels m-t-10">
+                    <div class="form-group m-b-5">
+                        <input type="text" #palabra (keyup)="busqueda(palabra.value)" name="busqueda" class="form-control">
+                        <span class="bar"></span>
+                        <label for="" class="card-subtitle">Buscar...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table color-table success-table table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{'Nombre' | uppercase}}</th>
+                            <th>{{'Direccio&oacute;n' | uppercase}}</th>
+                            <th>{{'Telefono' | uppercase}}</th>
+                            <th>{{'Descripci&oacute;n' | uppercase}}</th>
+                            <th>{{'Acci&oacute;n' | uppercase}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let empre of empresa; index as i">
+                        <tr>
+                            <td>{{ (i + 1) }}</td>
+                            <td>{{ empre.name }}</td>
+                            <td>{{ empre.direccion }}</td>
+                            <td>{{ empre.telefono }}</td>
+                            <td>{{ empre.descripcion }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="#" role="button"><span class="ti-settings"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h6 class="card-subtitle" *ngIf="palabra.value.length > 0"> {{ empresa.length }} empresa encontrada de {{ empresasDB.empresas.length }} registros</h6>
+                <div *ngIf="empresa.length === 0">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>No hay resultados para esta busqueda</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

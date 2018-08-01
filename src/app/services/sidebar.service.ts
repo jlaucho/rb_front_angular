@@ -42,7 +42,7 @@ export class SidebarService {
       submenu: [
         {
           titulo: 'Registrar',
-          url: '/registercompany',
+          url: '/empresa-register',
         },
         {
           titulo: 'Buscar',
@@ -50,7 +50,7 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todas',
-              url: '/interno1',
+              url: '/empresa-list',
             },
             {
               titulo: 'Por RIF',
