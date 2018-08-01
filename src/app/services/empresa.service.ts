@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Empresa } from '../interfaces/empresa';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 
 

@@ -3,10 +3,10 @@
         <div class="card">
             <div class="card-body">
 
-                <h5 class="card-title">Registro de usuario</h5>
+                <h5 class="card-title">Registro de empresa</h5>
 
                 <div *ngIf="mensajeExito" class="alert alert-primary">
-                    <h4 class="alert-heading">Registro exisoto</h4>
+                    <h4 class="alert-heading">Registro exitoso</h4>
                     El registro de la empresa {{ empresa.name }} fue exitoso
                 </div>
 
@@ -33,7 +33,7 @@
                                 <span *ngIf="forma.controls['RIF'].errors?.minlength && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF debe contener mas de {{ caracterMin }} caracteres</small></span>
                                 <span *ngIf="forma.controls['RIF'].errors?.required && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF es obligatorio</small></span>
                                 <span *ngIf="forma.controls['RIF'].errors?.maxlength && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF NO debe exceder los {{ caracterMax }} caracteres</small></span>
-                                <!-- <span *ngIf="forma.controls['RIF'].errors?.pattern && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El formato del RIF no es valido</small></span> -->
+                                <span *ngIf="forma.controls['RIF'].errors?.existe && !forma.controls['RIF'].pristine && forma.controls['RIF'].touched" class="inputlabel errorClass"> <small> El RIF ya se encuentra registrado</small></span>
                             </div>
                         </div>
 

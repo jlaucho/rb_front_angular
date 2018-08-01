@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { Empresa } from '../../../interfaces/empresa';
+import { Observable } from 'rxjs/Observable';
+import { ValidatorsService } from '../../../services/validators.service';
 
 
 
@@ -22,7 +24,8 @@ export class EmpresaRegisterComponent implements OnInit {
   mensajeError: Boolean = false;
 
   constructor( private _funcionesService: FuncionesGenericasService,
-               private _empresaService: EmpresaService ) { }
+               private _empresaService: EmpresaService,
+               private _validadorService: ValidatorsService ) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -31,7 +34,7 @@ export class EmpresaRegisterComponent implements OnInit {
             Validators.required]),
       RIF: new FormControl(null, [Validators.minLength( this.caracterMin ),
             Validators.maxLength( this.caracterMax ),
-            Validators.required]),
+            Validators.required], this.existeEmpresa.bind( this )),
       direccion: new FormControl(null, [Validators.minLength( this.caracterMin ),
             Validators.maxLength( 254 ),
             Validators.required]),
@@ -48,10 +51,11 @@ export class EmpresaRegisterComponent implements OnInit {
 
   enviarFormulario() {
     let empresa: Empresa = this.forma.value;
-    this._empresaService.registerEmpresa( empresa )
-        .subscribe( (resp: any) => {
-          this.mensajeExito = resp.ok;
-        });
+    console.log( this.forma.controls );
+    // this._empresaService.registerEmpresa( empresa )
+    //     .subscribe( (resp: any) => {
+    //       this.mensajeExito = resp.ok;
+    //     });
   }
 
   // Limpiar el formulario
@@ -59,5 +63,22 @@ export class EmpresaRegisterComponent implements OnInit {
     this.forma.reset();
   }
   // fin de limpiar el formulario
+  // Validaciones asincronas
+  existeEmpresa( rif: FormControl ): Observable<any> | Promise<any> {
+     console.log(rif);
+    return new Promise(
+      (resolve => {
+        this._validadorService.existe( 'RIF', rif.value )
+          .subscribe( (respuesta: any) => {
+            console.log( respuesta );
+            if (respuesta) {
+              resolve ({ existe: true });
+            } else {
+              resolve (null);
+            }
+          });
+      })
+    );
+  }
 
 }
