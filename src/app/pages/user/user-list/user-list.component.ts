@@ -39,8 +39,6 @@ export class UserListComponent implements OnInit {
           temp.push(usuario);
         }
       }
-      // (temp.length === 0) ? this.usuarios = null : this.usuarios = temp;
       this.usuarios = temp;
-      // console.log( this.usuarios );
   }
 }
