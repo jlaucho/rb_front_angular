@@ -34,14 +34,16 @@ export class UserService {
     return this._http.post( url, user );
   }
   listaUser () {
-    let url = `${ environment.basePath }/api/v1/user`;
-    let token =  (JSON.parse(localStorage.getItem('user'))).token;
-    let headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    // headers.append('Authorization', `Bearer ${token}`);
-    console.log( headers );
-    return this._http.get(url, {headers});
+    // let url = `${ environment.basePath }/api/v1/user`;
+    // let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    // let headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${token}`
+    // });
+    // return this._http.get(url, {headers});
+
+    // Respuesta con generados de JSON
+    let url = `https://next.json-generator.com/api/json/get/4y4RJN2VB`;
+    return this._http.get(url);
   }
   buscarUser( id: number ) {
     let token =  (JSON.parse(localStorage.getItem('user'))).token;

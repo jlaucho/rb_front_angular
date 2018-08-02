@@ -21,10 +21,10 @@ export class UserListComponent implements OnInit {
 
   listaUser(): void {
     this._userService.listaUser()
-        .subscribe( (userList: any) => {
-          this.usuariosDB = userList;
-          console.log(this.usuariosDB);
-          this.usuarios = this.usuariosDB.users;
+    .subscribe( (userList: any) => {
+      this.usuariosDB = userList;
+      this.usuarios = userList.users;
+      console.log( userList );
         });
   }
   busqueda(palabra: string) {
