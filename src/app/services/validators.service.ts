@@ -11,8 +11,12 @@ export class ValidatorsService {
   constructor( private _http: HttpClient ) { }
 
   emailTaken( email: string ): Observable<any> {
+    let token = (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${ token }`
+    });
     let url = `${ environment.basePath }/api/v1/validators/emailtaken/${ email }`;
-    return this._http.get( url );
+    return this._http.get( url, {headers} );
   }
 
   existe ( campo: string, valor: string ): any {

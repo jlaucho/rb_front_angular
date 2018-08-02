@@ -43,4 +43,13 @@ export class UserService {
     console.log( headers );
     return this._http.get(url, {headers});
   }
+  buscarUser( id: number ) {
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    let url = `${ environment.basePath }/api/v1/user/${ id }`;
+
+    return this._http.get( url, { headers } );
+  }
 }

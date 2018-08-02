@@ -16,6 +16,7 @@ import { UserRegisterComponent } from './pages/user/register/user-register.compo
 import { UserListComponent } from './pages/user/user-list/user-list.component';
 import { EmpresaRegisterComponent } from './pages/empresa/empresa-register/empresa-register.component';
 import { EmpresaListComponent } from './pages/empresa/empresa-list/empresa-list.component';
+import { UserUpdateComponent } from './pages/user/user-update/user-update.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
@@ -31,6 +32,8 @@ const appRoutes: Routes = [
                 {title: 'Registro de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
         { path: 'user-list', component: UserListComponent, data:
                 {title: 'Lista de usuarios', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Listar'} },
+        { path: 'user-update/:idUser', component: UserUpdateComponent, data:
+                        {title: 'Actualización de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Actualizar'} },
         { path: 'empresa-register', component: EmpresaRegisterComponent, data:
                 {title: 'Registro de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Registar'} },
         { path: 'empresa-list', component: EmpresaListComponent, data:

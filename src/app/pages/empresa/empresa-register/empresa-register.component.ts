@@ -31,14 +31,14 @@ export class EmpresaRegisterComponent implements OnInit {
     this.forma = new FormGroup({
       name: new FormControl(null, [Validators.minLength( this.caracterMin ),
             Validators.maxLength( this.caracterMax ),
-            Validators.required]),
+            Validators.required], this.existeName.bind( this )),
       RIF: new FormControl(null, [Validators.minLength( this.caracterMin ),
             Validators.maxLength( this.caracterMax ),
-            Validators.required], this.existeEmpresa.bind( this )),
+            Validators.required], this.existeRif.bind( this )),
       direccion: new FormControl(null, [Validators.minLength( this.caracterMin ),
             Validators.maxLength( 254 ),
             Validators.required]),
-      telefono: new FormControl(null, [Validators.minLength( this.caracterMin ),
+      telefono: new FormControl(null, [Validators.minLength( 10 ),
             Validators.maxLength( 15 ),
             Validators.required]),
       descripcion: new FormControl(null, [Validators.minLength( this.caracterMin ),
@@ -52,10 +52,10 @@ export class EmpresaRegisterComponent implements OnInit {
   enviarFormulario() {
     let empresa: Empresa = this.forma.value;
     console.log( this.forma.controls );
-    // this._empresaService.registerEmpresa( empresa )
-    //     .subscribe( (resp: any) => {
-    //       this.mensajeExito = resp.ok;
-    //     });
+    this._empresaService.registerEmpresa( empresa )
+        .subscribe( (resp: any) => {
+          this.mensajeExito = resp.ok;
+        });
   }
 
   // Limpiar el formulario
@@ -64,11 +64,26 @@ export class EmpresaRegisterComponent implements OnInit {
   }
   // fin de limpiar el formulario
   // Validaciones asincronas
-  existeEmpresa( rif: FormControl ): Observable<any> | Promise<any> {
-     console.log(rif);
+  existeRif( rif: FormControl ): Observable<any> | Promise<any> {
     return new Promise(
       (resolve => {
         this._validadorService.existe( 'RIF', rif.value )
+          .subscribe( (respuesta: any) => {
+            console.log( respuesta );
+            if (respuesta) {
+              resolve ({ existe: true });
+            } else {
+              resolve (null);
+            }
+          });
+      })
+    );
+  }
+
+  existeName( name: FormControl ): Observable<any> | Promise<any> {
+    return new Promise(
+      (resolve => {
+        this._validadorService.existe( 'name', name.value )
           .subscribe( (respuesta: any) => {
             console.log( respuesta );
             if (respuesta) {

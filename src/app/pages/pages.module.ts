@@ -23,6 +23,8 @@ import { EmpresaRegisterComponent } from './empresa/empresa-register/empresa-reg
 import { FuncionesGenericasService } from '../services/funciones.service';
 import { EmpresaService } from '../services/empresa.service';
 import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.component';
+import { MensajesFormsComponent } from '../componentes/mensajes-forms/mensajes-forms.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
 
 
 
@@ -54,11 +56,13 @@ import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.compon
     TablaComponent,
     UserListComponent,
     EmpresaRegisterComponent,
-    EmpresaListComponent
+    EmpresaListComponent,
+    MensajesFormsComponent,
+    UserUpdateComponent,
   ],
   exports: [
     DashboardComponent,
-    ProgressComponent,
+    ProgressComponent
   ]
 })
 export class PagesModule { }

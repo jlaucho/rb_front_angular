@@ -19,11 +19,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
-                            <th>Telefono</th>
-                            <th>Acci&oacute;n</th>
+                            <th>{{'Nombre' | uppercase }}</th>
+                            <th>{{'Apellido' | uppercase}}</th>
+                            <th>{{'Email' | uppercase}}</th>
+                            <th>{{'Telefono' | uppercase}}</th>
+                            <th class="text-center">{{'Acci&oacute;n' | uppercase}}</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let usuario of usuarios; index as i">
@@ -33,8 +33,8 @@
                             <td>{{ usuario.apellido }}</td>
                             <td>{{ usuario.email }}</td>
                             <td>{{ usuario.telefono }}</td>
-                            <td>
-                                <a class="btn btn-primary" href="#" role="button"><span class="ti-settings"></span></a>
+                            <td class="text-center">
+                                <a class="btn btn-primary btn-xs" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></a>
                             </td>
                         </tr>
                     </tbody>

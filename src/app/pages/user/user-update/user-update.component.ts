@@ -5,32 +5,32 @@ import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
 
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
+  selector: 'app-user-update',
+  templateUrl: './user-update.component.html',
   styles: []
 })
-export class UserRegisterComponent implements OnInit {
+export class UserUpdateComponent implements OnInit {
 
   forma: FormGroup;
   caracterMax = 25;
   caracterMin = 4;
-  user: User;
+  user: any;
   unamePattern = '^[a-zA-Z ]+$';
   ucedulaPattern = '^[0-9]+$';
   email: string;
-  debouncer: any;
-
-
 
    constructor( public _userService: UserService,
                public _validatorsService: ValidatorsService,
-              private _funcionesService: FuncionesGenericasService) { }
+              private _funcionesService: FuncionesGenericasService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.buscarUser();
     this.forma = new FormGroup({
       name: new FormControl(null, [Validators.minLength( this.caracterMin ),
                           Validators.maxLength( this.caracterMax ),
@@ -51,25 +51,29 @@ export class UserRegisterComponent implements OnInit {
       telefono:  new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required,
                           Validators.email], this.existeDB.bind( this )),
-      type: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required,
-                          Validators.minLength(6),
-                          Validators.maxLength(20)]),
-      password_confirmation: new FormControl(null, [Validators.required,
-                          Validators.minLength(6),
-                          Validators.maxLength(20)]),
-    }, { validators: this.sonIguales()});
-    // Se quita el autorellenado de las casillas
-    // let entradas = window.document.getElementById('form-register').getElementsByTagName('input');
-    // for (const key in entradas) {
-    //   if (entradas.hasOwnProperty(key)) {
-    //     const entrada = entradas[key];
-    //     entrada.setAttribute('autocomplete', 'off');
-    //   }
-    // }
-    this._funcionesService.limpiarCasillas('form-register');
-  }
+      type: new FormControl(null, [Validators.required])
+    });
+    }
   // fin de eliminacion de autorellenado
+
+  buscarUser() {
+    let id = this.route.params.subscribe( (resp: any) => {
+      this._userService.buscarUser( resp.idUser )
+          .subscribe( (respuesta: any) => {
+            this.user = {
+              name: respuesta.user.name,
+              apellido: respuesta.user.apellido,
+              cedula: respuesta.user.cedula,
+              direccion: respuesta.user.direccion,
+              email: respuesta.user.email,
+              telefono: respuesta.user.telefono,
+              type: respuesta.user.type
+            };
+              this.forma.setValue( this.user );
+              this._funcionesService.limpiarCasillas('form-register');
+            });
+      });
+  }
 
   // Limpiar el formulario
   limpiar(): void {
@@ -98,7 +102,11 @@ export class UserRegisterComponent implements OnInit {
           this._validatorsService.emailTaken( group.value )
               .subscribe((respuesta) => {
             if (respuesta) {
-              resolve({'existe': true});
+              if (respuesta.email === this.user.email) {
+                resolve (null);
+              } else {
+                resolve({'existe': true});
+              }
             } else {
               resolve(null);
             }
@@ -120,3 +128,4 @@ export class UserRegisterComponent implements OnInit {
   }
 
 }
+

@@ -7,10 +7,21 @@ export class FuncionesGenericasService {
 
   limpiarCasillas( idForm: string ): void {
     let entradas = window.document.getElementById(idForm).getElementsByTagName('input');
-    for (const key in entradas) {
+    let entradasSelect = window.document.getElementById(idForm).getElementsByTagName('select');
+
+    for (let key in entradasSelect) {
+      if (entradasSelect.hasOwnProperty(key)) {
+        let element = entradasSelect[key];
+        element.focus();
+        // element.blur();
+      }
+    }
+    for (let key in entradas) {
       if (entradas.hasOwnProperty(key)) {
-        const entrada = entradas[key];
+        let entrada = entradas[key];
         entrada.setAttribute('autocomplete', 'off');
+        entrada.focus();
+        entrada.blur();
       }
     }
   }

@@ -7,7 +7,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 @Component({
   selector: 'app-empresa-list',
   templateUrl: './empresa-list.component.html',
-  styles: []
+  styleUrls: ['empresa.css']
 })
 export class EmpresaListComponent implements OnInit {
 
@@ -32,7 +32,8 @@ export class EmpresaListComponent implements OnInit {
     for (const empre of this.empresasDB.empresas) {
       if ( (empre.name.toLowerCase().indexOf(palabra) >= 0) ||
           (empre.direccion.toLowerCase().indexOf(palabra) >= 0) ||
-          (empre.telefono.toLowerCase().indexOf(palabra) >= 0)  ) {
+          (empre.telefono.toLowerCase().indexOf(palabra) >= 0 ) ||
+          (empre.RIF.toLowerCase().indexOf(palabra) > 0)  ) {
         temp.push(empre);
       }
     }

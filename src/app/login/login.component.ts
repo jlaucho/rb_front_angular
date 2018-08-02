@@ -30,10 +30,16 @@ export class LoginComponent implements OnInit {
     });
 
     if (localStorage.getItem('recuerdame')) {
-        this.recuerdame = {
-          user: localStorage.getItem('recuerdame'),
-          activo: true
-        };
+      let login = {
+        email: localStorage.getItem('recuerdame'),
+        password: '',
+        recuerdame: true
+      }
+        this.forma.setValue(login);
+        // this.recuerdame = {
+        //   user: localStorage.getItem('recuerdame'),
+        //   activo: true
+        // };
         console.log(this.recuerdame);
     }
   }
