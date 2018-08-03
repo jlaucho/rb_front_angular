@@ -8,11 +8,11 @@ import { ValidatorsService } from '../../../services/validators.service';
 declare function init_plugis();
 
 @Component({
-  selector: 'app-empresa-register',
-  templateUrl: './empresa-register.component.html',
+  selector: 'app-empresa-update',
+  templateUrl: './empresa-update.component.html',
   styles: []
 })
-export class EmpresaRegisterComponent implements OnInit {
+export class EmpresaUpdateComponent implements OnInit {
 
   forma: FormGroup;
   caracterMax = 60;
@@ -50,10 +50,11 @@ export class EmpresaRegisterComponent implements OnInit {
   enviarFormulario() {
     let empresa: Empresa = this.forma.value;
     console.log( this.forma.controls );
-    this._empresaService.registerEmpresa( empresa )
-        .subscribe( (resp: any) => {
-          this.mensajeExito = resp.ok;
-        });
+
+    // this._empresaService.registerEmpresa( empresa )
+    //     .subscribe( (resp: any) => {
+    //       this.mensajeExito = resp.ok;
+    //     });
   }
 
   // Limpiar el formulario

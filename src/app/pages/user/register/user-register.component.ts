@@ -4,6 +4,7 @@ import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
+declare function init_plugis();
 
 
 import { Observable } from 'rxjs/Observable';
@@ -31,6 +32,7 @@ export class UserRegisterComponent implements OnInit {
               private _funcionesService: FuncionesGenericasService) { }
 
   ngOnInit() {
+
     this.forma = new FormGroup({
       name: new FormControl(null, [Validators.minLength( this.caracterMin ),
                           Validators.maxLength( this.caracterMax ),
@@ -68,6 +70,7 @@ export class UserRegisterComponent implements OnInit {
     //   }
     // }
     this._funcionesService.limpiarCasillas('form-register');
+    init_plugis();
   }
   // fin de eliminacion de autorellenado
 

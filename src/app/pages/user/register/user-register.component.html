@@ -101,7 +101,7 @@
                             <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal">volver</button>
                             <span class="pull-right">
                                 <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
-                                <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left">Registrar</button>
+                                <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar</button>
                             </span>
                         </div>
                     </div>

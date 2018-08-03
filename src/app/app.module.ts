@@ -12,6 +12,9 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 
+// Guards
+import { LoginGuardGuard } from './services/guards/login-guard.guard';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     APP_ROUTE
   ],
   providers: [
+    LoginGuardGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { User } from '../../../interfaces/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+declare function init_plugis();
 
 
 @Component({
@@ -17,6 +18,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.listaUser();
+    init_plugis();
   }
 
   listaUser(): void {

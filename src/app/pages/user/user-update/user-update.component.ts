@@ -4,6 +4,7 @@ import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
+declare function init_plugis();
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,6 +24,7 @@ export class UserUpdateComponent implements OnInit {
   unamePattern = '^[a-zA-Z ]+$';
   ucedulaPattern = '^[0-9]+$';
   email: string;
+  idUser: number;
 
    constructor( public _userService: UserService,
                public _validatorsService: ValidatorsService,
@@ -53,11 +55,13 @@ export class UserUpdateComponent implements OnInit {
                           Validators.email], this.existeDB.bind( this )),
       type: new FormControl(null, [Validators.required])
     });
+    init_plugis();
     }
   // fin de eliminacion de autorellenado
 
   buscarUser() {
     let id = this.route.params.subscribe( (resp: any) => {
+      this.idUser = resp.idUser;
       this._userService.buscarUser( resp.idUser )
           .subscribe( (respuesta: any) => {
             this.user = {
@@ -118,12 +122,12 @@ export class UserUpdateComponent implements OnInit {
 
   // Envo de formulario
   enviarFormulario() {
-    this.user = this.forma.value;
-    console.log( this.forma );
-    this._userService.registerUser( this.user )
-      .subscribe( (respuesta: any ) => {
-        console.log( respuesta );
-      });
+    let user = this.forma.value;
+    console.log( this.forma.value );
+    this._userService.actualizarUser( this.idUser, user )
+        .subscribe( (resp: any) => {
+          console.log( resp );
+        });
 
   }
 

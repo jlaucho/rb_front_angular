@@ -20,7 +20,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{'Nombre' | uppercase}}</th>
-                            <th>{{'Direccio&oacute;n' | uppercase}}</th>
+                            <th>{{'Direcci&oacute;n' | uppercase}}</th>
                             <th>{{'Telefono' | uppercase}}</th>
                             <th>{{'Descripci&oacute;n' | uppercase}}</th>
                             <th>{{'rif' | uppercase}}</th>
@@ -36,7 +36,8 @@
                             <td>{{ empre.descripcion }}</td>
                             <td>{{ empre.RIF }}</td>
                             <td>
-                                <a class="btn btn-primary btn-xs" href="#" role="button"><span class="ti-settings"></span></a>
+                                <a class="btn btn-primary btn-xs" [routerLink]="['/empresa-update', empre.idEmpresas]" role="button"><span class="ti-settings"></span></a>
+                                <a class="btn btn-danger btn-xs" (click)="eliminarEmpresa()" role="button"><span class="ti-trash"></span></a>
                             </td>
                         </tr>
                     </tbody>
