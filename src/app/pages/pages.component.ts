@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare function init_plugis();
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -10,6 +11,7 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_plugis();
   }
 
 }

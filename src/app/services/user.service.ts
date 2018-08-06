@@ -67,4 +67,13 @@ export class UserService {
     });
     return  this._http.put( url, body, { headers } );
   }
+
+  borrarUser( id: number ) {
+    let url = `${ environment.basePath }/api/v1/user/${ id }`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return  this._http.delete( url, { headers } );
+  }
 }

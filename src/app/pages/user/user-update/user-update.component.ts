@@ -6,7 +6,7 @@ import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
 declare function init_plugis();
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -29,7 +29,8 @@ export class UserUpdateComponent implements OnInit {
    constructor( public _userService: UserService,
                public _validatorsService: ValidatorsService,
               private _funcionesService: FuncionesGenericasService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.buscarUser();
@@ -126,6 +127,7 @@ export class UserUpdateComponent implements OnInit {
     console.log( this.forma.value );
     this._userService.actualizarUser( this.idUser, user )
         .subscribe( (resp: any) => {
+          this.router.navigate(['user-list']);
           console.log( resp );
         });
 

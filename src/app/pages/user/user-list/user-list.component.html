@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-6 floating-labels m-t-10">
                     <div class="form-group m-b-5">
-                        <input type="text" #palabra (keyup)="busqueda(palabra.value)" name="busqueda" class="form-control">
+                        <input type="text" #palabra (keyup)="busqueda(palabra.value)" id="palabra" name="busqueda" class="form-control">
                         <span class="bar"></span>
                         <label for="" class="card-subtitle">Buscar...</label>
                     </div>
@@ -35,6 +35,7 @@
                             <td>{{ usuario.telefono }}</td>
                             <td class="text-center">
                                 <a class="btn btn-primary btn-xs" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></a>
+                                <a class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarUser( usuario.id )" role="button"><span class="ti-trash"></span></a>
                             </td>
                         </tr>
                     </tbody>
