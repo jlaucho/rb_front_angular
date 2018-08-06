@@ -38,8 +38,9 @@ export class UserService {
     let url = `${ environment.basePath }/api/v1/user/store`;
     return this._http.post( url, user );
   }
-  listaUser () {
-    let url = `${ environment.basePath }/api/v1/user`;
+  listaUser ( parametro: string ) {
+    let url = `${ environment.basePath }/api/v1/user/${ parametro }`;
+    console.log( 'url', url );
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -76,4 +77,5 @@ export class UserService {
     });
     return  this._http.delete( url, { headers } );
   }
+
 }

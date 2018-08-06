@@ -18,19 +18,15 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todos',
-              url: '/user-list',
-            },
-            {
-              titulo: 'Cedula',
-              url: '/interno2',
+              url: '/user-list/todos',
             },
             {
               titulo: 'Activos',
-              url: '/interno2',
+              url: '/user-list/activos',
             },
             {
               titulo: 'Inactivos',
-              url: '/interno2',
+              url: '/user-list/inactivos',
             }
           ]
         }

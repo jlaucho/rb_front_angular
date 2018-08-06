@@ -33,7 +33,7 @@ const appRoutes: Routes = [
                 data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
         { path: 'user-register', canActivate: [ LoginGuardGuard ], component: UserRegisterComponent, data:
                 {title: 'Registro de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
-        { path: 'user-list', canActivate: [ LoginGuardGuard ], component: UserListComponent, data:
+        { path: 'user-list/:tipo', canActivate: [ LoginGuardGuard ], component: UserListComponent, data:
                 {title: 'Lista de usuarios', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Listar'} },
         { path: 'user-update/:idUser', canActivate: [ LoginGuardGuard ], component: UserUpdateComponent, data:
                         {title: 'Actualización de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Actualizar'} },
