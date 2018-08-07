@@ -65,14 +65,15 @@ export class UserUpdateComponent implements OnInit {
       this.idUser = resp.idUser;
       this._userService.buscarUser( resp.idUser )
           .subscribe( (respuesta: any) => {
+            console.log( 'respuesta', respuesta.busqueda );
             this.user = {
-              name: respuesta.user.name,
-              apellido: respuesta.user.apellido,
-              cedula: respuesta.user.cedula,
-              direccion: respuesta.user.direccion,
-              email: respuesta.user.email,
-              telefono: respuesta.user.telefono,
-              type: respuesta.user.type
+              name: respuesta.busqueda.name,
+              apellido: respuesta.busqueda.apellido,
+              cedula: respuesta.busqueda.cedula,
+              direccion: respuesta.busqueda.direccion,
+              email: respuesta.busqueda.email,
+              telefono: respuesta.busqueda.telefono,
+              type: respuesta.busqueda.type
             };
               this.forma.setValue( this.user );
               this._funcionesService.limpiarCasillas('form-register');
@@ -127,7 +128,7 @@ export class UserUpdateComponent implements OnInit {
     console.log( this.forma.value );
     this._userService.actualizarUser( this.idUser, user )
         .subscribe( (resp: any) => {
-          this.router.navigate(['user-list']);
+          this.router.navigate(['user-list', 'activos']);
           console.log( resp );
         });
 

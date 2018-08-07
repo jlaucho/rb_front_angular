@@ -56,7 +56,7 @@ export class UserService {
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    let url = `${ environment.basePath }/api/v1/user/${ id }`;
+    let url = `${ environment.basePath }/api/v1/buscar/usuario/${ id }`;
 
     return this._http.get( url, { headers } );
   }
@@ -76,6 +76,16 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     return  this._http.delete( url, { headers } );
+  }
+
+  reactivarUser( id: number ) {
+    let body = { id };
+    let url = `${ environment.basePath }/api/v1/user/reactivar`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return  this._http.post( url, body, { headers } );
   }
 
 }

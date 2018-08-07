@@ -79,10 +79,10 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/user-list']" data-dismiss="modal">volver</button>
+                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/user-list', 'activos']" data-dismiss="modal">volver</button>
                             <span class="pull-right">
                               <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
-                              <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left">Registrar</button>
+                              <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left">Actualizar</button>
                           </span>
                         </div>
                     </div>

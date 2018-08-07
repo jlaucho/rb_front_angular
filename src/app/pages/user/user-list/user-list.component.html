@@ -34,10 +34,13 @@
                             <td>{{ usuario.email }}</td>
                             <td>{{ usuario.telefono }}</td>
                             <td class="text-center">
+
                                 <a class="btn btn-primary btn-xs" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></a>
 
-                                <a class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarUser( usuario.id )" role="button"><span class="ti-trash"></span></a>
-                                <a class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarUser( usuario.id )" role="button"><span class="ti-trash"></span></a>
+                                <a *ngIf="!usuario.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarUser( usuario.id )" role="button"><span class="ti-trash"></span></a>
+                                <ng-template #activo>
+                                    <a class="btn btn-success btn-xs" title="reactivar" style="color: #ffffff" (click)="reactivarUser( usuario.id )" role="button"><span class="ti-check"></span></a>
+                                </ng-template>
                             </td>
                         </tr>
                     </tbody>

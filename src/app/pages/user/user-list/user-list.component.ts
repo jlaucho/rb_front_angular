@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
   
   obtenerParametro () {
     
-    this.activeRouter.params.subscribe( (parametro: string) =>{
+    this.activeRouter.params.subscribe( (parametro: Object): void =>{
       this.parametro = parametro.tipo;
     });
     // console.log('parametro', this.parametro);
@@ -86,28 +86,53 @@ export class UserListComponent implements OnInit {
       if (result.value) {
         this._userService.borrarUser( id )
         .subscribe( (respuesta: any) => {
-          let temp = this.usuariosDB.users.filter( ( usuario ) => {
-            return usuario.id !== respuesta.user.id;
-          });
-          console.log( 'palabra de busqueda', this.busquedaPalabra );
-          // this.usuarios = temp;
-          this.usuarios = this.usuariosDB.users = temp;
-          this.usuariosDB.total = this.usuariosDB.total - 1;
-
-          if ( this.busquedaPalabra ) {
-            this.busqueda( this.busquedaPalabra );
-             if (this.usuarios.length === 0 ) {
-                this.busquedaPalabra = '';
-                this.busqueda('');
-                window.document.getElementById('palabra').focus();
-                // palabraInput.blur();
-             }
-          }
-
-
+          this.respuestasLista( true, id );
+          Swal('Borrar', 'Usuario borrado satisfactoriamente!', 'success');
         });
-        Swal('Borrar', 'Usuario borrado satisfactoriamente!', 'success');
       }
     });
   }
+
+  reactivarUser( id: number ): void {
+    Swal({
+      title: 'Estas Seguro?',
+      text: 'Desea reactivar el usuario!',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'SI, Reactivar!!!'
+    }).then((result) => {
+      if (result.value) {
+        this._userService.reactivarUser( id )
+        .subscribe( (respuesta: any) => {
+          this.respuestasLista( false, id );
+          Swal('Reactivar', 'Usuario Reactivado satisfactoriamente!', 'success');
+        });
+      }
+    });
+  }
+
+  respuestasLista ( isActived: boolean, id: number ): void {
+
+    for (const usuario in this.usuariosDB.users) {
+      if( this.usuariosDB.users[usuario].id === id) {
+        if( this.parametro === 'todos' ){
+        this.usuariosDB.users[usuario].deleted_at = isActived;
+      } else {
+        this.usuariosDB.users.splice( usuario, 1 );
+        this.usuariosDB.total = this.usuariosDB.total -1;
+      }
+    }
+  }
+
+  if ( this.busquedaPalabra ) {
+    this.busqueda( this.busquedaPalabra );
+     if (this.usuarios.length === 0 ) {
+        this.busquedaPalabra = '';
+        this.busqueda('');
+        window.document.getElementById('palabra').focus();
+     }
+  }
+}
 }
