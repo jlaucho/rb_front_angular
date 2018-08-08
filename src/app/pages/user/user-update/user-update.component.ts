@@ -87,20 +87,6 @@ export class UserUpdateComponent implements OnInit {
   }
   // fin de limpiar el formulario
 
-  // Validacion de password iguales
-  sonIguales (): any {
-    return  (group: FormGroup) => {
-      let pass1 = group.controls['password'].value;
-      let pass2 = group.controls['password_confirmation'].value;
-
-      if ( pass1 === pass2 ) {
-        return null;
-      }
-      return {iguales: true};
-    };
-  }
-  // Fin de la validacion de password iguales
-
   // Validacion de correo existente en la BD
   existeDB ( group: FormControl): Promise<any> | Observable<any> {
     let promesa = new Promise(

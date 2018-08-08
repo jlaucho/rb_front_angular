@@ -4,25 +4,27 @@ import { User } from '../interfaces/user';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { UrlHandlingStrategy } from '@angular/router';
 
 
 
 @Injectable()
 export class UserService {
 
-  constructor( private _http: HttpClient ) { }
+  constructor( private _http: HttpClient ) {
+   }
 
-  storageUser( data) {
+  storageUser( data ) {
     let user = {
       token: data.token,
       token_type: data.token_type,
+      expired_in: data.expire_in,
       user: {
         name: data.user.name,
         apellido: data.user.apellido,
         email: data.user.email
       }
     };
+
     localStorage.setItem('user', JSON.stringify( user ));
   }
 
@@ -38,8 +40,8 @@ export class UserService {
     let url = `${ environment.basePath }/api/v1/user/store`;
     return this._http.post( url, user );
   }
-  listaUser ( parametro: string ) {
-    let url = `${ environment.basePath }/api/v1/user/${ parametro }`;
+  listaUser ( parametro: string, page: string = '' ) {
+    let url = `${ environment.basePath }/api/v1/user/${ parametro }${ page }`;
     console.log( 'url', url );
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
     let headers = new HttpHeaders({
@@ -86,6 +88,19 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     return  this._http.post( url, body, { headers } );
+  }
+
+  irA( index: number ) {
+    let url = `${ environment.basePath }/api/v1/user/activos?page=${ index }`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return  this._http.get( url, { headers } );
+  }
+
+  nexPage( url: string ) {
+    return url;
   }
 
 }

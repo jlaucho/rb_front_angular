@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-6 m-t-20">
-                    <h6 class="card-subtitle">Lista de usuarios registrados es el sistema ({{ usuariosDB.total }}) </h6>
+                    <h6 class="card-subtitle">Lista de usuarios registrados es el sistema ({{ total }}) </h6>
                 </div>
                 <div class="col-6 floating-labels m-t-10">
                     <div class="form-group m-b-5">
@@ -23,16 +23,22 @@
                             <th>{{'Apellido' | uppercase}}</th>
                             <th>{{'Email' | uppercase}}</th>
                             <th>{{'Telefono' | uppercase}}</th>
+                            <th>{{'jerarquia' | uppercase}}</th>
                             <th class="text-center">{{'Acci&oacute;n' | uppercase}}</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let usuario of usuarios; index as i">
                         <tr>
-                            <td>{{ (i + 1) }}</td>
-                            <td>{{ usuario.name }}</td>
-                            <td>{{ usuario.apellido }}</td>
-                            <td>{{ usuario.email }}</td>
-                            <td>{{ usuario.telefono }}</td>
+                            <td style="width: 5%;">{{ (i + 1) }}</td>
+                            <td style="width: 12%;">{{ usuario.name }}</td>
+                            <td style="width: 12%;">{{ usuario.apellido }}</td>
+                            <td style="width: 37%;">{{ usuario.email }}</td>
+                            <td style="width: 10%;">{{ usuario.telefono }}</td>
+                            <td style="width: 14%;">
+                                <span class="badge" style="width: 100%" [ngClass]="{'badge-success': usuario.type === 'conductor', 'badge-warning': usuario.type === 'user','badge-primary': usuario.type === 'superAdmin', 'badge-info': usuario.type === 'admin' }">
+                                 {{ usuario.type | uppercase }} 
+                                </span>
+                            </td>
                             <td class="text-center">
 
                                 <a class="btn btn-primary btn-xs" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></a>
@@ -45,7 +51,20 @@
                         </tr>
                     </tbody>
                 </table>
-                <h6 class="card-subtitle" *ngIf="palabra.value.length > 0"> {{ usuarios.length }} usuarios encontrados de {{ usuariosDB.users.length }} registros</h6>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" ngClass="{'disabled': usuariosDB.users.prev_page_url }">
+                            <a class="page-link" (click)="nexPage( usuariosDB.users.prev_page_url )">Previous</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{'active': pagina === usuariosDB.users.current_page}" *ngFor="let pagina of numeroPaginas">
+                            <a class="page-link " (click)="irA( pagina )"> {{ pagina }} </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" (click)="nexPage( usuariosDB.users.next_page_url )">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                <h6 class="card-subtitle">Mostrando {{ usuarios.length }} usuarios de {{ total }} registros</h6>
                 <div *ngIf="usuarios.length === 0">
                     <div class="alert alert-primary" role="alert">
                         <strong>No hay resultados para esta busqueda</strong>

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         email: localStorage.getItem('recuerdame'),
         password: '',
         recuerdame: true
-      }
+      };
         this.forma.setValue(login);
         // this.recuerdame = {
         //   user: localStorage.getItem('recuerdame'),
@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem('recuerdame');
     }
     this._userService.loginUser( this.forma.value ).subscribe( (data: any) => {
+      console.log(data);
       this._userService.storageUser( data );
       this.router.navigate(['/dashboard']);
     });

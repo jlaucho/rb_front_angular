@@ -19,46 +19,47 @@ export class UserListComponent implements OnInit {
   usuarios: any = [];
   busquedaPalabra: string;
   parametro: string;
+  total: number;
+  numeroPaginas: any = [];
 
   constructor( private _userService: UserService,
-               private activeRouter: ActivatedRoute, 
-               private router: Router ) { 
-    
-          router.events.subscribe( (event: Event) => {
+               private activeRouter: ActivatedRoute,
+               private router: Router ) {
+
+          router.events.subscribe( (event: any) => {
             if (event instanceof NavigationEnd) {
                 this.obtenerParametro();
                 this.listaUser();
             }
         });
-                 
     }
-                
+
   ngOnInit() {
-    
+
     init_plugis();
   }
-  
+
   obtenerParametro () {
-    
-    this.activeRouter.params.subscribe( (parametro: Object): void =>{
+
+    this.activeRouter.params.subscribe( (parametro: any): void => {
       this.parametro = parametro.tipo;
     });
-    // console.log('parametro', this.parametro);
   }
 
-  listaUser(): void {
-    this._userService.listaUser( this.parametro )
+  listaUser( page: string = '' ): void {
+    this._userService.listaUser( this.parametro, page )
     .subscribe( (userList: any) => {
-      // console.log( userList );
+      this.total = userList.users.total;
+      console.log( userList );
       this.usuariosDB = userList;
-      this.usuarios = userList.users;
-      // console.log( this.usuarios );
-        });
+      this.usuarios = userList.users.data;
+      this.numeroPagina();
+    });
   }
   busqueda(palabra: string) {
       palabra = palabra.toLowerCase();
       let temp: any = [];
-      for (const usuario of this.usuariosDB.users) {
+      for (const usuario of this.usuariosDB.users.data) {
         // console.log(usuario);
         if ( (usuario.name.toLowerCase().indexOf(palabra) >= 0) ||
             (usuario.apellido.toLowerCase().indexOf(palabra) >= 0) ||
@@ -116,12 +117,12 @@ export class UserListComponent implements OnInit {
   respuestasLista ( isActived: boolean, id: number ): void {
 
     for (const usuario in this.usuariosDB.users) {
-      if( this.usuariosDB.users[usuario].id === id) {
-        if( this.parametro === 'todos' ){
+      if ( this.usuariosDB.users[usuario].id === id) {
+        if ( this.parametro === 'todos' ) {
         this.usuariosDB.users[usuario].deleted_at = isActived;
       } else {
         this.usuariosDB.users.splice( usuario, 1 );
-        this.usuariosDB.total = this.usuariosDB.total -1;
+        this.usuariosDB.total = this.usuariosDB.total - 1;
       }
     }
   }
@@ -134,5 +135,28 @@ export class UserListComponent implements OnInit {
         window.document.getElementById('palabra').focus();
      }
   }
+
 }
+    nexPage( url: string ) {
+      if (url) {
+        let index = url.indexOf( '?' );
+        url = url.slice( index );
+        this.listaUser( url );
+      }
+    }
+
+  numeroPagina() {
+    this.numeroPaginas = [];
+    let totalPaginas = this.usuariosDB.users.last_page;
+    // console.log( 'ultima pagina', this.usuariosDB.users.last_page );
+    for (let index = 1; index < (totalPaginas + 1); index++) {
+      this.numeroPaginas.push( index );
+    }
+    // console.log( this.numeroPaginas );
+  }
+
+  irA( index: number ): void {
+    let page = `?page=${ index }`;
+    this.listaUser( page );
+  }
 }
