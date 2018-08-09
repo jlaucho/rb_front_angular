@@ -36,8 +36,8 @@
                             <td style="width: 10%;">{{ usuario.telefono }}</td>
                             <td style="width: 14%;">
                                 <span class="badge" style="width: 100%" [ngClass]="{'badge-success': usuario.type === 'conductor', 'badge-warning': usuario.type === 'user','badge-primary': usuario.type === 'superAdmin', 'badge-info': usuario.type === 'admin' }">
-                                 {{ usuario.type | uppercase }} 
-                                </span>
+                      {{ usuario.type | uppercase }} 
+                        </span>
                             </td>
                             <td class="text-center">
 

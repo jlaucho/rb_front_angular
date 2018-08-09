@@ -60,13 +60,14 @@ export class UserListComponent implements OnInit {
       palabra = palabra.toLowerCase();
       let temp: any = [];
       for (const usuario of this.usuariosDB.users.data) {
-        // console.log(usuario);
-        if ( (usuario.name.toLowerCase().indexOf(palabra) >= 0) ||
-            (usuario.apellido.toLowerCase().indexOf(palabra) >= 0) ||
-            (usuario.email.toLowerCase().indexOf(palabra) >= 0)  ) {
-          // this.usuarios = usuario;
-          temp.push(usuario);
+        console.log(usuario);
+        for (let user of usuario) {
         }
+        // if ( (usuario.name.toLowerCase().indexOf(palabra) >= 0) ||
+        //     (usuario.apellido.toLowerCase().indexOf(palabra) >= 0) ||
+        //     (usuario.email.toLowerCase().indexOf(palabra) >= 0)  ) {
+        //   temp.push(usuario);
+        // }
       }
       this.usuarios = temp;
   }
