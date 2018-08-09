@@ -60,8 +60,15 @@ export class UserListComponent implements OnInit {
       palabra = palabra.toLowerCase();
       let temp: any = [];
       for (const usuario of this.usuariosDB.users.data) {
-        console.log(usuario);
-        for (let user of usuario) {
+        for (let i in usuario) {
+          if (usuario.hasOwnProperty(i)) {
+            let element = usuario[i].toString().toLowerCase();
+            if ( element.indexOf( palabra )) {
+              temp.push(usuario);
+              break;
+            }
+            // break;
+          }
         }
         // if ( (usuario.name.toLowerCase().indexOf(palabra) >= 0) ||
         //     (usuario.apellido.toLowerCase().indexOf(palabra) >= 0) ||
@@ -70,6 +77,7 @@ export class UserListComponent implements OnInit {
         // }
       }
       this.usuarios = temp;
+      console.log( this.usuarios );
   }
 
   borrarUser( id: number ): void {
