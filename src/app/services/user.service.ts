@@ -40,8 +40,8 @@ export class UserService {
     let url = `${ environment.basePath }/api/v1/user/store`;
     return this._http.post( url, user );
   }
-  listaUser ( parametro: string, page: string = '' ) {
-    let url = `${ environment.basePath }/api/v1/user/${ parametro }${ page }`;
+  listaUser ( parametro: string, page: string = '', palabra ) {
+    let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
     console.log( 'url', url );
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
     let headers = new HttpHeaders({

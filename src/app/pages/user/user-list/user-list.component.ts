@@ -1,4 +1,3 @@
-import { User } from '../../../interfaces/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import Swal from 'sweetalert2';
@@ -29,7 +28,7 @@ export class UserListComponent implements OnInit {
           router.events.subscribe( (event: any) => {
             if (event instanceof NavigationEnd) {
                 this.obtenerParametro();
-                this.listaUser();
+                this.listaUser('', '');
             }
         });
     }
@@ -46,8 +45,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  listaUser( page: string = '' ): void {
-    this._userService.listaUser( this.parametro, page )
+  listaUser( page: string = '', palabra: string ): void {
+    this._userService.listaUser( this.parametro, page, palabra )
     .subscribe( (userList: any) => {
       this.total = userList.users.total;
       console.log( userList );
@@ -56,25 +55,38 @@ export class UserListComponent implements OnInit {
       this.numeroPagina();
     });
   }
+
+
+  // Esta funcion busca todas la coincidencia dentro de la misma pagina "Sin paginacion"
   busqueda(palabra: string) {
+    if ( palabra.length > 2 ) {
+      this.listaUser( '', palabra );
+    } else if ( palabra.length === 2 ) {
+      this.listaUser( '', '' );
+    }
+}
+ 
+  // Esta funcion busca todas la coincidencia dentro de la misma pagina "Sin paginacion"
+  busqueda2(palabra: string) {
       palabra = palabra.toLowerCase();
       let temp: any = [];
       for (const usuario of this.usuariosDB.users.data) {
+        let encontro: boolean = false;
         for (let i in usuario) {
           if (usuario.hasOwnProperty(i)) {
-            let element = usuario[i].toString().toLowerCase();
-            if ( element.indexOf( palabra )) {
-              temp.push(usuario);
-              break;
+            if (usuario[i]) {
+
+              let element = usuario[i].toString().toLowerCase();
+              if ( element.indexOf( palabra ) >= 0) {
+                // console.log( element );
+                encontro = true;
+              }
             }
-            // break;
-          }
         }
-        // if ( (usuario.name.toLowerCase().indexOf(palabra) >= 0) ||
-        //     (usuario.apellido.toLowerCase().indexOf(palabra) >= 0) ||
-        //     (usuario.email.toLowerCase().indexOf(palabra) >= 0)  ) {
-        //   temp.push(usuario);
-        // }
+        }
+        if (encontro) {
+          temp.push(usuario);
+        }
       }
       this.usuarios = temp;
       console.log( this.usuarios );
@@ -136,21 +148,21 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  if ( this.busquedaPalabra ) {
-    this.busqueda( this.busquedaPalabra );
-     if (this.usuarios.length === 0 ) {
-        this.busquedaPalabra = '';
-        this.busqueda('');
-        window.document.getElementById('palabra').focus();
-     }
-  }
+  // if ( this.busquedaPalabra ) {
+  //   this.busqueda( this.busquedaPalabra );
+  //    if (this.usuarios.length === 0 ) {
+  //       this.busquedaPalabra = '';
+  //       this.busqueda('');
+  //       window.document.getElementById('palabra').focus();
+  //    }
+  // }
 
 }
     nexPage( url: string ) {
       if (url) {
         let index = url.indexOf( '?' );
         url = url.slice( index );
-        this.listaUser( url );
+        this.listaUser( url, this.busquedaPalabra );
       }
     }
 
@@ -166,6 +178,6 @@ export class UserListComponent implements OnInit {
 
   irA( index: number ): void {
     let page = `?page=${ index }`;
-    this.listaUser( page );
+    this.listaUser( page, this.busquedaPalabra );
   }
 }
