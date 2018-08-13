@@ -12,6 +12,8 @@ export class MensajesFormsComponent implements OnInit {
   @Input() selectorName: string;
   @Input() caracterMin: number;
   @Input() caracterMax: number;
+  @Input() min: number;
+  @Input() max: number;
 
   nombre: string = '';
 
@@ -22,14 +24,17 @@ export class MensajesFormsComponent implements OnInit {
   ngOnInit() {
     this.nombre = this.selectorName;
    switch (this.nombre) {
-     case 'name':
+    case 'name':
        this.nombre = 'nombre';
        break;
-      case 'type':
+    case 'type':
        this.nombre = 'tipo';
        break;
-       case 'password':
+    case 'password':
        this.nombre = 'clave';
+       break;
+    case 'por_bono_nocturno':
+       this.nombre = 'bono nocturno';
        break;
    }
   }

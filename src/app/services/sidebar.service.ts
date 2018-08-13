@@ -138,11 +138,15 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todos',
-              url: '/'
+              url: '/tabulador-list/todos'
             },
             {
-              titulo: 'Activo',
-              url: '/',
+              titulo: 'Activos',
+              url: '/tabulador-list/activo'
+            },
+            {
+              titulo: 'Inactivos',
+              url: '/tabulador-list/inactivos'
             },
           ]
         }

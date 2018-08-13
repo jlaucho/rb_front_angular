@@ -27,7 +27,10 @@ import { MensajesFormsComponent } from '../componentes/mensajes-forms/mensajes-f
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.component';
 import { PaginationService } from '../services/pagination.service';
-import { TabuladorComponent } from './tabulador/tabulador.component';
+import { TabuladorService } from '../services/tabulador.service';
+
+import { TabuladorComponent } from './tabulador/register/tabulador.component';
+import { TabuladorListComponent } from './tabulador/tabulador-list/tabulador-list.component';
 
 
 
@@ -48,7 +51,8 @@ import { TabuladorComponent } from './tabulador/tabulador.component';
     ValidatorsService,
     FuncionesGenericasService,
     EmpresaService,
-    PaginationService
+    PaginationService,
+    TabuladorService
   ],
   declarations: [
     PagesComponent,
@@ -66,6 +70,7 @@ import { TabuladorComponent } from './tabulador/tabulador.component';
     UserUpdateComponent,
     EmpresaUpdateComponent,
     TabuladorComponent,
+    TabuladorListComponent,
   ],
   exports: [
     DashboardComponent,
