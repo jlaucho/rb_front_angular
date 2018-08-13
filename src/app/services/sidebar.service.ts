@@ -123,6 +123,30 @@ export class SidebarService {
           ]
         }
       ]
+    },
+    {
+      titulo: 'Tabulador',
+      icono: 'mdi mdi-gauge',
+      submenu: [
+        {
+          titulo: 'Registrar',
+          url: '/tabulador-register',
+        },
+        {
+          titulo: 'Buscar',
+          url: '/',
+          submenu: [
+            {
+              titulo: 'Todos',
+              url: '/'
+            },
+            {
+              titulo: 'Activo',
+              url: '/',
+            },
+          ]
+        }
+      ]
     }
   ];
 

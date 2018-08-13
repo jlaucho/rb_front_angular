@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registro de Tabulador</h5>
+                <h6 class="card-subtitle">Sistema de registro de tabulador al sistema</h6>
+                <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="por_bono_nocturno" name="por_bono_nocturno" class="form-control">
+                                <span class="bar"></span>
+                                <label for="name">Porcentaje agregado por bono nocturno (%)</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="por_bono_nocturno" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="apellido" name="apellido" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Apellido</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="apellido" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="cedula" name="cedula" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Cedula</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cedula" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="direccion" name="direccion" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Direcci&oacute;n</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="direccion" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="telefono" formControlName="telefono" name="telefono" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Telefono</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="telefono" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="email" formControlName="email" name="email" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Email</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="email" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <select formControlName="type" name="type" class="form-control p-0" id="input7">
+                                    <option></option>
+                                    <option value="superAdmin">Administrador</option>
+                                    <option value="admin">Administrativo</option>
+                                    <option value="user">Usuario</option>
+                                    <option value="conductor">Trabajador</option>
+                                </select>
+                                <span class="bar"></span>
+                                <label for="input6">Tipo</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="type" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="password" formControlName="password" name="password" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Clave</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="password" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group m-b-40">
+                                <input type="password" formControlName="password_confirmation" name="password_confirm" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Repita la clave</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="password_confirmation" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                    </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal">volver</button>
+                            <span class="pull-right">
+                                <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
+                                <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div *ngIf="false" class="alert alert-danger" role="alert">
+                                <strong>Aca es donde van los errores retornados de la base de datos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

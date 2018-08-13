@@ -19,6 +19,7 @@ import { EmpresaListComponent } from './pages/empresa/empresa-list/empresa-list.
 import { UserUpdateComponent } from './pages/user/user-update/user-update.component';
 import { LoginGuardGuard } from './services/guards/login-guard.guard';
 import { EmpresaUpdateComponent } from './pages/empresa/empresa-update/empresa-update.component';
+import { TabuladorComponent } from './pages/tabulador/tabulador.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
@@ -43,6 +44,8 @@ const appRoutes: Routes = [
                 {title: 'Listado de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Listar'} },
         { path: 'empresa-update/:idEmpresa', canActivate: [ LoginGuardGuard ], component: EmpresaUpdateComponent, data:
                 {title: 'Listado de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Listar'} },
+        { path: 'tabulador-register', canActivate: [ LoginGuardGuard ], component: TabuladorComponent, data:
+                {title: 'Registro de Tabulador', izquierda: 'Pagina', medio: 'Tabulador', derecha: 'Registrar'} },
         { path: '', component: DashboardComponent },
     ] },
     { path: '**', component: NopagefoundComponent },

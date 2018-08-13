@@ -52,6 +52,8 @@ export class EmpresaRegisterComponent implements OnInit {
     console.log( this.forma.controls );
     this._empresaService.registerEmpresa( empresa )
         .subscribe( (resp: any) => {
+          this.empresa = resp.empresa;
+          console.log( this.empresa );
           this.mensajeExito = resp.ok;
         });
   }

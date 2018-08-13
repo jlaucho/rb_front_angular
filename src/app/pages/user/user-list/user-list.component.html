@@ -41,7 +41,8 @@
                             </td>
                             <td class="text-center">
 
-                                <a class="btn btn-primary btn-xs" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></a>
+
+                                <button class="btn btn-primary btn-xs" [disabled]="usuario.deleted_at" [routerLink]="['/user-update', usuario.id]" role="button"><span class="ti-settings"></span></button>
 
                                 <a *ngIf="!usuario.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarUser( usuario.id )" role="button"><span class="ti-trash"></span></a>
                                 <ng-template #activo>
@@ -53,14 +54,27 @@
                 </table>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item" ngClass="{'disabled': usuariosDB.users.prev_page_url }">
-                            <a class="page-link" (click)="nexPage( usuariosDB.users.prev_page_url )">Previous</a>
-                        </li>
-                        <li class="page-item" [ngClass]="{'active': pagina === usuariosDB.users.current_page}" *ngFor="let pagina of numeroPaginas">
-                            <a class="page-link " (click)="irA( pagina )"> {{ pagina }} </a>
-                        </li>
+
                         <li class="page-item">
-                            <a class="page-link" (click)="nexPage( usuariosDB.users.next_page_url )">Next</a>
+                            <div *ngIf="prev_page_url; else prevPageButton">
+                                <a class="page-link" (click)="nexPage( usuariosDB.users.prev_page_url )">Previous</a>
+                            </div>
+                            <ng-template #prevPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
+                        </li>
+
+                        <li class="page-item" [ngClass]="{'active': pagina === usuariosDB.users.current_page}" *ngFor="let pagina of numeroPaginas">
+                            <button class="page-link " [disabled]="pagina === usuariosDB.users.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
+                        </li>
+
+                        <li class="page-item">
+                            <div *ngIf="next_page_url; else nexPageButton">
+                                <a class="page-link" (click)="nexPage( usuariosDB.users.next_page_url )">Previous</a>
+                            </div>
+                            <ng-template #nexPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
                         </li>
                     </ul>
                 </nav>

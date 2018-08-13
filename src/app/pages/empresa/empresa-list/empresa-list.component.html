@@ -15,34 +15,34 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table color-table success-table table-sm">
+                <table class="table table-hover color-table success-table table-sm">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>{{'Nombre' | uppercase}}</th>
-                            <th>{{'Direcci&oacute;n' | uppercase}}</th>
-                            <th>{{'Telefono' | uppercase}}</th>
-                            <th>{{'Descripci&oacute;n' | uppercase}}</th>
-                            <th>{{'rif' | uppercase}}</th>
-                            <th>{{'Acci&oacute;n' | uppercase}}</th>
+                            <th style=" width: 5%; " class="text-center">#</th>
+                            <th style="width: 20%; ">{{'Nombre' | uppercase}}</th>
+                            <th style="width: 21%; ">{{'Direcci&oacute;n' | uppercase }}</th>
+                            <th style="width: 10%; ">{{'Telefono' | uppercase}}</th>
+                            <th style="width: 25%; ">{{'Descripci&oacute;n' | uppercase}}</th>
+                            <th style="width: 10%; ">{{'rif' | uppercase}}</th>
+                            <th class="text-center">{{'Acci&oacute;n' | uppercase}}</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let empre of empresa; index as i">
+                    <tbody *ngFor="let empre of empresa; index as i ">
                         <tr>
-                            <td>{{ (i + 1) }}</td>
+                            <td class="text-center">{{ (i + 1) }}</td>
                             <td>{{ empre.name }}</td>
-                            <td>{{ empre.direccion }}</td>
+                            <td>{{ empre.direccion | slice:0:30 }}<span *ngIf="empre.direccion.length > 30">...</span> </td>
                             <td>{{ empre.telefono }}</td>
-                            <td>{{ empre.descripcion }}</td>
+                            <td>{{ empre.descripcion | slice:0:30 }}<span *ngIf="empre.descripcion.length > 30">...</span></td>
                             <td>{{ empre.RIF }}</td>
-                            <td>
-                                <a class="btn btn-primary btn-xs" [routerLink]="['/empresa-update', empre.idEmpresas]" role="button"><span class="ti-settings"></span></a>
-                                <a class="btn btn-danger btn-xs" (click)="eliminarEmpresa()" role="button"><span class="ti-trash"></span></a>
+                            <td class="text-center">
+                                <a class="btn btn-primary btn-xs " [routerLink]="[ '/empresa-update', empre.idEmpresas] " role="button "><span class="ti-settings "></span></a>
+                                <a class="btn btn-danger btn-xs " (click)="eliminarEmpresa() " role="button "><span style="color: #ffffff" class="ti-trash "></span></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <h6 class="card-subtitle" *ngIf="palabra.value.length > 0"> {{ empresa.length }} empresa encontrada de {{ empresasDB.empresas.length }} registros</h6>
+                <h6 class="card-subtitle " *ngIf="palabra.value.length> 0"> {{ empresa.length }} empresa encontrada de {{ empresasDB.empresas.length }} registros</h6>
                 <div *ngIf="empresa.length === 0">
                     <div class="alert alert-primary" role="alert">
                         <strong>No hay resultados para esta busqueda</strong>

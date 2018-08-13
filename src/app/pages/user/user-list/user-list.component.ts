@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+import { PaginationService } from '../../../services/pagination.service';
 import Swal from 'sweetalert2';
 // import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -16,10 +17,12 @@ export class UserListComponent implements OnInit {
 
   usuariosDB: any = [];
   usuarios: any = [];
-  busquedaPalabra: string;
+  busquedaPalabra: string = '';
   parametro: string;
   total: number;
   numeroPaginas: any = [];
+  prev_page_url: any = null;
+  next_page_url: any = null;
 
   constructor( private _userService: UserService,
                private activeRouter: ActivatedRoute,
@@ -52,6 +55,9 @@ export class UserListComponent implements OnInit {
       console.log( userList );
       this.usuariosDB = userList;
       this.usuarios = userList.users.data;
+      this.prev_page_url = (this.usuariosDB.users.prev_page_url) ? true : false;
+      this.next_page_url = (this.usuariosDB.users.next_page_url) ? true : false;
+      console.log( this.prev_page_url );
       this.numeroPagina();
     });
   }
@@ -65,7 +71,7 @@ export class UserListComponent implements OnInit {
       this.listaUser( '', '' );
     }
 }
- 
+
   // Esta funcion busca todas la coincidencia dentro de la misma pagina "Sin paginacion"
   busqueda2(palabra: string) {
       palabra = palabra.toLowerCase();
@@ -108,6 +114,7 @@ export class UserListComponent implements OnInit {
       if (result.value) {
         this._userService.borrarUser( id )
         .subscribe( (respuesta: any) => {
+          console.log( respuesta, 'id: ', id );
           this.respuestasLista( true, id );
           Swal('Borrar', 'Usuario borrado satisfactoriamente!', 'success');
         });
@@ -129,6 +136,7 @@ export class UserListComponent implements OnInit {
         this._userService.reactivarUser( id )
         .subscribe( (respuesta: any) => {
           this.respuestasLista( false, id );
+          console.log( respuesta, 'id: ', id );
           Swal('Reactivar', 'Usuario Reactivado satisfactoriamente!', 'success');
         });
       }
@@ -137,12 +145,13 @@ export class UserListComponent implements OnInit {
 
   respuestasLista ( isActived: boolean, id: number ): void {
 
-    for (const usuario in this.usuariosDB.users) {
-      if ( this.usuariosDB.users[usuario].id === id) {
+    console.log( 'usuariosDB: ', this.usuariosDB );
+    for (const usuario in this.usuariosDB.users.data) {
+      if ( this.usuariosDB.users.data[usuario].id === id) {
         if ( this.parametro === 'todos' ) {
-        this.usuariosDB.users[usuario].deleted_at = isActived;
+        this.usuariosDB.users.data[usuario].deleted_at = isActived;
       } else {
-        this.usuariosDB.users.splice( usuario, 1 );
+        this.usuariosDB.users.data.splice( usuario, 1 );
         this.usuariosDB.total = this.usuariosDB.total - 1;
       }
     }

@@ -26,6 +26,9 @@ import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.compon
 import { MensajesFormsComponent } from '../componentes/mensajes-forms/mensajes-forms.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.component';
+import { PaginationService } from '../services/pagination.service';
+import { TabuladorComponent } from './tabulador/tabulador.component';
+
 
 
 
@@ -44,7 +47,8 @@ import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.
     WidgateService,
     ValidatorsService,
     FuncionesGenericasService,
-    EmpresaService
+    EmpresaService,
+    PaginationService
   ],
   declarations: [
     PagesComponent,
@@ -61,6 +65,7 @@ import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.
     MensajesFormsComponent,
     UserUpdateComponent,
     EmpresaUpdateComponent,
+    TabuladorComponent,
   ],
   exports: [
     DashboardComponent,
