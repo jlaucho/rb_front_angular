@@ -191,36 +191,6 @@
 
                     </div>
 
-                    <!-- <div class="row" *ngFor="let prac of forma.controls['practica'].controls; let i = index">
-                        <div formArrayName="practica">
-
-                            <div class="col-3">
-
-                                <div class="form-group m-b-40">
-                                    <input type="text" [formControlName]="i" name="practica" class="form-control">
-                                    <span class="bar"></span>
-                                    <label for="">practica para repetir</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row" formArrayName="segundo">
-
-                            <div class="col-3">
-
-                                <div class="form-group m-b-40">
-                                    <input type="text" [formControlName]="i" name="practica" class="form-control">
-                                    <span class="bar"></span>
-                                    <label for="">Segunda Practica</label>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <button class="btn btn-success" type="button" (click)="agregarOtro()">agregarOtro</button> -->
-
-
-
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -233,12 +203,53 @@
                     </div>
                     <div class="row container-fluid">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div *ngIf="true" class="alert alert-danger" role="alert">
+                            <div *ngIf="false" class="alert alert-danger" role="alert">
                                 <strong>{{ forma.controls['mensaje'].errors?.existe }}</strong>
                             </div>
                         </div>
                     </div>
                 </form>
+                <div class="row" *ngIf="mostrarDetalle">
+                    <div class="col-12">
+                        <table class="table" style="font-family: 'Courier New', Courier, monospace; font-size: 11pt" border="1">
+                            <thead>
+                                <tr>
+                                    <td colspan="13">Buenos día, por medio de la presente adjunto el detalle de servicio prestado el día 13 del mes de Julio de 2018: (Servicio Prestado al Sra. Monica Rincon) </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4"> <strong> 15-08-2018 </strong></td>
+                                    <td colspan="9"></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Planta pepsi Norte</td>
+                                    <td>-</td>
+                                    <td>Planta Mosaca</td>
+                                    <td>=</td>
+                                    <td colspan="2">1 DesvInter</td>
+                                    <td>x</td>
+                                    <td colspan="2">7.000.000,00 bs/desvInter</td>
+                                    <td>=</td>
+                                    <td colspan="2">7.000.000,00 bs</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="1"> Nocturno </td>
+                                    <td>=</td>
+                                    <td class="text-center" colspan="2">20 %</td>
+                                    <td>x</td>
+                                    <td class="text-center" colspan="2">7.000.000,00 bs</td>
+                                    <td>=</td>
+                                    <td>1.400.000,00</td>
+                                    <td>bs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 export interface Servicio {
     mensaje: String;
-    fecha: String;
     origen: String[];
     destino: String[];
     cantidad:  Number[];
@@ -15,7 +14,4 @@ export interface Servicio {
     cantPernocta: Number;
     fechaServicio: String;
     realizado_por: Number;
-    
-
-
 }

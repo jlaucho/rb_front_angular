@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ServiciosService } from '../../../services/servicios.service';
 import { UserService } from '../../../services/user.service';
+import { Servicio } from '../../../interfaces/servicio';
 declare function init_plugis();
 
 @Component({
@@ -18,6 +19,8 @@ export class ServicioRegisterComponent implements OnInit {
   mostrarMensaje: boolean = false;
   mensajeAlert: string = '';
   tipoAlert: string = 'success';
+  detalleServicio: Servicio;
+  mostrarDetalle: boolean = true;
 
   constructor(
     private _servicioService: ServiciosService,
@@ -71,13 +74,16 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   enviarFormulario () {
-    this._servicioService.registrarServicio ( this.forma.value )
-        .subscribe( (resp: any) => {
-          this.mensajeAlert = resp.mensaje;
-          this.mostrarMensaje = resp.ok;
-          this.tipoAlert = 'success';
-          console.log( '=======================================', resp );
-        });
+    console.log( this.forma.value );
+    this.detalleServicio = this.forma.value;
+    this.mostrarDetalle = true;
+    // this._servicioService.registrarServicio ( this.forma.value )
+    //     .subscribe( (resp: any) => {
+    //       this.mensajeAlert = resp.mensaje;
+    //       this.mostrarMensaje = resp.ok;
+    //       this.tipoAlert = 'success';
+    //       console.log( '=======================================', resp );
+    //     });
   }
 
   usuariosRegistrados () {
