@@ -21,6 +21,7 @@ import { LoginGuardGuard } from './services/guards/login-guard.guard';
 import { EmpresaUpdateComponent } from './pages/empresa/empresa-update/empresa-update.component';
 import { TabuladorComponent } from './pages/tabulador/register/tabulador.component';
 import { TabuladorListComponent } from './pages/tabulador/tabulador-list/tabulador-list.component';
+import { ServicioRegisterComponent } from './pages/servicios/servicio-register/servicio-register.component';
 
 
 const appRoutes: Routes = [
@@ -51,6 +52,8 @@ const appRoutes: Routes = [
                 {title: 'Registro de Tabulador', izquierda: 'Pagina', medio: 'Tabulador', derecha: 'Registrar'} },
         { path: 'tabulador-list/:tipo', canActivate: [ LoginGuardGuard ], component: TabuladorListComponent, data:
                 {title: 'Registro de Tabulador', izquierda: 'Pagina', medio: 'Tabulador', derecha: 'Lista'} },
+        { path: 'servicio-register', canActivate: [ LoginGuardGuard ], component: ServicioRegisterComponent, data:
+                {title: 'Registro de Servicio', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Registro'} },
         { path: '', component: DashboardComponent },
     ] },
     { path: '**', component: NopagefoundComponent },

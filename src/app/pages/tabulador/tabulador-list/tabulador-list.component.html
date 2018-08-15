@@ -1,3 +1,72 @@
-<p>
-    tabulador-list works!
-</p>
+<div class="card">
+    <div class="col-1"></div>
+    <div class="col-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6 m-t-20">
+                    <h6 class="card-subtitle">Lista de usuarios registrados es el sistema ({{ total }}) </h6>
+                </div>
+                <div class="col-6 floating-labels m-t-10">
+                    <div class="form-group m-b-5">
+                        <input type="text" #palabra [(ngModel)]="busquedaPalabra" (keyup)="busqueda(palabra.value)" id="palabra" name="busqueda" class="form-control">
+                        <span class="bar"></span>
+                        <label for="" class="card-subtitle">Buscar...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table color-table success-table table-sm text-center">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="background-color:aquamarine"></th>
+                            <th colspan="3" style="background-color: red"> PORCENTAJES </th>
+                            <th colspan="4" style="background-color: blue"> MONTOS </th>
+                            <th colspan="2" style="background-color: blueviolet"></th>
+                        </tr>
+                        <tr style="font-size: 9pt">
+                            <th>#</th>
+                            <th>{{'Nocturno' | uppercase }}</th>
+                            <th>{{'Encomienda' | uppercase}}</th>
+                            <th>{{'fin semena' | uppercase}}</th>
+                            <th>{{'Pernocta' | uppercase}}</th>
+                            <th>{{'Horas' | uppercase}}</th>
+                            <th>{{'desv Interno' | uppercase}}</th>
+                            <th>{{'desv Externo' | uppercase}}</th>
+                            <th>{{'fecha Inicio' | uppercase}}</th>
+                            <th class="text-center">{{'Acci&oacute;n' | uppercase}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let tabulador of tabuladores; index as i">
+                        <tr class="justify-content-center">
+                            <td style="width: 5%;">{{ (i + 1) }}</td>
+                            <td style="width: 10%;">{{ tabulador.por_bono_nocturno }}</td>
+                            <td style="width: 10%;">{{ tabulador.por_encomienda }}</td>
+                            <td style="width: 10%;">{{ tabulador.por_fin_semana }}</td>
+                            <td style="width: 13%;">{{ tabulador.monto_pernocta }}</td>
+                            <td style="width: 13%;">{{ tabulador.monto_horas }}</td>
+                            <td style="width: 13%;">{{ tabulador.monto_desv_inter }}</td>
+                            <td style="width: 13%;">{{ tabulador.monto_desv_exter }}</td>
+                            <td style="width: 15%;">{{ tabulador.fecha_inicio | date }}</td>
+                            <td class="text-center">
+
+
+                                <button class="btn btn-primary btn-xs" [disabled]="false" [routerLink]="['/user-update', tabulador.id]" role="button"><span class="ti-settings"></span></button>
+
+                                <!-- <a *ngIf="!tabulador.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarTabulador( tabulad.id )" role="button"><span class="ti-trash"></span></a>
+                                <ng-template #activo>
+                                    <a class="btn btn-success btn-xs" title="reactivar" style="color: #ffffff" (click)="reactivarTabulador( taulador.id )" role="button"><span class="ti-check"></span></a>
+                                </ng-template> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h6 class="card-subtitle">Mostrando {{ tabuladores.length }} usuarios de {{ total }} registros</h6>
+                <div *ngIf="tabuladores.length === 0">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>No hay resultados para esta busqueda</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

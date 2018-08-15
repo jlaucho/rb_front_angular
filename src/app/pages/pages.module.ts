@@ -31,6 +31,7 @@ import { TabuladorService } from '../services/tabulador.service';
 
 import { TabuladorComponent } from './tabulador/register/tabulador.component';
 import { TabuladorListComponent } from './tabulador/tabulador-list/tabulador-list.component';
+import { ServicioRegisterComponent } from './servicios/servicio-register/servicio-register.component';
 
 
 
@@ -71,6 +72,7 @@ import { TabuladorListComponent } from './tabulador/tabulador-list/tabulador-lis
     EmpresaUpdateComponent,
     TabuladorComponent,
     TabuladorListComponent,
+    ServicioRegisterComponent,
   ],
   exports: [
     DashboardComponent,

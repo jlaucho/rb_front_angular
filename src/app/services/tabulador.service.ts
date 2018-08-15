@@ -26,10 +26,18 @@ export class TabuladorService {
   }
 
   obtenerLista ( parametro: string ) {
-    let url = `${ environment.basePath }/api/v1/tabulador/${ parametro }`;
+    let url = `${ environment.basePath }/api/v1/buscar/tabulador/${ parametro }`;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${ this.token }`
     });
     return this.http.get( url, { headers } );
+  }
+
+  borrarTabulador ( id: number ): void {
+    console.log( id );
+  }
+
+  reactivarTabulador ( id: number ): void {
+    console.log( id );
   }
 }

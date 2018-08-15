@@ -7,12 +7,14 @@ import { TabuladorService } from '../../../services/tabulador.service';
 @Component({
   selector: 'app-tabulador-list',
   templateUrl: './tabulador-list.component.html',
-  styleUrls: ['./tabulador-list.component.css']
+  styleUrls: ['../../empresa/empresa-list/empresa.css']
 })
 export class TabuladorListComponent implements OnInit {
 
   parametro: string;
-  tabuladores: Tabulador[];
+  tabuladores: any = [];
+  busquedaPalabra: string;
+  total: number;
 
   constructor(
     private _tabuladorService: TabuladorService,
@@ -34,8 +36,14 @@ export class TabuladorListComponent implements OnInit {
   obtenerLista ( parametro: string ): void {
     this._tabuladorService.obtenerLista( parametro )
         .subscribe( (respuesta: any) => {
-          console.log( respuesta );
+          this.tabuladores = respuesta.busqueda;
+          this.total = respuesta.total;
+          console.log( this.tabuladores );
         });
+  }
+
+  busqueda( palabra: string ) {
+    console.log(palabra);
   }
 
 }

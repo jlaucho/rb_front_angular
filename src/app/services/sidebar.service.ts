@@ -66,7 +66,7 @@ export class SidebarService {
       submenu: [
         {
           titulo: 'Registrar',
-          url: '/listarUsuarios',
+          url: '/servicio-register',
         },
         {
           titulo: 'Buscar',
@@ -141,7 +141,7 @@ export class SidebarService {
               url: '/tabulador-list/todos'
             },
             {
-              titulo: 'Activos',
+              titulo: 'Activo',
               url: '/tabulador-list/activo'
             },
             {
