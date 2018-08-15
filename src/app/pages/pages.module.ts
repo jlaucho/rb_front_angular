@@ -32,6 +32,8 @@ import { TabuladorService } from '../services/tabulador.service';
 import { TabuladorComponent } from './tabulador/register/tabulador.component';
 import { TabuladorListComponent } from './tabulador/tabulador-list/tabulador-list.component';
 import { ServicioRegisterComponent } from './servicios/servicio-register/servicio-register.component';
+import { ServiciosService } from '../services/servicios.service';
+import { AlertComponent } from '../componentes/alert/alert.component';
 
 
 
@@ -53,7 +55,8 @@ import { ServicioRegisterComponent } from './servicios/servicio-register/servici
     FuncionesGenericasService,
     EmpresaService,
     PaginationService,
-    TabuladorService
+    TabuladorService,
+    ServiciosService
   ],
   declarations: [
     PagesComponent,
@@ -73,6 +76,7 @@ import { ServicioRegisterComponent } from './servicios/servicio-register/servici
     TabuladorComponent,
     TabuladorListComponent,
     ServicioRegisterComponent,
+    AlertComponent
   ],
   exports: [
     DashboardComponent,

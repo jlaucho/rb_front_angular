@@ -42,7 +42,6 @@ export class UserService {
   }
   listaUser ( parametro: string, page: string = '', palabra ) {
     let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
-    console.log( 'url', url );
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -52,6 +51,14 @@ export class UserService {
     // Respuesta con generados de JSON
     // let url = `https://next.json-generator.com/api/json/get/4y4RJN2VB`;
     // return this._http.get(url);
+  }
+  userRegister() {
+    let url = `${ environment.basePath }/api/v1/user/userRegister`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.get(url, {headers});
   }
   buscarUser( id: number ) {
     let token =  (JSON.parse(localStorage.getItem('user'))).token;

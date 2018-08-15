@@ -5,6 +5,7 @@
                 <h5 class="card-title">Registro de servicio realizado</h5>
                 <h6 class="card-subtitle">Sistema de registro de servicios al sistema</h6>
                 <hr>
+                <app-alert *ngIf="mostrarMensaje" [mensaje]="mensajeAlert" [type]="tipoAlert"></app-alert>
                 <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
 
 
@@ -94,7 +95,7 @@
 
 
                         <div class="col-1">
-                            <div class="form-group m-b-40" formArrayName="recorrido">
+                            <div class="form-group m-b-40" formArrayName="encomienda">
                                 <select [formControlName]="i" name="encomienda" class="form-control p-0" id="input7">
                                 <option></option>
                                 <option value="SI">SI</option>
@@ -180,31 +181,13 @@
                         <div class="col-6">
                             <div class="form-group m-b-40">
                                 <select formControlName="realizado_por" name="realizado_por" class="form-control p-0" id="input7">
-                              <option></option>
-                              <option value="SI">nombre de conductor 1</option>
-                              <option value="SI">nombre de conductor 2</option>
-                              <option value="SI">nombre de conductor 3</option>
+                              <option [value]="usuario.id" *ngFor="let usuario of usuarios" > {{ usuario.name }} {{ usuario.apellido }} C.I {{ usuario.cedula }} </option>
                           </select>
                                 <span class="bar"></span>
                                 <label for="input6">Realizado Por: </label>
                                 <app-mensajes-forms [forma]="forma" selectorName="realizado_por" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
                             </div>
                         </div>
-
-                        <div class="col-6">
-                            <div class="form-group m-b-40">
-                                <select formControlName="registrado_por" name="registrado_por" class="form-control p-0" id="input7">
-                            <option></option>
-                            <option value="SI">Usuario de sistema 1</option>
-                            <option value="SI">Usuario de sistema 2</option>
-                            <option value="SI">Usuario de sistema 3</option>
-                        </select>
-                                <span class="bar"></span>
-                                <label for="input6">Realizado Por: </label>
-                                <app-mensajes-forms [forma]="forma" selectorName="registrado_por" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
-                            </div>
-                        </div>
-
 
                     </div>
 

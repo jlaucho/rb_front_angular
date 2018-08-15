@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ServiciosService } from '../../../services/servicios.service';
+import { UserService } from '../../../services/user.service';
 declare function init_plugis();
 
 @Component({
@@ -12,8 +14,15 @@ export class ServicioRegisterComponent implements OnInit {
   forma: FormGroup;
   caracterMin: number = 20;
   caracterMax: number = 250;
+  usuarios: any;
+  mostrarMensaje: boolean = false;
+  mensajeAlert: string = '';
+  tipoAlert: string = 'success';
 
-  constructor() { }
+  constructor(
+    private _servicioService: ServiciosService,
+    private _userService: UserService
+  ) { }
 
   ngOnInit() {
 
@@ -56,11 +65,28 @@ export class ServicioRegisterComponent implements OnInit {
       ])
     });
 
+    this.usuariosRegistrados();
+
     init_plugis();
   }
 
   enviarFormulario () {
-    console.log( this.forma.value );
+    this._servicioService.registrarServicio ( this.forma.value )
+        .subscribe( (resp: any) => {
+          this.mensajeAlert = resp.mensaje;
+          this.mostrarMensaje = resp.ok;
+          this.tipoAlert = 'success';
+          console.log( '=======================================', resp );
+        });
+  }
+
+  usuariosRegistrados () {
+    // let url = `${ environment.basePath }api/v1/user/todos`;
+    this._userService.userRegister()
+        .subscribe ( (resp: any) => {
+          this.usuarios = resp.users;
+          console.log('========================================', this.usuarios);
+        });
   }
 
   limpiar() {
