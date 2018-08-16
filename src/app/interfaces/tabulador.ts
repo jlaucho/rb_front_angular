@@ -1,13 +1,15 @@
 export interface Tabulador {
-    id?: Number;
-    por_bono_nocturno: Number;
-    por_encomienda:  Number;
-    monto_pernocta: Number;
-    monto_horas: Number;
-    por_fin_semana: Number;
-    monto_desv_inter: Number;
-    monto_desv_exter: Number;
+    id?: number;
+    activo: String;
+    por_bono_nocturno: number;
+    por_encomienda:  number;
+    monto_pernocta: number;
+    monto_horas: number;
+    por_fin_semana: number;
+    monto_desv_inter: number;
+    monto_desv_exter: number;
     fecha_inicio: String;
     deleted_at?: String;
     created_at?: String;
+    updated_at?: String;
 }
