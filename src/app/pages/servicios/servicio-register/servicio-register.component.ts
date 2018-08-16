@@ -67,6 +67,9 @@ export class ServicioRegisterComponent implements OnInit {
         new FormControl(null),
       ])
     });
+    let datosFormulario = {
+      mensaje: 'Este es el '
+    }
 
     this.usuariosRegistrados();
 
