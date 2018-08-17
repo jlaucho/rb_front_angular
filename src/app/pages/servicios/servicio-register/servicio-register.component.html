@@ -72,8 +72,7 @@
 
                         <div class="col-2">
                             <div class="form-group m-b-40" formArrayName="concepto">
-                                <select [formControlName]="i" name="concepto" class="form-control p-0" id="input7">
-                                <option></option>
+                                <select [formControlName]="i" name="concepto" (change)="cambioConcepto(i, 'recorrido'+i)" class="form-control p-0" id="input7">
                                 <option value="DesvInter">Desvio Interno</option>
                                 <option value="DesvExter">Desvio Externo</option>
                                 <option value="Traslado">Viaje</option>
@@ -86,7 +85,7 @@
 
                         <div class="col-2">
                             <div class="form-group m-b-40" formArrayName="recorrido">
-                                <input type="text" [formControlName]="i" name="recorrido" class="form-control">
+                                <input type="text" [formControlName]="i" readonly='readonly' id="recorrido{{i}}" name="recorrido" class="form-control">
                                 <span class="bar"></span>
                                 <label for="">Monto</label>
                                 <app-mensajes-forms [forma]="forma" selectorName="recorrido" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
@@ -125,7 +124,7 @@
                     <hr>
                     <br>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <input type="text" formControlName="cantHoras" name="cantHoras" class="form-control">
                                 <span class="bar"></span>
@@ -134,7 +133,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <input type="text" formControlName="cantPernocta" name="cantPernocta" class="form-control">
                                 <span class="bar"></span>
@@ -143,7 +142,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <input type="text" formControlName="cantCorreos" name="cantCorreos" class="form-control">
                                 <span class="bar"></span>
@@ -152,7 +151,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <select formControlName="bono_finSemana" name="bono_finSemana" class="form-control p-0" id="input7">
                                   <option></option>
@@ -165,7 +164,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <select formControlName="ODC" name="ODC" class="form-control p-0" id="input7">
                                 <option></option>
@@ -178,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group m-b-40">
                                 <select formControlName="realizado_por" name="realizado_por" class="form-control p-0" id="input7">
                               <option [value]="usuario.id" *ngFor="let usuario of usuarios" > {{ usuario.name }} {{ usuario.apellido }} C.I {{ usuario.cedula }} </option>
@@ -209,52 +208,102 @@
                         </div>
                     </div>
                 </form>
-                <div class="row" *ngIf="mostrarDetalle">
-                    <div class="col-12">
-                        <table class="table" style="font-family: 'Courier New', Courier, monospace; font-size: 11pt" border="1">
-                            <thead>
-                                <tr>
-                                    <td colspan="13">Buenos día, por medio de la presente adjunto el detalle de servicio prestado el día 13 del mes de Julio de 2018: (Servicio Prestado al Sra. Monica Rincon) </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="4"> <strong> 15-08-2018 </strong></td>
-                                    <td colspan="9"></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Planta pepsi Norte</td>
-                                    <td>-</td>
-                                    <td>Planta Mosaca</td>
-                                    <td>=</td>
-                                    <td colspan="2">1 DesvInter</td>
-                                    <td>x</td>
-                                    <td colspan="2">7.000.000,00 bs/desvInter</td>
-                                    <td>=</td>
-                                    <td colspan="2">7.000.000,00 bs</td>
-
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td colspan="1"> Nocturno </td>
-                                    <td>=</td>
-                                    <td class="text-center" colspan="2">20 %</td>
-                                    <td>x</td>
-                                    <td class="text-center" colspan="2">7.000.000,00 bs</td>
-                                    <td>=</td>
-                                    <td>1.400.000,00</td>
-                                    <td>bs</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="8">Total a cancelar por traslado: </td>
-                                    <td colspan="5"> <span style="font-size: 13pt"> <strong> 8.400.000,00 bs ( 8.400,00 bsf )</strong></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive"> Sacar Modal </button>
+<!-- <img src="../assets/images/alert/model2.png" alt="default" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive" /> -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Verifique los datos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12" *ngIf="mostrarDetalle">
+                    <table class="table table-no-bordered table-condensed table-sm" style="font-family: 'Courier New', Courier, monospace; font-size: 10pt">
+                        <thead>
+                            <tr>
+                                <td colspan="13"> {{ detalleServicio.mensaje }} </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4"> <strong> {{ detalleServicio.fechaServicio | date:"dd/MM//yyyy"}} </strong></td>
+                                <td colspan="9"></td>
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> DETALLES DE RECORRIDOS </strong> </th>
+                            </tr>
+                            <tr *ngFor="let recorrido of detalleServicio.origen; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{detalleServicio.origen[i]}}</td>
+                                <td>-</td>
+                                <td>{{detalleServicio.destino[i]}}</td>
+                                <td>=</td>
+                                <td colspan="2">{{ detalleServicio.cantidad[i] }} {{ detalleServicio.concepto[i] }}</td>
+                                <td>x</td>
+                                <td colspan="2">{{detalleServicio.recorrido[i] | number:'.2-2'}} bs/{{ detalleServicio.concepto[i] }}</td>
+                                <td>=</td>
+                                <td>{{ (detalleServicio.recorrido[i] * detalleServicio.cantidad[i]) | number:'.2-2' }}</td>
+                                <td>bs</td>
+
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> VALORES GENERALES </strong> </th>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_nocturno > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Nocturno </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ tabulador.por_bono_nocturno | number:'.2-2'}} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_nocturno | number:'.2-2' }} bs</td>
+                                <td>=</td>
+                                <td> {{tabulador.por_bono_nocturno * (detalleServicio.monto_nocturno / 100 ) | number:'.2-2'}} </td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_encomienda > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Encomienda </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ tabulador.por_encomienda | number:'.2-2' }} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_encomienda | number:'.2-2'}} bs</td>
+                                <td>=</td>
+                                <td>{{ tabulador.por_encomienda * ( detalleServicio.monto_encomienda / 100) | number: '.2-2'}}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_espera > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Espera </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.cantHoras }} hrs</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ tabulador.monto_horas | number:'.2-2'}} bs/hr</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.monto_espera | number: '.2-2' }}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="text-right">
+                                    <h3>Total a cancelar:</h3>
+                                </td>
+                                <td colspan="5">
+                                    <h3> <strong> {{ detalleServicio.monto_general | number: '.2-2'}} bs ( {{(detalleServicio.monto_general / 100000) | number: '.2-2'}} bsS )</strong> </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

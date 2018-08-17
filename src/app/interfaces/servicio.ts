@@ -2,16 +2,20 @@ export interface Servicio {
     mensaje: String;
     origen: String[];
     destino: String[];
-    cantidad:  Number[];
+    cantidad:  number[];
     concepto: String[];
     encomienda: String[];
     nocturno: String[];
-    recorrido: Number[];
+    recorrido: number[];
     ODC: String;
     bono_fin_semana: String;
-    cantCorreos: Number;
-    cantHoras: Number;
-    cantPernocta: Number;
+    cantCorreos: number;
+    cantHoras: number;
+    cantPernocta: number;
     fechaServicio: String;
-    realizado_por: Number;
+    realizado_por: number;
+    monto_nocturno?: number;
+    monto_encomienda?: number;
+    monto_espera?: number;
+    monto_general?: number;
 }
