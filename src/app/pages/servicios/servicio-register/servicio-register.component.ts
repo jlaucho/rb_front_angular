@@ -177,8 +177,10 @@ export class ServicioRegisterComponent implements OnInit {
     this.forma.reset();
   }
   agregarOtro() {
+    let valores = this.forma.controls['destino'].length;
+    let datoActual = this.forma.controls['destino'].value[ ( valores - 1 ) ];
     (<FormArray>this.forma.controls['origen']).push(
-      new FormControl(null, Validators.required)
+      new FormControl(datoActual, Validators.required)
     );
     (<FormArray>this.forma.controls['destino']).push(
       new FormControl(null, Validators.required)
