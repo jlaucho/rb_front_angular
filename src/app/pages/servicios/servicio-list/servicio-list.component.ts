@@ -15,6 +15,7 @@ export class ServicioListComponent implements OnInit {
   prev_page_url: boolean = null;
   next_page_url: boolean = null;
   busquedaPalabra: string;
+  numeroPaginas: any = [];
 
   constructor( private activatedRoute: ActivatedRoute,
                private _ServicioService: ServiciosService ) { }
@@ -37,6 +38,7 @@ export class ServicioListComponent implements OnInit {
           // console.log( this.serviciosDB );
           this.prev_page_url = (this.serviciosDB.correos.prev_page_url) ? true : false;
           this.next_page_url = (this.serviciosDB.correos.next_page_url) ? true : false;
+          this.numeroPagina();
         });
   }
 
@@ -54,5 +56,14 @@ export class ServicioListComponent implements OnInit {
 
   nexPage ( url: string ) {
     console.log( url );
+  }
+  numeroPagina() {
+    this.numeroPaginas = [];
+    let totalPaginas = this.serviciosDB.correos.last_page;
+    // console.log( 'ultima pagina', this.usuariosDB.users.last_page );
+    for (let index = 1; index < (totalPaginas + 1); index++) {
+      this.numeroPaginas.push( index );
+    }
+    // console.log( this.numeroPaginas );
   }
 }

@@ -56,20 +56,20 @@
 
                         <li class="page-item">
                             <div *ngIf="prev_page_url; else prevPageButton">
-                                <a class="page-link" (click)="nexPage( serviciosDB.users.prev_page_url )">Previous</a>
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.prev_page_url )">Previous</a>
                             </div>
                             <ng-template #prevPageButton>
                                 <button class="page-link btn btn-link" disabled="disabled">Previous</button>
                             </ng-template>
                         </li>
 
-                        <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.users.current_page}" *ngFor="let pagina of numeroPaginas">
-                            <button class="page-link " [disabled]="pagina === serviciosDB.users.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
+                        <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.correos.current_page}" *ngFor="let pagina of numeroPaginas">
+                            <button class="page-link " [disabled]="pagina === serviciosDB.correos.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
                         </li>
 
                         <li class="page-item">
                             <div *ngIf="next_page_url; else nexPageButton">
-                                <a class="page-link" (click)="nexPage( serviciosDB.users.next_page_url )">Previous</a>
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.next_page_url )">Previous</a>
                             </div>
                             <ng-template #nexPageButton>
                                 <button class="page-link btn btn-link" disabled="disabled">Previous</button>
