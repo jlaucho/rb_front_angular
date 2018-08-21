@@ -119,8 +119,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <button type="button" (click)="agregarOtro()" class="btn btn-primary">Agregar Otro</button>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" (click)="quitar()" class="btn btn-danger pull-left">Eliminar</button>
+                            <button type="button" (click)="agregarOtro()" class="btn btn-primary pull-right">Agregar Otro</button>
+                        </div>
+                    </div>
                     <hr>
                     <br>
                     <div class="row">

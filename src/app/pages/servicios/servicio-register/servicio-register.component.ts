@@ -115,8 +115,8 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   sacarModal () {
-    // console.log( this.forma );
     this.detalleServicio = this.forma.value;
+    console.log( this.detalleServicio );
     let monto_nocturno: number = 0;
     let monto_encomienda: number = 0;
     let monto_espera: number = 0;
@@ -146,7 +146,7 @@ export class ServicioRegisterComponent implements OnInit {
                                         + monto_recorridos;
 
 
-    // console.log( this.forma.value );
+    console.log( this.forma.value );
 
     this.mostrarDetalle = true;
   }
@@ -167,6 +167,7 @@ export class ServicioRegisterComponent implements OnInit {
           this.mostrarMensaje = resp.ok;
           this.tipoAlert = 'success';
           this.mostrarDetalle = false;
+          this.quitar( true );
           this.limpiar();
           console.log( '=======================================', resp );
         });
@@ -182,6 +183,7 @@ export class ServicioRegisterComponent implements OnInit {
 
   limpiar() {
     this.forma.reset();
+    init_plugis();
   }
   agregarOtro() {
     // let valores = 1;
@@ -213,8 +215,26 @@ export class ServicioRegisterComponent implements OnInit {
     init_plugis();
   }
 
-  quitar() {
-    console.log('quitar');
+
+  quitar( todos: boolean = false ) {
+
+    let valores = 0;
+
+    if ( !todos ) {
+      valores = this.forma.get('destino')['controls'].length - 1;
+    }
+
+    console.log( valores );
+    (<FormArray>this.forma.controls['origen']).removeAt( valores );
+    (<FormArray>this.forma.controls['destino']).removeAt( valores );
+    (<FormArray>this.forma.controls['cantidad']).removeAt( valores );
+    (<FormArray>this.forma.controls['concepto']).removeAt( valores );
+    (<FormArray>this.forma.controls['encomienda']).removeAt( valores );
+    (<FormArray>this.forma.controls['nocturno']).removeAt( valores );
+    (<FormArray>this.forma.controls['recorrido']).removeAt( valores );
+
+
+    console.log( this.forma.value );
   }
 
   cambioConcepto ( index: number, idrecorrido: string ) {
