@@ -26,6 +26,7 @@ export class ServicioRegisterComponent implements OnInit {
   mostrarDetalle: boolean = false;
   tabulador: Tabulador;
   montoDisabled: boolean = false;
+  clickModal = true;
 
   constructor(
     private _servicioService: ServiciosService,
@@ -105,7 +106,7 @@ export class ServicioRegisterComponent implements OnInit {
       ]
     };
 
-    // this.forma.setValue( datosFormulario );
+    this.forma.setValue( datosFormulario );
 
     this.usuariosRegistrados();
     this.tabuladorActivo();
@@ -113,7 +114,7 @@ export class ServicioRegisterComponent implements OnInit {
     init_plugis();
   }
 
-  enviarFormulario () {
+  sacarModal () {
     // console.log( this.forma );
     this.detalleServicio = this.forma.value;
     let monto_nocturno: number = 0;
@@ -148,20 +149,26 @@ export class ServicioRegisterComponent implements OnInit {
     // console.log( this.forma.value );
 
     this.mostrarDetalle = true;
-    this._servicioService.registrarServicio ( this.forma.value )
-        .subscribe( (resp: any) => {
-          this.mensajeAlert = resp.mensaje;
-          this.mostrarMensaje = resp.ok;
-          this.tipoAlert = 'success';
-          // console.log( '=======================================', resp );
-        });
   }
 
   usuariosRegistrados () {
     // let url = `${ environment.basePath }api/v1/user/todos`;
     this._userService.userRegister()
-        .subscribe ( (resp: any) => {
-          this.usuarios = resp.users;
+    .subscribe ( (resp: any) => {
+      this.usuarios = resp.users;
+    });
+  }
+
+  enviarFormulario () {
+
+    this._servicioService.registrarServicio ( this.forma.value )
+        .subscribe( (resp: any) => {
+          this.mensajeAlert = resp.mensaje;
+          this.mostrarMensaje = resp.ok;
+          this.tipoAlert = 'success';
+          this.mostrarDetalle = false;
+          this.limpiar();
+          console.log( '=======================================', resp );
         });
   }
 
@@ -177,7 +184,8 @@ export class ServicioRegisterComponent implements OnInit {
     this.forma.reset();
   }
   agregarOtro() {
-    let valores = this.forma.controls['destino'].length;
+    // let valores = 1;
+    let valores = this.forma.get('destino')['controls'].length;
     let datoActual = this.forma.controls['destino'].value[ ( valores - 1 ) ];
     (<FormArray>this.forma.controls['origen']).push(
       new FormControl(datoActual, Validators.required)

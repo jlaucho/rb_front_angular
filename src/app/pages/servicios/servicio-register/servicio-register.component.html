@@ -193,10 +193,12 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal">volver</button>
+                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal"> <span class="ti-back-left" ></span> volver</button>
                             <span class="pull-right">
-                              <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
-                              <button type="submit" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar</button>
+                              <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left"> <span class="ti-eraser"></span> Limpiar</button>
+                            <button type="button" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left" (click)="sacarModal()"> 
+                                        <span class="ti-eye"></span> Visualizar
+                            </button>
                             </span>
                         </div>
                     </div>
@@ -212,17 +214,17 @@
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive"> Sacar Modal </button>
-<!-- <img src="../assets/images/alert/model2.png" alt="default" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive" /> -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive">{{ mostrarDetalle }} Sacar Modal </button> -->
+<div class="modal" *ngIf="mostrarDetalle" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarDetalle ? 'block': 'hidden' }">
+    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myLargeModalLabel">Verifique los datos</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" (click)="mostrarDetalle = false;">×</button>
             </div>
             <div class="modal-body">
-                <div class="col-12" *ngIf="mostrarDetalle">
+                <div class="col-12">
                     <table class="table table-no-bordered table-condensed table-sm" style="font-family: 'Courier New', Courier, monospace; font-size: 10pt">
                         <thead>
                             <tr>
@@ -300,7 +302,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect text-right" (click)="mostrarDetalle = false;">Cerrar</button>
+                <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button>
             </div>
         </div>
         <!-- /.modal-content -->
