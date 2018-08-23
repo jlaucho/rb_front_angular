@@ -6,7 +6,7 @@ export class SidebarService {
   menu: any = [
     {
       titulo: 'Usuario',
-      icono: 'mdi mdi-gauge',
+      icono: 'mdi mdi-account-outline',
       submenu: [
         {
         titulo: 'Registrar',
@@ -34,7 +34,7 @@ export class SidebarService {
     },
     {
       titulo: 'Empresa',
-      icono: 'mdi mdi-bullseye',
+      icono: 'mdi mdi-city',
       submenu: [
         {
           titulo: 'Registrar',
@@ -62,7 +62,7 @@ export class SidebarService {
     },
     {
       titulo: 'Servicios',
-      icono: 'mdi mdi-bullseye',
+      icono: 'mdi mdi-car',
       submenu: [
         {
           titulo: 'Registrar',
@@ -74,19 +74,19 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todos',
-              url: '/interno1',
+              url: '/servicio-list/todos',
             },
             {
               titulo: 'Por ODC',
-              url: '/interno2',
+              url: '/servicio-list/ODC',
             },
             {
               titulo: 'Por Facturar',
-              url: '/interno2',
+              url: '/servicio-list/pendientes',
             },
             {
               titulo: 'Facturados',
-              url: '/interno2',
+              url: '/servicio-list/facturados',
             }
           ]
         },
@@ -94,11 +94,11 @@ export class SidebarService {
     },
     {
       titulo: 'Factura',
-      icono: 'mdi mdi-gauge',
+      icono: 'mdi mdi-cash-multiple',
       submenu: [
         {
           titulo: 'Registrar',
-          url: '/',
+          url: '/factura-register',
         },
         {
           titulo: 'Buscar',
@@ -106,19 +106,19 @@ export class SidebarService {
           submenu: [
             {
               titulo: 'Todas',
-              url: '/'
+              url: '/factura-list/todas'
             },
             {
               titulo: 'Pendientes',
-              url: '/',
+              url: '/factura-list/pendientes',
             },
             {
               titulo: 'Numero de Factura',
-              url: '/'
+              url: '/factura-list/number'
             },
             {
               titulo: 'Rango de Fecha',
-              url: '/'
+              url: '/factura-list/dateRange'
             }
           ]
         }
@@ -126,7 +126,7 @@ export class SidebarService {
     },
     {
       titulo: 'Tabulador',
-      icono: 'mdi mdi-gauge',
+      icono: 'mdi mdi-table-large',
       submenu: [
         {
           titulo: 'Registrar',

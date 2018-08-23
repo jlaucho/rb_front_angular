@@ -28,4 +28,9 @@ registrarServicio ( servicio: any ) {
   return this.http.post( url, servicio, { headers: this.headers } );
 }
 
+listaServicio ( parametro: string ) {
+  let url = `${ environment.basePath }/api/v1/servicio/${ parametro }`;
+  return this.http.get( url, {headers: this.headers} );
+}
+
 }

@@ -39,14 +39,14 @@
                     <tbody *ngFor="let tabulador of tabuladores; index as i">
                         <tr class="justify-content-center">
                             <td style="width: 5%;">{{ (i + 1) }}</td>
-                            <td style="width: 10%;">{{ tabulador.por_bono_nocturno }}</td>
-                            <td style="width: 10%;">{{ tabulador.por_encomienda }}</td>
-                            <td style="width: 10%;">{{ tabulador.por_fin_semana }}</td>
-                            <td style="width: 13%;">{{ tabulador.monto_pernocta }}</td>
-                            <td style="width: 13%;">{{ tabulador.monto_horas }}</td>
-                            <td style="width: 13%;">{{ tabulador.monto_desv_inter }}</td>
-                            <td style="width: 13%;">{{ tabulador.monto_desv_exter }}</td>
-                            <td style="width: 15%;">{{ tabulador.fecha_inicio | date }}</td>
+                            <td style="width: 10%;">{{ tabulador.por_bono_nocturno | number:'.2-2' }} % </td>
+                            <td style="width: 10%;">{{ tabulador.por_encomienda | number:'.2-2' }} % </td>
+                            <td style="width: 10%;">{{ tabulador.por_fin_semana | number:'.2-2' }} % </td>
+                            <td style="width: 13%;">{{ tabulador.monto_pernocta | number:'.2-2' }} Bs</td>
+                            <td style="width: 13%;">{{ tabulador.monto_horas | number:'.2-2' }} Bs </td>
+                            <td style="width: 13%;">{{ tabulador.monto_desv_inter | number:'.2-2' }} Bs </td>
+                            <td style="width: 13%;">{{ tabulador.monto_desv_exter | number:'.2-2' }} Bs </td>
+                            <td style="width: 15%;">{{ tabulador.fecha_inicio | date:'dd-MM-yyyy' }}</td>
                             <td class="text-center">
 
 

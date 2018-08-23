@@ -1,0 +1,89 @@
+<div class="card">
+    <div class="col-1"></div>
+    <div class="col-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-8 m-t-20">
+                    <h6 class="card-subtitle">Lista de servicios registrados es el sistema ({{ total }}) Total Facturado ({{ serviciosDB.total | number:'.2-2'}} Bs) </h6>
+                </div>
+                <div class="col-4 floating-labels m-t-10">
+                    <div class="form-group m-b-5">
+                        <input type="text" #palabra [(ngModel)]="busquedaPalabra" (keyup)="busqueda(palabra.value)" id="palabra" name="busqueda" class="form-control">
+                        <span class="bar"></span>
+                        <label for="" class="card-subtitle">Buscar...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table color-table success-table table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{'Fecha' | uppercase }}</th>
+                            <th>{{'Facturado' | uppercase}}</th>
+                            <th>{{'total' | uppercase}}</th>
+                            <th>{{'conductor' | uppercase}}</th>
+                            <th>{{'estatus' | uppercase}}</th>
+                            <th class="text-center">{{'Acci&oacute;n' | uppercase}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let servicio of servicios; index as i">
+                        <tr>
+                            <td style="width: 5%;">{{ (i + 1) }}</td>
+                            <td style="width: 12%;">{{ servicio.fechaServicio | date:'dd-MM-yyyy' }}</td>
+                            <td style="width: 12%;">{{ servicio.facturado }}</td>
+                            <td style="width: 15%;">{{ servicio.totalMonto | number:'.2-2' }} Bs</td>
+                            <td style="width: 25%;">
+                                <span *ngIf="servicio.r_realizado; else rRealizado"> {{servicio.r_realizado.name | uppercase}} {{servicio.r_realizado.apellido | uppercase}} </span>
+                                <ng-template #rRealizado>
+                                    Sin Informaci&oacute;n
+                                </ng-template>
+                            </td>
+                            <td style="width: 20%;">En espera de ODC</td>
+                            <td class="text-center">
+                                <button class="btn btn-primary btn-xs" [disabled]="servicio.deleted_at" [routerLink]="['/user-update', servicio.id]" role="button"><span class="ti-settings"></span></button>
+
+                                <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarServicio( servicio.id )" role="button"><span class="ti-trash"></span></a>
+                                <ng-template #activo>
+                                    <a class="btn btn-success btn-xs" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.id )" role="button"><span class="ti-check"></span></a>
+                                </ng-template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+
+                        <li class="page-item">
+                            <div *ngIf="prev_page_url; else prevPageButton">
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.prev_page_url )">Previous</a>
+                            </div>
+                            <ng-template #prevPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
+                        </li>
+
+                        <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.correos.current_page}" *ngFor="let pagina of numeroPaginas">
+                            <button class="page-link " [disabled]="pagina === serviciosDB.correos.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
+                        </li>
+
+                        <li class="page-item">
+                            <div *ngIf="next_page_url; else nexPageButton">
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.next_page_url )">Previous</a>
+                            </div>
+                            <ng-template #nexPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
+                        </li>
+                    </ul>
+                </nav>
+                <h6 class="card-subtitle">Mostrando {{ servicios.length }} servicios de {{ total }} registros</h6>
+                <div *ngIf="servicios.length === 0">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>No hay resultados para esta busqueda</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

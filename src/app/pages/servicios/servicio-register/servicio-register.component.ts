@@ -26,6 +26,7 @@ export class ServicioRegisterComponent implements OnInit {
   mostrarDetalle: boolean = false;
   tabulador: Tabulador;
   montoDisabled: boolean = false;
+  clickModal = true;
 
   constructor(
     private _servicioService: ServiciosService,
@@ -105,7 +106,7 @@ export class ServicioRegisterComponent implements OnInit {
       ]
     };
 
-    // this.forma.setValue( datosFormulario );
+    this.forma.setValue( datosFormulario );
 
     this.usuariosRegistrados();
     this.tabuladorActivo();
@@ -113,9 +114,9 @@ export class ServicioRegisterComponent implements OnInit {
     init_plugis();
   }
 
-  enviarFormulario () {
-    // console.log( this.forma );
+  sacarModal () {
     this.detalleServicio = this.forma.value;
+    console.log( this.detalleServicio );
     let monto_nocturno: number = 0;
     let monto_encomienda: number = 0;
     let monto_espera: number = 0;
@@ -145,23 +146,30 @@ export class ServicioRegisterComponent implements OnInit {
                                         + monto_recorridos;
 
 
-    // console.log( this.forma.value );
+    console.log( this.forma.value );
 
     this.mostrarDetalle = true;
-    this._servicioService.registrarServicio ( this.forma.value )
-        .subscribe( (resp: any) => {
-          this.mensajeAlert = resp.mensaje;
-          this.mostrarMensaje = resp.ok;
-          this.tipoAlert = 'success';
-          // console.log( '=======================================', resp );
-        });
   }
 
   usuariosRegistrados () {
     // let url = `${ environment.basePath }api/v1/user/todos`;
     this._userService.userRegister()
-        .subscribe ( (resp: any) => {
-          this.usuarios = resp.users;
+    .subscribe ( (resp: any) => {
+      this.usuarios = resp.users;
+    });
+  }
+
+  enviarFormulario () {
+
+    this._servicioService.registrarServicio ( this.forma.value )
+        .subscribe( (resp: any) => {
+          this.mensajeAlert = resp.mensaje;
+          this.mostrarMensaje = resp.ok;
+          this.tipoAlert = 'success';
+          this.mostrarDetalle = false;
+          this.quitar( true );
+          this.limpiar();
+          console.log( '=======================================', resp );
         });
   }
 
@@ -175,9 +183,11 @@ export class ServicioRegisterComponent implements OnInit {
 
   limpiar() {
     this.forma.reset();
+    init_plugis();
   }
   agregarOtro() {
-    let valores = this.forma.controls['destino'].length;
+    // let valores = 1;
+    let valores = this.forma.get('destino')['controls'].length;
     let datoActual = this.forma.controls['destino'].value[ ( valores - 1 ) ];
     (<FormArray>this.forma.controls['origen']).push(
       new FormControl(datoActual, Validators.required)
@@ -205,8 +215,26 @@ export class ServicioRegisterComponent implements OnInit {
     init_plugis();
   }
 
-  quitar() {
-    console.log('quitar');
+
+  quitar( todos: boolean = false ) {
+
+    let valores = 0;
+
+    if ( !todos ) {
+      valores = this.forma.get('destino')['controls'].length - 1;
+    }
+
+    console.log( valores );
+    (<FormArray>this.forma.controls['origen']).removeAt( valores );
+    (<FormArray>this.forma.controls['destino']).removeAt( valores );
+    (<FormArray>this.forma.controls['cantidad']).removeAt( valores );
+    (<FormArray>this.forma.controls['concepto']).removeAt( valores );
+    (<FormArray>this.forma.controls['encomienda']).removeAt( valores );
+    (<FormArray>this.forma.controls['nocturno']).removeAt( valores );
+    (<FormArray>this.forma.controls['recorrido']).removeAt( valores );
+
+
+    console.log( this.forma.value );
   }
 
   cambioConcepto ( index: number, idrecorrido: string ) {

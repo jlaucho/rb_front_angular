@@ -34,6 +34,7 @@ import { TabuladorListComponent } from './tabulador/tabulador-list/tabulador-lis
 import { ServicioRegisterComponent } from './servicios/servicio-register/servicio-register.component';
 import { ServiciosService } from '../services/servicios.service';
 import { AlertComponent } from '../componentes/alert/alert.component';
+import { ServicioListComponent } from './servicios/servicio-list/servicio-list.component';
 
 
 
@@ -76,7 +77,8 @@ import { AlertComponent } from '../componentes/alert/alert.component';
     TabuladorComponent,
     TabuladorListComponent,
     ServicioRegisterComponent,
-    AlertComponent
+    AlertComponent,
+    ServicioListComponent
   ],
   exports: [
     DashboardComponent,
