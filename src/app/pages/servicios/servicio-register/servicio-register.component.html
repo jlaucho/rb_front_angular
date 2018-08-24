@@ -7,8 +7,6 @@
                 <hr>
                 <app-alert *ngIf="mostrarMensaje" [mensaje]="mensajeAlert" [type]="tipoAlert"></app-alert>
                 <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
-
-
                     <div class="row justify-content-center">
                         <div class="col-12 text-center">
                             <h3>Fecha de Servicio</h3>
@@ -16,10 +14,10 @@
                         </div>
                         <div class="col-6 text-center">
                             <div class="form-group m-b-40">
-                                <input type="text" formControlName="fechaServicio" name="fechaServicio" class="form-control">
+                                <input type="text" formControlName="fechaServicio" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" class="form-control">
                                 <span class="bar"></span>
                                 <!-- <label for=""><h3>Fecha de Realizaci&oacute;n</h3></label> -->
-                                <app-mensajes-forms [forma]="forma" selectorName="fechaServicio" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                                <app-mensajes-forms [forma]="forma" selectorName="fechaServicio" id="fechaServicio" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
                             </div>
                         </div>
                     </div>

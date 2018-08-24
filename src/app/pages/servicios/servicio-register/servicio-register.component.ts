@@ -106,7 +106,7 @@ export class ServicioRegisterComponent implements OnInit {
       ]
     };
 
-    this.forma.setValue( datosFormulario );
+    // this.forma.setValue( datosFormulario );
 
     this.usuariosRegistrados();
     this.tabuladorActivo();
