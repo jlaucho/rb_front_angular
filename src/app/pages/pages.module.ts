@@ -35,6 +35,8 @@ import { ServicioRegisterComponent } from './servicios/servicio-register/servici
 import { ServiciosService } from '../services/servicios.service';
 import { AlertComponent } from '../componentes/alert/alert.component';
 import { ServicioListComponent } from './servicios/servicio-list/servicio-list.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+
 
 
 
@@ -48,6 +50,7 @@ import { ServicioListComponent } from './servicios/servicio-list/servicio-list.c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     GraficaService,
