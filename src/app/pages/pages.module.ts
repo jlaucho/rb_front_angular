@@ -35,7 +35,10 @@ import { ServicioRegisterComponent } from './servicios/servicio-register/servici
 import { ServiciosService } from '../services/servicios.service';
 import { AlertComponent } from '../componentes/alert/alert.component';
 import { ServicioListComponent } from './servicios/servicio-list/servicio-list.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
+
 
 
 
@@ -50,7 +53,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    // TooltipModule.forRoot()
   ],
   providers: [
     GraficaService,

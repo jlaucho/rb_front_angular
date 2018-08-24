@@ -5,7 +5,8 @@ import { UserService } from '../../../services/user.service';
 import { Servicio } from '../../../interfaces/servicio';
 import { TabuladorService } from '../../../services/tabulador.service';
 import { Tabulador } from '../../../interfaces/tabulador';
-import { filter } from 'rxjs/operators';
+// import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
 declare function init_plugis();
 
 @Component({
@@ -27,6 +28,7 @@ export class ServicioRegisterComponent implements OnInit {
   tabulador: Tabulador;
   montoDisabled: boolean = false;
   clickModal = true;
+  Datepicker: string = '';
 
   constructor(
     private _servicioService: ServiciosService,
