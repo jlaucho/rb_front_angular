@@ -51,7 +51,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation example" *ngIf="Ok">
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item">
@@ -78,9 +78,9 @@
                     </ul>
                 </nav>
                 <h6 class="card-subtitle">Mostrando {{ servicios.length }} servicios de {{ total }} registros</h6>
-                <div *ngIf="servicios.length === 0">
+                <div *ngIf="!Ok">
                     <div class="alert alert-primary" role="alert">
-                        <strong>No hay resultados para esta busqueda</strong>
+                        <strong>{{ mensaje }}</strong>
                     </div>
                 </div>
             </div>

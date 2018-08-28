@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiciosService } from '../../../services/servicios.service';
 
+declare function init_plugis();
+
 @Component({
   selector: 'app-servicio-list',
   templateUrl: './servicio-list.component.html',
@@ -16,30 +18,47 @@ export class ServicioListComponent implements OnInit {
   next_page_url: boolean = null;
   busquedaPalabra: string;
   numeroPaginas: any = [];
+  Ok: boolean = true;
+  mensaje: string = '';
 
   constructor( private activatedRoute: ActivatedRoute,
                private _ServicioService: ServiciosService ) { }
 
   ngOnInit() {
     this.obtenerParametro();
+    init_plugis();
   }
   obtenerParametro () {
     this.activatedRoute.params.subscribe( (param: any) => {
+      // console.log( param.parametro );
       this.obtenerLista( param.parametro );
     });
   }
   obtenerLista ( parametro: string  ) {
     this._ServicioService.listaServicio ( parametro )
-        .subscribe( ( resp: any ) => {
-          console.log( resp );
-          this.total = resp.correos.total;
-          this.serviciosDB = resp;
-          this.servicios = resp.correos.data;
-          // console.log( this.serviciosDB );
-          this.prev_page_url = (this.serviciosDB.correos.prev_page_url) ? true : false;
-          this.next_page_url = (this.serviciosDB.correos.next_page_url) ? true : false;
-          this.numeroPagina();
-        });
+    .subscribe( ( resp: any ) => {
+      console.log( resp );
+      this.total = resp.correos.total;
+      this.serviciosDB = resp;
+      this.servicios = resp.correos.data;
+      this.prev_page_url = (this.serviciosDB.correos.prev_page_url) ? true : false;
+      this.next_page_url = (this.serviciosDB.correos.next_page_url) ? true : false;
+      this.numeroPagina();
+      this.Ok = true;
+      },
+      (error: any) => {
+        this.Ok = false;
+        console.log( error.error.mensaje );
+        this.total = 0;
+        this.serviciosDB = [];
+        this.servicios = [];
+        this.mensaje = error.error.mensaje;
+
+        this.prev_page_url = false;
+        this.next_page_url = false;
+        // this.numeroPagina();
+      }
+    );
   }
 
   busqueda (parametro: string) {
