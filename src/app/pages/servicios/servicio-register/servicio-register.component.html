@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-6 text-center">
                             <div class="form-group m-b-40">
-                                <input type="text" formControlName="fechaServicio" bsDatepicker class="form-control">
+                                <input type="text" formControlName="fechaServicio" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" class="form-control">
                                 <span class="bar"></span>
                                 <!-- <label for=""><h3>Fecha de Realizaci&oacute;n</h3></label> -->
                                 <app-mensajes-forms [forma]="forma" selectorName="fechaServicio" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>

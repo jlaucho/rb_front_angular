@@ -184,7 +184,7 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   limpiar() {
-    this.forma.reset();
+    // this.forma.reset();
     init_plugis();
   }
   agregarOtro() {
