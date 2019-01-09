@@ -161,6 +161,10 @@ export class ServicioRegisterComponent implements OnInit {
     });
   }
 
+  verFormulario(): void {
+    console.log(this.forma.controls['origen']['controls'].length);
+  }
+
   enviarFormulario () {
 
     this._servicioService.registrarServicio ( this.forma.value )
