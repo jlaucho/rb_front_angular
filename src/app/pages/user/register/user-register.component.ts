@@ -7,7 +7,7 @@ import { FuncionesGenericasService } from '../../../services/funciones.service';
 declare function init_plugis();
 
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-register',

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { Empresa } from '../../../interfaces/empresa';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ValidatorsService } from '../../../services/validators.service';
 declare function init_plugis();
 
