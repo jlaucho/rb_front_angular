@@ -30,9 +30,9 @@ export class EmpresaRegisterComponent implements OnInit {
       name: new FormControl(null, [Validators.minLength( this.caracterMin ),
         Validators.maxLength( this.caracterMax ),
         Validators.required], this.existeName.bind( this )),
-        RIF: new FormControl(null, [Validators.minLength( this.caracterMin ),
+      RIF: new FormControl(null, [Validators.minLength( this.caracterMin ),
           Validators.maxLength( this.caracterMax ),
-          Validators.required], this.existeRif.bind( this )),
+          Validators.required]),
       direccion: new FormControl(null, [Validators.minLength( this.caracterMin ),
         Validators.maxLength( 254 ),
         Validators.required]),
@@ -64,21 +64,21 @@ export class EmpresaRegisterComponent implements OnInit {
   }
   // fin de limpiar el formulario
   // Validaciones asincronas
-  existeRif( rif: FormControl ): Observable<any> | Promise<any> {
-    return new Promise(
-      (resolve => {
-        this._validadorService.existe( 'RIF', rif.value )
-          .subscribe( (respuesta: any) => {
-            console.log( respuesta );
-            if (respuesta) {
-              resolve ({ existe: true });
-            } else {
-              resolve (null);
-            }
-          });
-      })
-    );
-  }
+  // existeRif( rif: FormControl ): Observable<any> | Promise<any> {
+  //   return new Promise(
+  //     (resolve => {
+  //       this._validadorService.existe( 'RIF', rif.value )
+  //         .subscribe( (respuesta: any) => {
+  //           console.log( respuesta );
+  //           if (respuesta) {
+  //             resolve ({ existe: true });
+  //           } else {
+  //             resolve (null);
+  //           }
+  //         });
+  //     })
+  //   );
+  // }
 
   existeName( name: FormControl ): Observable<any> | Promise<any> {
     return new Promise(
