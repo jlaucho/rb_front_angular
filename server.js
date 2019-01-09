@@ -1,16 +1,15 @@
 const express = require('express');
-
-const app = expres();
 const path = require('path');
 
-app.us(express.static(__dirname + '/dist'));
+const app = expres();
 
-app.listen(process.env.PORT || 8080);
-
+app.use(express.static(__dirname + '/dist/rb-front-angular'));
 
 //PathLocationStradegy
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist/rb-front-angular/index.html'));
 });
 
-console.log('Console Listening');
+app.listen(process.env.PORT || 8080, () => {
+    console.log('Console Listening');
+});
