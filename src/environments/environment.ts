@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   // basePath: 'http://localhost:8000'
   // basePath: 'http://localhost/personales/RB_Servicios/rb_back_laravel/public/index.php'
   basePath: 'https://rbservicios-back-laravel.herokuapp.com'
