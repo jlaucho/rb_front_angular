@@ -4,15 +4,18 @@ import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
+import Swal from 'sweetalert2';
+
 declare function init_plugis();
 
 
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
-  styles: []
+  styles: ['button {margin-left: 15px;}']
 })
 export class UserRegisterComponent implements OnInit {
 
@@ -23,12 +26,14 @@ export class UserRegisterComponent implements OnInit {
   unamePattern = '^[a-zA-Z ]+$';
   ucedulaPattern = '^[0-9]+$';
   email: string;
-  debouncer: any;
+  respuesta: any;
+  erroresBack: any;
 
 
 
    constructor( public _userService: UserService,
                public _validatorsService: ValidatorsService,
+               private router: Router,
               private _funcionesService: FuncionesGenericasService) { }
 
   ngOnInit() {
@@ -63,14 +68,32 @@ export class UserRegisterComponent implements OnInit {
     }, { validators: this.sonIguales()});
     // Se quita el autorellenado de las casillas
     // let entradas = window.document.getElementById('form-register').getElementsByTagName('input');
-    // for (const key in entradas) {
-    //   if (entradas.hasOwnProperty(key)) {
-    //     const entrada = entradas[key];
-    //     entrada.setAttribute('autocomplete', 'off');
+    // for (const key inerror.error.error entradas) {
+    //   if (entradas.haerror.error.errorsOwnProperty(key)) {
+    //     const entradaerror.error.error = entradas[key];
+    //     entrada.setAterror.error.errortribute('autocomplete', 'off');
     //   }
     // }
     this._funcionesService.limpiarCasillas('form-register');
     init_plugis();
+    this.rellenarCasillas();
+  }
+
+  // tslint:disable-next-line:member-ordering
+  carga = {
+    'name': 'Jesus',
+    'apellido': 'Laucho',
+    'cedula': '14136448',
+    'direccion': 'San Rafael',
+    'telefono': '0416-5608003',
+    'email': 'jlaucho@gmail.com',
+    'type': 'supeAdmin',
+    'password': '14460484',
+    'password_confirmation': '14460484'
+};
+
+  rellenarCasillas() {
+    this.forma.setValue( this.carga );
   }
   // fin de eliminacion de autorellenado
 
@@ -105,6 +128,10 @@ export class UserRegisterComponent implements OnInit {
             } else {
               resolve(null);
             }
+          },
+          (error: any) => {
+            this.router.navigate(['/login']);
+            console.log(error.message);
           });
       });
     return promesa;
@@ -114,11 +141,24 @@ export class UserRegisterComponent implements OnInit {
   // Envo de formulario
   enviarFormulario() {
     this.user = this.forma.value;
-    console.log( this.forma );
     this._userService.registerUser( this.user )
       .subscribe( (respuesta: any ) => {
+        this.respuesta = respuesta;
         console.log( respuesta );
-      });
+        this.limpiar();
+        this.erroresBack = false;
+        if (respuesta.ok) {
+         Swal(
+          'Completado',
+          `Se completo el registro del usurio ${ respuesta.user.name } ${respuesta.user.apellido} correctamente`,
+           'success'
+           );
+        }
+      },
+        (error: any) => {
+          this.erroresBack = error.error.error;
+        }
+      );
 
   }
 

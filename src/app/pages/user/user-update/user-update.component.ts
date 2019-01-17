@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-update',
   templateUrl: './user-update.component.html',
-  styles: []
+  styles: ['button { margin-left: 15px }']
 })
 export class UserUpdateComponent implements OnInit {
 
@@ -61,22 +61,22 @@ export class UserUpdateComponent implements OnInit {
   // fin de eliminacion de autorellenado
 
   buscarUser() {
-    let id = this.route.params.subscribe( (resp: any) => {
+      this.route.params.subscribe( (resp: any) => {
       this.idUser = resp.idUser;
       this._userService.buscarUser( resp.idUser )
           .subscribe( (respuesta: any) => {
-            console.log( 'respuesta', respuesta.busqueda );
             this.user = {
-              name: respuesta.busqueda.name,
-              apellido: respuesta.busqueda.apellido,
-              cedula: respuesta.busqueda.cedula,
-              direccion: respuesta.busqueda.direccion,
-              email: respuesta.busqueda.email,
-              telefono: respuesta.busqueda.telefono,
-              type: respuesta.busqueda.type
+              name: respuesta.busqueda[0].name,
+              apellido: respuesta.busqueda[0].apellido,
+              cedula: respuesta.busqueda[0].cedula,
+              direccion: respuesta.busqueda[0].direccion,
+              email: respuesta.busqueda[0].email,
+              telefono: respuesta.busqueda[0].telefono,
+              type: respuesta.busqueda[0].type
             };
+              init_plugis();
               this.forma.setValue( this.user );
-              this._funcionesService.limpiarCasillas('form-register');
+              // this._funcionesService.limpiarCasillas('form-register');
             });
       });
   }

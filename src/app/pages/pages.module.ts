@@ -24,6 +24,7 @@ import { FuncionesGenericasService } from '../services/funciones.service';
 import { EmpresaService } from '../services/empresa.service';
 import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.component';
 import { MensajesFormsComponent } from '../componentes/mensajes-forms/mensajes-forms.component';
+
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.component';
 import { PaginationService } from '../services/pagination.service';

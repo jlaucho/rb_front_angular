@@ -9,7 +9,7 @@
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">
                         <input class="form-control" type="text" formControlName="email" name="email" placeholder="e-mail" autocomplete="off">
-                        <span *ngIf="forma.controls['email'].errors?.email && !forma.controls['email'].pristine" class="inputlabel">El email debelau ser valido</span>
+                        <span *ngIf="forma.controls['email'].errors?.email && !forma.controls['email'].pristine" class="inputlabel">El email debelau ser valido</span><br>
                         <span *ngIf="forma.controls['email'].errors?.required && !forma.controls['email'].pristine" class="inputlabel">El email es necesario</span>
                         <span *ngIf="forma.controls['email'].errors?.minlength" class="inputlabel">Debe ser mayor a {{ forma.controls['email'].errors?.minlength.requiredLength }} caracteres</span>
                     </div>

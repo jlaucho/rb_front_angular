@@ -45,6 +45,7 @@ export class EmpresaRegisterComponent implements OnInit {
     });
     this._funcionesService.limpiarCasillas('form-register');
     init_plugis();
+    this.rellenarCasillas();
   }
 
   enviarFormulario() {
@@ -56,6 +57,18 @@ export class EmpresaRegisterComponent implements OnInit {
           console.log( this.empresa );
           this.mensajeExito = resp.ok;
         });
+  }
+
+  rellenarCasillas() {
+    this.empresa = {
+      name: 'Nombre de la empresa',
+      RIF: 'J-401713-4',
+      direccion: 'Direccion de la empresa',
+      descripcion: 'Descripcioin de la empresa',
+      telefono: 'Telefono de la empresa'
+    };
+
+    this.forma.setValue(this.empresa);
   }
 
   // Limpiar el formulario

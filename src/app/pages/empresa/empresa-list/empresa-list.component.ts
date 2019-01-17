@@ -44,7 +44,7 @@ export class EmpresaListComponent implements OnInit {
     this.empresa = temp;
 }
 
-eliminarEmpresa(){
+eliminarEmpresa() {
   Swal('Importante', 'Verifique los datos he intente de nuevo!', 'warning');
       return;
 }
