@@ -108,7 +108,7 @@ export class ServicioRegisterComponent implements OnInit {
       ]
     };
 
-    // this.forma.setValue( datosFormulario );
+    this.forma.setValue( datosFormulario );
 
     this.usuariosRegistrados();
     this.tabuladorActivo();
@@ -118,7 +118,6 @@ export class ServicioRegisterComponent implements OnInit {
 
   sacarModal () {
     this.detalleServicio = this.forma.value;
-    console.log( this.detalleServicio );
     let monto_nocturno: number = 0;
     let monto_encomienda: number = 0;
     let monto_espera: number = 0;
@@ -183,7 +182,7 @@ export class ServicioRegisterComponent implements OnInit {
     this._tabuladorService.obtenerLista('activo')
         .subscribe( (resp: any) => {
             this.tabulador = resp.busqueda[0];
-            // console.log( 'Tabulador', this.tabulador );
+            console.log( 'Tabulador', this.tabulador );
         });
   }
 
