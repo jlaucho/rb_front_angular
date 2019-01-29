@@ -175,7 +175,11 @@ export class ServicioRegisterComponent implements OnInit {
           this.quitar( true );
           this.limpiar();
           console.log( '=======================================', resp );
-        });
+        },
+          (error) => {
+            console.log(error);
+          }
+        );
   }
 
   tabuladorActivo () {

@@ -38,6 +38,8 @@ import { AlertComponent } from '../componentes/alert/alert.component';
 import { ServicioListComponent } from './servicios/servicio-list/servicio-list.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ServicioUpdateComponent } from './servicios/servicio-update/servicio-update.component';
+import { BusquedaColeccionService } from '../services/busqueda-coleccion.service';
 
 
 
@@ -65,7 +67,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     EmpresaService,
     PaginationService,
     TabuladorService,
-    ServiciosService
+    ServiciosService,
+    BusquedaColeccionService
   ],
   declarations: [
     PagesComponent,
@@ -86,7 +89,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     TabuladorListComponent,
     ServicioRegisterComponent,
     AlertComponent,
-    ServicioListComponent
+    ServicioListComponent,
+    ServicioUpdateComponent
   ],
   exports: [
     DashboardComponent,

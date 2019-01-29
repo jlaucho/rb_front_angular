@@ -1,0 +1,219 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registro de servicio realizado</h5>
+                <h6 class="card-subtitle">Sistema de registro de servicios al sistema</h6>
+                <hr>
+                <app-alert *ngIf="mostrarMensaje" [mensaje]="mensajeAlert" [type]="tipoAlert"></app-alert>
+                <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <h3>Fecha de Servicio</h3>
+                            <br>
+                        </div>
+                        <div class="col-6 text-center">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="fechaServicio" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" class="form-control">
+                                <span class="bar"></span>
+                                <!-- <label for=""><h3>Fecha de Realizaci&oacute;n</h3></label> -->
+                                <app-mensajes-forms [forma]="forma" selectorName="fechaServicio" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="mensaje" name="mensaje" class="form-control">
+                                <span class="bar"></span>
+                                <label for="name">Mensaje</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="mensaje" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3>Datos de recorridos</h3>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let prac of forma.controls['origen']['controls']; let i = index">
+                        <div class="col-1">{{ i + 1}}</div>
+                        <div class="col-2">
+                            <div class="form-group m-b-40" formArrayName="origen">
+                                <input type="text" [formControlName]="i" name="origen" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Origen</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="origen" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+
+                        <div class="col-2">
+                            <div class="form-group m-b-40" formArrayName="destino">
+                                <input type="text" [formControlName]="i" name="destino" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Destino</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="destino" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-1">
+                            <div class="form-group m-b-40" formArrayName="cantidad">
+                                <input type="text" [formControlName]="i" name="cantidad" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Cantidad</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cantidad" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="form-group m-b-40" formArrayName="concepto">
+                                <select [formControlName]="i" name="concepto" (change)="cambioConcepto(i, 'recorrido'+i)" class="form-control p-0" id="input7">
+                              <option value="DesvInter">Desvio Interno</option>
+                              <option value="DesvExter">Desvio Externo</option>
+                              <option value="Traslado">Viaje</option>
+                          </select>
+                                <span class="bar"></span>
+                                <label for="input6">Concepto: </label>
+                                <app-mensajes-forms [forma]="forma" selectorName="concepto" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="form-group m-b-40" formArrayName="recorrido">
+                                <input type="text" [formControlName]="i" readonly='readonly' id="recorrido{{i}}" name="recorrido" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Monto</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="recorrido" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+
+                        <div class="col-1">
+                            <div class="form-group m-b-40" formArrayName="encomienda">
+                                <select [formControlName]="i" name="encomienda" class="form-control p-0" id="input7">
+                              <option></option>
+                              <option value="SI">SI</option>
+                              <option value="NO">NO</option>
+                          </select>
+                                <span class="bar"></span>
+                                <label for="input6">Encomi.</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="encomienda" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-1">
+                            <div class="form-group m-b-40" formArrayName="nocturno">
+                                <select [formControlName]="i" name="nocturno" class="form-control p-0" id="input7">
+                              <option></option>
+                              <option value="SI">SI</option>
+                              <option value="NO">NO</option>
+                            </select>
+                                <span class="bar"></span>
+                                <label for="input6">Noctur.</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="nocturno" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" (click)="quitar()" class="btn btn-danger pull-left">Eliminar</button>
+                            <button type="button" (click)="agregarOtro()" class="btn btn-primary pull-right">Agregar Otro</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="cantHoras" name="cantHoras" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Horas de espera</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cantHoras" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="cantPernocta" name="cantPernocta" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Cantidad de Pernoctas</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cantPernocta" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <input type="text" formControlName="cantCorreos" name="cantCorreos" class="form-control">
+                                <span class="bar"></span>
+                                <label for="">Catidad de servicios</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cantCorreos" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <select formControlName="bono_finSemana" name="bono_finSemana" class="form-control p-0" id="input7">
+                                <option></option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                                <span class="bar"></span>
+                                <label for="input6">Bono fin de semana</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="bono_finSemana" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <select formControlName="ODC" name="ODC" class="form-control p-0" id="input7">
+                              <option></option>
+                              <option value="SI">SI</option>
+                              <option value="NO">NO</option>
+                          </select>
+                                <span class="bar"></span>
+                                <label for="input6">Lleva ODC</label>
+                                <app-mensajes-forms [forma]="forma" selectorName="ODC" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group m-b-40">
+                                <select formControlName="realizado_por" name="realizado_por" class="form-control p-0" id="input7">
+                            <option [value]="usuario.id" *ngFor="let usuario of usuarios" > {{ usuario.name }} {{ usuario.apellido }} C.I {{ usuario.cedula }} </option>
+                        </select>
+                                <span class="bar"></span>
+                                <label for="input6">Realizado Por: </label>
+                                <app-mensajes-forms [forma]="forma" selectorName="realizado_por" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal"> <span class="ti-back-left" ></span> volver</button>
+                            <span class="pull-right">
+                            <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left"> <span class="ti-eraser"></span> Limpiar</button>
+                            <button type="button" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left margin-left-10" (click)="sacarModal()"> 
+                                      <span class="ti-eye"></span> Visualizar
+                          </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div *ngIf="false" class="alert alert-danger" role="alert">
+                                <strong>{{ forma.controls['mensaje'].errors?.existe }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
