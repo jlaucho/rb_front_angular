@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { Servicio } from '../../../interfaces/servicio';
 import { TabuladorService } from '../../../services/tabulador.service';
 import { Tabulador } from '../../../interfaces/tabulador';
+import { User } from '../../../interfaces/user';
 // import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 declare function init_plugis();
@@ -19,7 +20,7 @@ export class ServicioRegisterComponent implements OnInit {
   forma: FormGroup;
   caracterMin: number = 20;
   caracterMax: number = 250;
-  usuarios: any;
+  conductores: User[];
   mostrarMensaje: boolean = false;
   mensajeAlert: string = '';
   tipoAlert: string = 'success';
@@ -29,6 +30,8 @@ export class ServicioRegisterComponent implements OnInit {
   montoDisabled: boolean = false;
   clickModal = true;
   Datepicker: string = '';
+  clientes: User[];
+  cliente: any;
 
   constructor(
     private _servicioService: ServiciosService,
@@ -39,7 +42,7 @@ export class ServicioRegisterComponent implements OnInit {
   ngOnInit() {
 
     this.forma = new FormGroup({
-      mensaje: new FormControl(null, Validators.required),
+      mensaje: new FormControl(null, null),
       fechaServicio: new FormControl(null, Validators.required),
       cantHoras: new FormControl(null, Validators.required),
       cantPernocta: new FormControl(null, Validators.required),
@@ -77,7 +80,7 @@ export class ServicioRegisterComponent implements OnInit {
     });
     let datosFormulario = {
       // tslint:disable-next-line:max-line-length
-      mensaje: 'Buenos día, por medio de la presente adjunto el detalle de servicio prestado el día 13 del mes de Julio de 2018: (Servicio Prestado al Sra. Monica Rincon)',
+      mensaje: `Buenos días`,
       fechaServicio: '2018-08-10',
       cantHoras: 0,
       cantPernocta: 0,
@@ -108,16 +111,21 @@ export class ServicioRegisterComponent implements OnInit {
       ]
     };
 
-    this.forma.setValue( datosFormulario );
+    // this.forma.setValue( datosFormulario );
 
-    this.usuariosRegistrados();
+    this.conductoresRegistrados();
     this.tabuladorActivo();
+    this.getUsuariosClientes();
 
     init_plugis();
   }
 
   sacarModal () {
+    let cliente = this.getUsuarioCliente( this.forma.value.mensaje );
+    console.log(cliente);
     this.detalleServicio = this.forma.value;
+    // tslint:disable-next-line:max-line-length
+    this.detalleServicio.mensaje = `Por medio de la presente se detalla el servicio prestado a ${ cliente.name } ${ cliente.apellido }, sin mas a que hacer refecrecia.`;
     let monto_nocturno: number = 0;
     let monto_encomienda: number = 0;
     let monto_espera: number = 0;
@@ -147,21 +155,20 @@ export class ServicioRegisterComponent implements OnInit {
                                         + monto_recorridos;
 
 
-    console.log( this.forma.value );
+    // console.log( this.forma.value );
 
     this.mostrarDetalle = true;
   }
 
-  usuariosRegistrados () {
-    // let url = `${ environment.basePath }api/v1/user/todos`;
-    this._userService.userRegister()
+  conductoresRegistrados () {
+    this._userService.userConductores()
     .subscribe ( (resp: any) => {
-      this.usuarios = resp.users;
+      this.conductores = resp.conductores;
     });
   }
 
   verFormulario(): void {
-    console.log(this.forma.controls['origen']['controls'].length);
+    console.log(this.forma.controls);
   }
 
   enviarFormulario () {
@@ -175,7 +182,17 @@ export class ServicioRegisterComponent implements OnInit {
           this.quitar( true );
           this.limpiar();
           console.log( '=======================================', resp );
-        });
+        },
+          (error: any) => {
+            this.mensajeAlert = 'Error al intentar enviar el correo electronico';
+            this.mostrarMensaje = true;
+            this.tipoAlert = 'danger';
+            this.mostrarDetalle = false;
+            this.quitar( true );
+            this.limpiar();
+            console.log(error.error.error);
+          }
+        );
   }
 
   tabuladorActivo () {
@@ -266,6 +283,22 @@ export class ServicioRegisterComponent implements OnInit {
     let valoresForm = this.forma.value;
     this.forma.setValue( valoresForm );
     campoSeleccionado.focus();
+  }
+
+  getUsuariosClientes() {
+    this._userService.userCliente()
+      .subscribe( (resp: any) => {
+        this.clientes = resp.users;
+        console.log(this.clientes);
+      });
+  }
+
+  getUsuarioCliente( id: number ) {
+    let respuesta = this.clientes.filter( (cliente: User) => {
+      return (cliente.id === Number (id));
+    });
+
+    return respuesta[0];
   }
 
 }

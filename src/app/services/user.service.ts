@@ -97,6 +97,24 @@ export class UserService {
     return  this._http.post( url, body, { headers } );
   }
 
+  userCliente() {
+    let url = `${ environment.basePath }/api/v1/user/usuarios`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return  this._http.get( url, { headers } );
+  }
+
+  userConductores() {
+    let url = `${ environment.basePath }/api/v1/user/conductores`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return  this._http.get( url, { headers } );
+  }
+
   irA( index: number ) {
     let url = `${ environment.basePath }/api/v1/user/activos?page=${ index }`;
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
