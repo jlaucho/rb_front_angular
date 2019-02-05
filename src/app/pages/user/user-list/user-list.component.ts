@@ -52,12 +52,10 @@ export class UserListComponent implements OnInit {
     this._userService.listaUser( this.parametro, page, palabra )
     .subscribe( (userList: any) => {
       this.total = userList.users.total;
-      console.log( userList );
       this.usuariosDB = userList;
       this.usuarios = userList.users.data;
       this.prev_page_url = (this.usuariosDB.users.prev_page_url) ? true : false;
       this.next_page_url = (this.usuariosDB.users.next_page_url) ? true : false;
-      console.log( this.prev_page_url );
       this.numeroPagina();
     });
   }

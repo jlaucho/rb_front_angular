@@ -41,11 +41,11 @@
                             </td>
                             <td style="width: 20%;">En espera de ODC</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-xs" [disabled]="servicio.deleted_at" [routerLink]="['/user-update', servicio.id]" role="button"><span class="ti-settings"></span></button>
+                                <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
 
-                                <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs" style="color: #ffffff" (click)="borrarServicio( servicio.id )" role="button"><span class="ti-trash"></span></a>
+                                <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs action" style="color: #ffffff" (click)="borrarServicio( servicio.idCorreos )" role="button"><span class="ti-trash"></span></a>
                                 <ng-template #activo>
-                                    <a class="btn btn-success btn-xs" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.id )" role="button"><span class="ti-check"></span></a>
+                                    <a class="btn btn-success btn-xs action" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.idCorreos )" role="button"><span class="ti-check"></span></a>
                                 </ng-template>
                             </td>
                         </tr>

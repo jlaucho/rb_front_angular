@@ -47,14 +47,6 @@ export class SidebarService {
             {
               titulo: 'Todas',
               url: '/empresa-list',
-            },
-            {
-              titulo: 'Por RIF',
-              url: '/interno2',
-            },
-            {
-              titulo: 'Por Nombre',
-              url: '/interno2',
             }
           ]
         },

@@ -36,8 +36,8 @@
                             <td>{{ empre.descripcion | slice:0:30 }}<span *ngIf="empre.descripcion.length > 30">...</span></td>
                             <td>{{ empre.RIF }}</td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-xs " [routerLink]="[ '/empresa-update', empre.idEmpresas] " role="button "><span class="ti-settings "></span></a>
-                                <a class="btn btn-danger btn-xs " (click)="eliminarEmpresa() " role="button "><span style="color: #ffffff" class="ti-trash "></span></a>
+                                <a class="btn btn-primary btn-xs action" [routerLink]="[ '/empresa-update', empre.idEmpresas] " role="button "><span class="ti-settings "></span></a>
+                                <a class="btn btn-danger btn-xs action" (click)="eliminarEmpresa() " role="button "><span style="color: #ffffff" class="ti-trash "></span></a>
                             </td>
                         </tr>
                     </tbody>
