@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Servicio } from 'src/app/interfaces/servicio';
-import { Tabulador } from 'src/app/interfaces/tabulador';
+import { Servicio } from '../../../interfaces/servicio';
+import { Tabulador } from '../../../interfaces/tabulador';
 import { BusquedaColeccionService } from '../../../services/busqueda-coleccion.service';
 
 @Component({

@@ -183,7 +183,6 @@ export class ServicioRegisterComponent implements OnInit {
           this.limpiar();
           console.log( '=======================================', resp );
         },
-<<<<<<< HEAD
           (error: any) => {
             this.mensajeAlert = 'Error al intentar enviar el correo electronico';
             this.mostrarMensaje = true;
@@ -192,10 +191,6 @@ export class ServicioRegisterComponent implements OnInit {
             this.quitar( true );
             this.limpiar();
             console.log(error.error.error);
-=======
-          (error) => {
-            console.log(error);
->>>>>>> a1cdd2ed4c6da6c6ad0905afac1535b5d7a417d5
           }
         );
   }
