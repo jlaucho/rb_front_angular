@@ -107,4 +107,8 @@ export class ServicioUpdateComponent implements OnInit {
     console.log('Cambio Concepto');
   }
 
+  sacarModal() {
+    console.log('Sacar Modal');
+  }
+
 }
