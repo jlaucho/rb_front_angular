@@ -90,4 +90,21 @@ export class ServicioUpdateComponent implements OnInit {
   enviarFormulario() {
     console.log(this.forma.value);
   }
+
+  limpiar() {
+    console.log('Limpiar');
+  }
+
+  quitar() {
+    console.log('Quitar');
+  }
+
+  agregarOtro() {
+    console.log('Agregar Otro');
+  }
+
+  cambioConcepto(i, concepto) {
+    console.log('Cambio Concepto');
+  }
+
 }
