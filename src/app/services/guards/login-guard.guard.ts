@@ -9,9 +9,11 @@ export class LoginGuardGuard implements CanActivate {
                 private router: Router ) {}
 
   canActivate() {
-    if (this._userService.isLogued()) {
+    if (this._userService.isLogued() && this._userService.tokenValid) {
+        console.log(this._userService.tokenValid);
         return true;
     } else {
+      console.log(this._userService.tokenValid);
       this.router.navigate(['/login']);
         return false;
     }

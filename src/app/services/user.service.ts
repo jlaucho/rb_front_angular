@@ -9,8 +9,11 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
-
+  tokenValid: boolean = false;
   constructor( private _http: HttpClient ) {
+    if(this.isLogued()){
+      this.me();
+    }
    }
 
   storageUser( data ) {
@@ -28,6 +31,21 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify( user ));
   }
 
+  me(): void {
+    let url = `${ environment.basePath }/api/v1/auth/me`;
+    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${ token }`
+    });
+    
+    this._http.post(url, null, {headers})
+        .subscribe( (resp: any) => {
+          this.tokenValid = true;
+        }, (error: any) => {
+          this.tokenValid = false;;
+        });
+  }
+
   isLogued(): boolean {
     return (localStorage.getItem('user') ) ? true : false;
   }
@@ -41,8 +59,8 @@ export class UserService {
     return this._http.post( url, user );
   }
   listaUser ( parametro: string, page: string = '', palabra ) {
-    let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
