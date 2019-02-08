@@ -6,6 +6,7 @@ import { Servicio } from '../../../interfaces/servicio';
 import { TabuladorService } from '../../../services/tabulador.service';
 import { Tabulador } from '../../../interfaces/tabulador';
 import { User } from '../../../interfaces/user';
+import Swal from 'sweetalert2';
 // import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 declare function init_plugis();
@@ -21,9 +22,6 @@ export class ServicioRegisterComponent implements OnInit {
   caracterMin: number = 20;
   caracterMax: number = 250;
   conductores: User[];
-  mostrarMensaje: boolean = false;
-  mensajeAlert: string = '';
-  tipoAlert: string = 'success';
   detalleServicio: Servicio;
   mostrarDetalle: boolean = false;
   tabulador: Tabulador;
@@ -175,18 +173,22 @@ export class ServicioRegisterComponent implements OnInit {
 
     this._servicioService.registrarServicio ( this.forma.value )
         .subscribe( (resp: any) => {
-          this.mensajeAlert = resp.mensaje;
-          this.mostrarMensaje = resp.ok;
-          this.tipoAlert = 'success';
-          this.mostrarDetalle = false;
-          this.quitar( true );
-          this.limpiar();
+            this.mostrarDetalle = false;
+            this.quitar( true );
+            this.limpiar();
+            Swal(
+             'Completado',
+             `${ resp.mensaje }`,
+              'success'
+              );
           console.log( '=======================================', resp );
         },
           (error: any) => {
-            this.mensajeAlert = 'Error al intentar enviar el correo electronico';
-            this.mostrarMensaje = true;
-            this.tipoAlert = 'danger';
+            Swal(
+              'Completado',
+              `Se completo el registro del usurio ${ error } correctamente`,
+               'error'
+               );
             this.mostrarDetalle = false;
             this.quitar( true );
             this.limpiar();
@@ -204,7 +206,7 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   limpiar() {
-    // this.forma.reset();
+    this.forma.reset();
     init_plugis();
   }
   agregarOtro() {

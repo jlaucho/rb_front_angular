@@ -31,19 +31,14 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify( user ));
   }
 
-  me(): void {
+  me() {
     let url = `${ environment.basePath }/api/v1/auth/me`;
     let token =  (JSON.parse(localStorage.getItem('user'))).token;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${ token }`
     });
-    
-    this._http.post(url, null, {headers})
-        .subscribe( (resp: any) => {
-          this.tokenValid = true;
-        }, (error: any) => {
-          this.tokenValid = false;;
-        });
+
+    return this._http.post(url, null, {headers});
   }
 
   isLogued(): boolean {

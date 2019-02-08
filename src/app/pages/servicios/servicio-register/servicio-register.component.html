@@ -5,7 +5,6 @@
                 <h5 class="card-title">Registro de servicio realizado</h5>
                 <h6 class="card-subtitle">Sistema de registro de servicios al sistema</h6>
                 <hr>
-                <app-alert *ngIf="mostrarMensaje" [mensaje]="mensajeAlert" [type]="tipoAlert"></app-alert>
                 <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
                     <div class="row justify-content-center">
                         <div class="col-12 text-center">
