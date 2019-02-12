@@ -12,7 +12,7 @@ export class UserService {
   tokenValid: boolean = false;
   token: string;
   constructor( private _http: HttpClient ) {
-    this.token =  (JSON.parse(localStorage.getItem('user'))).token;
+    this.token =  (JSON.parse(localStorage.getItem('user'))).token || 'asdfg';
    }
 
   storageUser( data ) {
