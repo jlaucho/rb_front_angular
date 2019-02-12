@@ -4,27 +4,17 @@ import { UserService } from '../user.service';
 
 @Injectable()
 export class LoginGuardGuard implements CanActivate {
-   value: boolean;
   constructor ( private _userService: UserService,
                 private router: Router ) {
-                  this._userService.me()
-                    .subscribe((resp: any)=>{
-                      this.value = resp.ok;
-                    }, (error: any)=>{
-                      this.router.navigate(['/login']);
-                      this.value = error.ok;
-
-                    });
                 }
   
   canActivate() {
-    if (this.value) {
-        console.log(this.value);
+    console.log('disparando desde el loginGuards');
+    if (this._userService.isLogued) {
         return true;
     } else {
-      console.log(this.value);
       this.router.navigate(['/login']);
-        return false;
+      return false;
     }
   }
 }

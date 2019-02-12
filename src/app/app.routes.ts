@@ -24,41 +24,43 @@ import { TabuladorListComponent } from './pages/tabulador/tabulador-list/tabulad
 import { ServicioRegisterComponent } from './pages/servicios/servicio-register/servicio-register.component';
 import { ServicioListComponent } from './pages/servicios/servicio-list/servicio-list.component';
 import { ServicioUpdateComponent } from './pages/servicios/servicio-update/servicio-update.component';
+import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: PagesComponent,
-    canActivate: [ LoginGuardGuard ],
+//     canActivate: [ LoginGuardGuard ],
+    canActivateChild: [ VerifyTokenGuard ],
     children: [
         // tslint:disable-next-line:max-line-length
-        { path: 'dashboard', canActivate: [ LoginGuardGuard ], component: DashboardComponent,
+        { path: 'dashboard', component: DashboardComponent,
                 data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
-        { path: 'progress', canActivate: [ LoginGuardGuard ], component: ProgressComponent,
+        { path: 'progress', component: ProgressComponent,
                 data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'} },
-        { path: 'graficas', canActivate: [ LoginGuardGuard ], component: GraficasComponent ,
+        { path: 'graficas', component: GraficasComponent ,
                 data: {title: 'Dashboard', izquierda: 'Principal', medio: 'pagina', derecha: 'Dashboard'}},
-        { path: 'user-register', canActivate: [ LoginGuardGuard ], component: UserRegisterComponent, data:
-                {title: 'Registro de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
-        { path: 'user-list/:tipo', canActivate: [ LoginGuardGuard ], component: UserListComponent, data:
+        { path: 'user-register', component: UserRegisterComponent,
+                data: {title: 'Registro de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Registrar'} },
+        { path: 'user-list/:tipo', component: UserListComponent, data:
                 {title: 'Lista de usuarios', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Listar'} },
-        { path: 'user-update/:idUser', canActivate: [ LoginGuardGuard ], component: UserUpdateComponent, data:
-                        {title: 'Actualización de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Actualizar'} },
-        { path: 'empresa-register', canActivate: [ LoginGuardGuard ], component: EmpresaRegisterComponent, data:
+        { path: 'user-update/:idUser', component: UserUpdateComponent, data:
+                {title: 'Actualización de usuario', izquierda: 'Pagina', medio: 'Usuario', derecha: 'Actualizar'} },
+        { path: 'empresa-register', component: EmpresaRegisterComponent, data:
                 {title: 'Registro de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Registar'} },
-        { path: 'empresa-list', canActivate: [ LoginGuardGuard ], component: EmpresaListComponent, data:
+        { path: 'empresa-list', component: EmpresaListComponent, data:
                 {title: 'Listado de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Listar'} },
-        { path: 'empresa-update/:idEmpresa', canActivate: [ LoginGuardGuard ], component: EmpresaUpdateComponent, data:
+        { path: 'empresa-update/:idEmpresa', component: EmpresaUpdateComponent, data:
                 {title: 'Listado de empresas', izquierda: 'Pagina', medio: 'Empresa', derecha: 'Listar'} },
-        { path: 'tabulador-register', canActivate: [ LoginGuardGuard ], component: TabuladorComponent, data:
+        { path: 'tabulador-register', component: TabuladorComponent, data:
                 {title: 'Registro de Tabulador', izquierda: 'Pagina', medio: 'Tabulador', derecha: 'Registrar'} },
-        { path: 'tabulador-list/:tipo', canActivate: [ LoginGuardGuard ], component: TabuladorListComponent, data:
+        { path: 'tabulador-list/:tipo', component: TabuladorListComponent, data:
                 {title: 'Registro de Tabulador', izquierda: 'Pagina', medio: 'Tabulador', derecha: 'Lista'} },
-        { path: 'servicio-register', canActivate: [ LoginGuardGuard ], component: ServicioRegisterComponent, data:
+        { path: 'servicio-register', component: ServicioRegisterComponent, data:
                 {title: 'Registro de Servicio', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Registro'} },
-        { path: 'servicio-update/:idServicio', canActivate: [ LoginGuardGuard ], component: ServicioUpdateComponent, data:
+        { path: 'servicio-update/:idServicio', component: ServicioUpdateComponent, data:
                 {title: 'Actualizacion de Servicio', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Actualizar'} },
-        { path: 'servicio-list/:parametro', canActivate: [ LoginGuardGuard ], component: ServicioListComponent, data:
+        { path: 'servicio-list/:parametro', component: ServicioListComponent, data:
                 {title: 'Listado de Servicios', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Lista'} },
         { path: '', component: DashboardComponent },
     ] },

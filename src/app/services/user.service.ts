@@ -10,10 +10,9 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
   tokenValid: boolean = false;
+  token: string;
   constructor( private _http: HttpClient ) {
-    if(this.isLogued()){
-      this.me();
-    }
+    this.token =  (JSON.parse(localStorage.getItem('user'))).token;
    }
 
   storageUser( data ) {
