@@ -25,6 +25,7 @@ export class VerifyTokenGuard implements CanActivateChild {
       let expirado = this.fecha_expiracion( payload.exp );
 
       if(expirado) {
+        this.router.navigate(['/login']);
         return false;
       }
       let paso = this.verficaToken();
@@ -34,12 +35,11 @@ export class VerifyTokenGuard implements CanActivateChild {
   verficaToken(): Promise<boolean> {
     return new Promise((resolve, reject)=>{
         this._userService.me()
-          .subscribe( (resp: any)=>{
+          .subscribe( ()=>{
             resolve(true);
-          }, (error: any)=>{
-            console.log('error verificando el token');
-            this.router.navigate(['/login']);
+          }, ()=>{
             reject(false);
+            this.router.navigate(['/login']);
           });
     });
   }
