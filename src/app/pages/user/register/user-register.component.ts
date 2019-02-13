@@ -4,6 +4,7 @@ import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { ValidatorsService } from '../../../services/validators.service';
 import { FuncionesGenericasService } from '../../../services/funciones.service';
+import { ShowErrorsFormService } from '../../../services/show-errors-form.service';
 import Swal from 'sweetalert2';
 
 declare function init_plugis();
@@ -34,7 +35,8 @@ export class UserRegisterComponent implements OnInit {
    constructor( public _userService: UserService,
                public _validatorsService: ValidatorsService,
                private router: Router,
-              private _funcionesService: FuncionesGenericasService) { }
+              private _funcionesService: FuncionesGenericasService,
+              private _showErrorsForm: ShowErrorsFormService) { }
 
   ngOnInit() {
 
@@ -140,6 +142,11 @@ export class UserRegisterComponent implements OnInit {
 
   // Envo de formulario
   enviarFormulario() {
+    console.log('enviando formulario');
+    if( this._showErrorsForm.showErrorsForm( this.forma ) ) {
+      return;
+    }
+    console.log('paso la primera validacion');
     this.user = this.forma.value;
     this._userService.registerUser( this.user )
       .subscribe( (respuesta: any ) => {
@@ -156,7 +163,7 @@ export class UserRegisterComponent implements OnInit {
         }
       },
         (error: any) => {
-          this.erroresBack = error.error.error;
+          this._showErrorsForm.showErrorsBackEnd(error.error.error);
         }
       );
 

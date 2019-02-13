@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { ShowErrorsFormService } from '../services/show-errors-form.service';
 import { Router } from '@angular/router';
 
 declare function init_plugis();
@@ -18,10 +19,12 @@ export class LoginComponent implements OnInit {
     user: null,
     activo: false
   };
+  disabled_submit: boolean = false;
 
 
   constructor( private _userService: UserService,
-               private router: Router) {
+               private router: Router,
+               private _shoeErrorsForm: ShowErrorsFormService) {
 
     this.forma = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.email]),
@@ -48,15 +51,23 @@ export class LoginComponent implements OnInit {
     init_plugis();
   }
   enviarLogin() {
+    this.disabled_submit = true;
     if (this.forma.value.recuerdame) {
       localStorage.setItem('recuerdame', this.forma.value.email);
     } else {
       localStorage.removeItem('recuerdame');
     }
+    console.log(this.forma.value);
+    if ( this._shoeErrorsForm.showErrorsForm(this.forma) ) {
+      return;
+    }
     this._userService.loginUser( this.forma.value )
       .subscribe( (data: any) => {
         this._userService.storageUser( data );
         this.router.navigate(['/dashboard']);
+    }, (error: any) => {
+      this._shoeErrorsForm.showErrorsBackEnd(error.error.error);
+      this.disabled_submit = false;
     });
   }
 

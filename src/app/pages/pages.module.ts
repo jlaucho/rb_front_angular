@@ -94,7 +94,7 @@ import { BusquedaColeccionService } from '../services/busqueda-coleccion.service
   ],
   exports: [
     DashboardComponent,
-    ProgressComponent
+    ProgressComponent,
   ]
 })
 export class PagesModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+
 @Component({
   selector: 'app-mensajes-forms',
   templateUrl: './mensajes-forms.component.html',
@@ -18,7 +19,7 @@ export class MensajesFormsComponent implements OnInit {
   nombre: string = '';
 
   constructor() {
-
+      console.log('desde el composnente de verga de eta')
   }
 
   ngOnInit() {
@@ -38,5 +39,6 @@ export class MensajesFormsComponent implements OnInit {
        break;
    }
   }
+
 
 }

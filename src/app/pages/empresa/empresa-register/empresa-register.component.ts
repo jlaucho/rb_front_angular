@@ -5,25 +5,27 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { Empresa } from '../../../interfaces/empresa';
 import { Observable } from 'rxjs';
 import { ValidatorsService } from '../../../services/validators.service';
+import Swal from 'sweetalert2';
+import { ShowErrorsFormService } from '../../../services/show-errors-form.service';
+import { Router } from '@angular/router';
 declare function init_plugis();
 
 @Component({
   selector: 'app-empresa-register',
   templateUrl: './empresa-register.component.html',
-  styles: []
+  styles: ['.margin-left-10{margin-left: 10px;}']
 })
 export class EmpresaRegisterComponent implements OnInit {
 
   forma: FormGroup;
   caracterMax = 60;
   caracterMin = 3;
-  empresa: Empresa;
-  mensajeExito: Boolean = false;
-  mensajeError: Boolean = false;
 
   constructor( private _funcionesService: FuncionesGenericasService,
                private _empresaService: EmpresaService,
-               private _validadorService: ValidatorsService ) { }
+               private _validadorService: ValidatorsService,
+               private _showErrorsForm: ShowErrorsFormService,
+               private router: Router ) { }
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -45,35 +47,31 @@ export class EmpresaRegisterComponent implements OnInit {
     });
     this._funcionesService.limpiarCasillas('form-register');
     init_plugis();
-    this.rellenarCasillas();
+    // this.rellenarCasillas();
   }
 
   enviarFormulario() {
+    if ( this._showErrorsForm.showErrorsForm( this.forma ) ) {
+      return;
+    }
     let empresa: Empresa = this.forma.value;
-    console.log( this.forma.controls );
     this._empresaService.registerEmpresa( empresa )
         .subscribe( (resp: any) => {
-          this.empresa = resp.empresa;
-          console.log( this.empresa );
-          this.mensajeExito = resp.ok;
+          Swal(
+            'Completado',
+            `el registro de la empresa ${ resp.empresa.name } fue exitoso`,
+            'success'
+            );
+            this.router.navigate(['/empresa-list']);
+        }, (error: any) => {
+          // console.log(error.error.error);
+          this._showErrorsForm.showErrorsBackEnd(error.error.error);
         });
   }
 
-  rellenarCasillas() {
-    this.empresa = {
-      name: 'Nombre de la empresa',
-      RIF: 'J-401713-4',
-      direccion: 'Direccion de la empresa',
-      descripcion: 'Descripcioin de la empresa',
-      telefono: 'Telefono de la empresa'
-    };
-
-    this.forma.setValue(this.empresa);
-  }
-
-  // Limpiar el formulario
   limpiar(): void {
     this.forma.reset();
+    init_plugis();
   }
   // fin de limpiar el formulario
   // Validaciones asincronas
@@ -108,5 +106,4 @@ export class EmpresaRegisterComponent implements OnInit {
       })
     );
   }
-
 }

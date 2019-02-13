@@ -5,11 +5,6 @@
 
                 <h5 class="card-title">Registro de empresa</h5>
 
-                <div *ngIf="mensajeExito" class="alert alert-primary">
-                    <h4 class="alert-heading">Registro exitoso</h4>
-                    El registro de la empresa {{ empresa.name }} fue exitoso
-                </div>
-
                 <h6 class="card-subtitle">Sistema de registro de EMPRESAS al sistema</h6>
                 <form [formGroup]="forma" (ngSubmit)="enviarFormulario()" class="floating-labels m-t-40" id="form-register">
                     <div class="row">
@@ -66,15 +61,8 @@
                             <button type="button" class="btn btn-info waves-effect text-left " data-dismiss="modal">volver</button>
                             <span class="pull-right">
                               <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left">Limpiar</button>
-                              <button type="submit" [disabled]="forma.pending || forma.invalid" class="btn btn-primary waves-effect text-left">Registrar</button>
+                              <button type="submit" class="btn btn-primary waves-effect text-left margin-left-10">Registrar</button>
                           </span>
-                        </div>
-                    </div>
-                    <div class="row container-fluid">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div *ngIf="true" class="alert alert-danger" role="alert">
-                                <strong>{{ forma.valid }}</strong>
-                            </div>
                         </div>
                     </div>
                 </form>
