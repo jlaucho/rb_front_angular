@@ -39,7 +39,12 @@
                                     Sin Informaci&oacute;n
                                 </ng-template>
                             </td>
-                            <td style="width: 20%;">En espera de ODC</td>
+                            <td style="width: 20%;" *ngIf="servicio.ODC === 'SI'">
+                                En espera de ODC
+                            </td>
+                            <td style="width: 20%;" *ngIf="servicio.ODC === 'NO'">
+                                En espera por Facturar
+                            </td>
                             <td class="text-center">
                                 <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
 

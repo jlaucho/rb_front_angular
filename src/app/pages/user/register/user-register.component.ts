@@ -153,6 +153,7 @@ export class UserRegisterComponent implements OnInit {
         this.respuesta = respuesta;
         console.log( respuesta );
         this.limpiar();
+        init_plugis();
         this.erroresBack = false;
         if (respuesta.ok) {
          Swal(

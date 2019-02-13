@@ -24,12 +24,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group m-b-40">
-                                <select formControlName="mensaje" name="mensaje" class="form-control p-0" id="input7">
+                                <select formControlName="cliente" name="cliente" class="form-control p-0" id="input7">
                                 <option [value]="cliente.id" *ngFor="let cliente of clientes" > {{ cliente.name }} {{ cliente.apellido }} C.I {{ cliente.cedula }} </option>
                             </select>
                                 <span class="bar"></span>
-                                <label for="mensaje">Servicio utilizado por: </label>
-                                <app-mensajes-forms [forma]="forma" selectorName="mensaje" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
+                                <label for="cliente">Servicio utilizado el cliente: </label>
+                                <app-mensajes-forms [forma]="forma" selectorName="cliente" [caracterMin]="caracterMin" [caracterMax]="caracterMax"></app-mensajes-forms>
                             </div>
                         </div>
 
@@ -130,6 +130,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="button" (click)="quitar()" class="btn btn-danger pull-left">Eliminar</button>
+                            <button type="button" (click)="mostrarFormulario()" class="btn btn-danger pull-left">Mostrar</button>
                             <button type="button" (click)="agregarOtro()" class="btn btn-primary pull-right">Agregar Otro</button>
                         </div>
                     </div>
@@ -208,7 +209,7 @@
                             <button type="button" class="btn btn-info waves-effect text-left" [routerLink]="['/']" data-dismiss="modal"> <span class="ti-back-left" ></span> volver</button>
                             <span class="pull-right">
                               <button type="button" (click)="limpiar()" class="btn btn-warning waves-effect text-left"> <span class="ti-eraser"></span> Limpiar</button>
-                            <button type="button" [disabled]="forma.invalid || forma.pending" class="btn btn-primary waves-effect text-left margin-left-10" (click)="sacarModal()"> 
+                            <button type="button" [disabled]="forma.pending" class="btn btn-primary waves-effect text-left margin-left-10" (click)="sacarModal()"> 
                                         <span class="ti-eye"></span> Visualizar
                             </button>
                             </span>

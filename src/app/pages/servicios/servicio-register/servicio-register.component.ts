@@ -7,6 +7,7 @@ import { TabuladorService } from '../../../services/tabulador.service';
 import { Tabulador } from '../../../interfaces/tabulador';
 import { User } from '../../../interfaces/user';
 import Swal from 'sweetalert2';
+import { ShowErrorsFormService } from '../../../services/show-errors-form.service';
 // import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 declare function init_plugis();
@@ -34,13 +35,14 @@ export class ServicioRegisterComponent implements OnInit {
   constructor(
     private _servicioService: ServiciosService,
     private _userService: UserService,
+    private _showErrorsForm: ShowErrorsFormService,
     private _tabuladorService: TabuladorService
   ) { }
 
   ngOnInit() {
 
     this.forma = new FormGroup({
-      mensaje: new FormControl(null, null),
+      cliente: new FormControl(null, Validators.required),
       fechaServicio: new FormControl(null, Validators.required),
       cantHoras: new FormControl(null, Validators.required),
       cantPernocta: new FormControl(null, Validators.required),
@@ -78,7 +80,7 @@ export class ServicioRegisterComponent implements OnInit {
     });
     let datosFormulario = {
       // tslint:disable-next-line:max-line-length
-      mensaje: `Buenos días`,
+      cliente: 'cliente',
       fechaServicio: '2018-08-10',
       cantHoras: 0,
       cantPernocta: 0,
@@ -119,8 +121,11 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   sacarModal () {
-    let cliente = this.getUsuarioCliente( this.forma.value.mensaje );
-    console.log(cliente);
+
+    if ( this._showErrorsForm.showErrorsForm( this.forma ) ) {
+      return;
+    }
+    let cliente = this.getUsuarioCliente( this.forma.value.cliente );
     this.detalleServicio = this.forma.value;
     // tslint:disable-next-line:max-line-length
     this.detalleServicio.mensaje = `Por medio de la presente se detalla el servicio prestado a ${ cliente.name } ${ cliente.apellido }, sin mas a que hacer refecrecia.`;
@@ -170,7 +175,7 @@ export class ServicioRegisterComponent implements OnInit {
   }
 
   enviarFormulario () {
-
+  console.log('Enviando Servicio a BD');
     this._servicioService.registrarServicio ( this.forma.value )
         .subscribe( (resp: any) => {
             this.mostrarDetalle = false;
@@ -256,9 +261,6 @@ export class ServicioRegisterComponent implements OnInit {
     (<FormArray>this.forma.controls['encomienda']).removeAt( valores );
     (<FormArray>this.forma.controls['nocturno']).removeAt( valores );
     (<FormArray>this.forma.controls['recorrido']).removeAt( valores );
-
-
-    console.log( this.forma.value );
   }
 
   cambioConcepto ( index: number, idrecorrido: string ) {
@@ -302,5 +304,7 @@ export class ServicioRegisterComponent implements OnInit {
 
     return respuesta[0];
   }
-
+  mostrarFormulario () {
+    console.log(this.forma.controls);
+  }
 }

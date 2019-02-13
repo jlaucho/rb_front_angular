@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     init_plugis();
   }
   enviarLogin() {
-    this.disabled_submit = true;
+    
     if (this.forma.value.recuerdame) {
       localStorage.setItem('recuerdame', this.forma.value.email);
     } else {
@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
     if ( this._shoeErrorsForm.showErrorsForm(this.forma) ) {
       return;
     }
+    this.disabled_submit = true;
     this._userService.loginUser( this.forma.value )
       .subscribe( (data: any) => {
         this._userService.storageUser( data );
