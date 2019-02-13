@@ -19,10 +19,8 @@ export class ServiciosService {
     });
 
 
-   }
-
-
-
+   
+  }
 registrarServicio ( servicio: any ) {
   let url = `${ environment.basePath }/api/v1/servicio/store`;
   return this.http.post( url, servicio, { headers: this.headers } );

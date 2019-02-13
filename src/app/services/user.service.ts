@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
-  tokenValid: boolean = false;
   constructor( private _http: HttpClient ) {
    }
 
@@ -35,7 +34,6 @@ export class UserService {
   me() {
     let url = `${ environment.basePath }/api/v1/auth/me`;
     let token =  this.getToken();
-    console.log(token);
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${ token }`
     });
@@ -59,6 +57,7 @@ export class UserService {
     let token =  this.getToken();
     let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
     console.log(url);
+    console.log(token);
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
