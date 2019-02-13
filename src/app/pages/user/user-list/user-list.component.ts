@@ -57,6 +57,8 @@ export class UserListComponent implements OnInit {
       this.prev_page_url = (this.usuariosDB.users.prev_page_url) ? true : false;
       this.next_page_url = (this.usuariosDB.users.next_page_url) ? true : false;
       this.numeroPagina();
+    }, (error: any)=>{
+      console.log(error);
     });
   }
 

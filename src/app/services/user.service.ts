@@ -56,8 +56,9 @@ export class UserService {
     return this._http.post( url, user );
   }
   listaUser ( parametro: string, page: string = '', palabra ) {
-    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let token =  this.getToken();
     let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
+    console.log(url);
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
