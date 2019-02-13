@@ -49,6 +49,7 @@ export class UserListComponent implements OnInit {
   }
 
   listaUser( page: string = '', palabra: string = '' ): void {
+    console.log(this.parametro);
     this._userService.listaUser( this.parametro, page, palabra )
     .subscribe( (userList: any) => {
       console.log(userList);
@@ -85,7 +86,6 @@ export class UserListComponent implements OnInit {
 
               let element = usuario[i].toString().toLowerCase();
               if ( element.indexOf( palabra ) >= 0) {
-                // console.log( element );
                 encontro = true;
               }
             }
