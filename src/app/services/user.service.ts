@@ -10,9 +10,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
   tokenValid: boolean = false;
-  token: string;
   constructor( private _http: HttpClient ) {
-    this.token =  (JSON.parse(localStorage.getItem('user'))).token || 'asdfg';
    }
 
   storageUser( data ) {
@@ -30,9 +28,14 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify( user ));
   }
 
+  getToken(): string {
+    return (JSON.parse(localStorage.getItem('user'))).token || '12345678';
+  }
+
   me() {
     let url = `${ environment.basePath }/api/v1/auth/me`;
-    let token =  (JSON.parse(localStorage.getItem('user'))).token;
+    let token =  this.getToken();
+    console.log(token);
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${ token }`
     });

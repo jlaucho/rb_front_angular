@@ -48,16 +48,15 @@ export class LoginComponent implements OnInit {
     init_plugis();
   }
   enviarLogin() {
-    console.log(this.forma.value);
     if (this.forma.value.recuerdame) {
       localStorage.setItem('recuerdame', this.forma.value.email);
     } else {
       localStorage.removeItem('recuerdame');
     }
-    this._userService.loginUser( this.forma.value ).subscribe( (data: any) => {
-      console.log(data);
-      this._userService.storageUser( data );
-      this.router.navigate(['/dashboard']);
+    this._userService.loginUser( this.forma.value )
+      .subscribe( (data: any) => {
+        this._userService.storageUser( data );
+        this.router.navigate(['/dashboard']);
     });
   }
 

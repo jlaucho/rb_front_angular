@@ -29,6 +29,7 @@ import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
+
     { path: '', component: PagesComponent,
 //     canActivate: [ LoginGuardGuard ],
     canActivateChild: [ VerifyTokenGuard ],

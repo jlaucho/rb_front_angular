@@ -11,33 +11,38 @@ export class VerifyTokenGuard implements CanActivateChild {
   constructor(
     private _userService: UserService,
     private router: Router
-  ){
-    
-  }
+  ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> | boolean {
       console.log('desde VerifyTokenGuards');
 
-      let token = this._userService.token;
-      console.log(token);
+      if (!this._userService.isLogued()) {
+        console.log('No se encontro el elemento user en el storage');
+        this.router.navigate(['/login']);
+        return false;
+      }
+
+      let token = this._userService.getToken();
       let payload = JSON.parse(atob(token.split('.')[1] ));
       let expirado = this.fecha_expiracion( payload.exp );
 
-      if(expirado) {
+      if (expirado) {
+        console.log('Token expirado');
         this.router.navigate(['/login']);
         return false;
       }
       let paso = this.verficaToken();
-      console.log(paso);
       return paso;
   }
   verficaToken(): Promise<boolean> {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         this._userService.me()
-          .subscribe( ()=>{
+          .subscribe( (resp) => {
             resolve(true);
-          }, ()=>{
+          }, (err) => {
+            console.log(err);
+            console.log('bloqueado por el guards, token invalido');
             reject(false);
             this.router.navigate(['/login']);
           });
