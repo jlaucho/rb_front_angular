@@ -56,8 +56,6 @@ export class UserService {
   listaUser ( parametro: string, page: string = '', palabra ) {
     let token =  this.getToken();
     let url = `${ environment.basePath }/api/v1/user/${ parametro }/${palabra}${ page }`;
-    console.log(url);
-    console.log(token);
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });

@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  listaUser( page: string = '', palabra: string ): void {
+  listaUser( page: string = '', palabra: string = '' ): void {
     this._userService.listaUser( this.parametro, page, palabra )
     .subscribe( (userList: any) => {
       console.log(userList);
