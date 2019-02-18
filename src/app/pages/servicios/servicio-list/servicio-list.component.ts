@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiciosService } from '../../../services/servicios.service';
 import { Servicio } from '../../../interfaces/servicio';
 import { Tabulador } from '../../../interfaces/tabulador';
+import Swal from 'sweetalert2';
 
 declare function init_plugis();
 
@@ -71,7 +72,21 @@ export class ServicioListComponent implements OnInit {
   }
 
   borrarServicio( id: number ) {
-     console.log('Le dico click a borrar servicio');
+     this._ServicioService.deleteServicio( id )
+       .subscribe( (resp: any) =>{
+         let servicio: Servicio = resp.servicio;
+        Swal(
+          'Eliminaci&oacute;n',
+          `La eliminacion del servicio realizado el dia ${ servicio.fechaServicio } se realizo correctamente`,
+           'success'
+           );
+       }, (err: any) =>{
+        Swal(
+          'error',
+          `Error al tratar de eliminar el servicio`,
+           'success'
+           );
+       });
    }
 
   reactivarServicio( id: number ) {
@@ -95,7 +110,7 @@ export class ServicioListComponent implements OnInit {
     console.log('Le dio a mostrar detalle');
     this._ServicioService.showServicio( idServicio )
       .subscribe( (resp: any) => {
-        this.detalleServicio = resp.busqueda;
+        this.detalleServicio = resp.busqueda[0];
         console.log(this.detalleServicio);
         this.mostrarDetalle = true;
       }, (err: any) => {

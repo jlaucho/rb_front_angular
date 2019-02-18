@@ -46,7 +46,7 @@
                                 </ng-template>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-success btn-xs action" (click)="verDetalle(servicio.idCorreos)" role="button"><span class="ti-eye"></span></button>
+                                <button class="btn btn-success btn-xs action" title="Detalle de servicio" (click)="verDetalle(servicio.idCorreos)" role="button"><span class="ti-eye"></span></button>
                                 <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
                                 <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs action" style="color: #ffffff" (click)="borrarServicio( servicio.idCorreos )" role="button"><span class="ti-trash"></span></a>
                                 <ng-template #activo>

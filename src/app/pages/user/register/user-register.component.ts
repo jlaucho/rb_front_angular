@@ -78,7 +78,7 @@ export class UserRegisterComponent implements OnInit {
     // }
     this._funcionesService.limpiarCasillas('form-register');
     init_plugis();
-    this.rellenarCasillas();
+    // this.rellenarCasillas();
   }
 
   // tslint:disable-next-line:member-ordering

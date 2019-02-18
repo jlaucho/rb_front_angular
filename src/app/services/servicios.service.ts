@@ -34,4 +34,9 @@ showServicio( idServicio: number ) {
   return this.http.get( url, {headers: this.headers} );
 }
 
+deleteServicio( idServicio: number ) {
+  let url = `${ environment.basePath }/api/v1/servicio/${ idServicio }`;
+  return this.http.delete( url, {headers: this.headers} );
+}
+
 }
