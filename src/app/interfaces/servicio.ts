@@ -18,4 +18,6 @@ export interface Servicio {
     monto_encomienda?: number;
     monto_espera?: number;
     monto_general?: number;
+    r_tabulador?: any;
+    totalMonto?: number;
 }

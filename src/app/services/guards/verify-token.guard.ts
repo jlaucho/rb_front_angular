@@ -15,10 +15,8 @@ export class VerifyTokenGuard implements CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> | boolean {
-      console.log('desde VerifyTokenGuards');
 
       if (!this._userService.isLogued()) {
-        console.log('No se encontro el elemento user en el storage');
         this.router.navigate(['/login']);
         return false;
       }
@@ -28,7 +26,6 @@ export class VerifyTokenGuard implements CanActivateChild {
       let expirado = this.fecha_expiracion( payload.exp );
 
       if (expirado) {
-        console.log('Token expirado');
         this.router.navigate(['/login']);
         return false;
       }

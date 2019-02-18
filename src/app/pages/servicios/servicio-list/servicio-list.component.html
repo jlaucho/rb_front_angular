@@ -39,18 +39,18 @@
                                     Sin Informaci&oacute;n
                                 </ng-template>
                             </td>
-                            <td style="width: 20%;" *ngIf="servicio.ODC === 'SI'">
-                                En espera de ODC
-                            </td>
-                            <td style="width: 20%;" *ngIf="servicio.ODC === 'NO'">
-                                En espera por Facturar
+                            <td style="width: 15%;">
+                                <div *ngIf="servicio.ODC === 'SI'; else status_servicio"> En espera de ODC </div>
+                                <ng-template #status_servicio>
+                                    En espera por Facturar
+                                </ng-template>
                             </td>
                             <td class="text-center">
+                                <button class="btn btn-success btn-xs action" (click)="verDetalle(servicio.idCorreos)" role="button"><span class="ti-eye"></span></button>
                                 <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
-
                                 <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs action" style="color: #ffffff" (click)="borrarServicio( servicio.idCorreos )" role="button"><span class="ti-trash"></span></a>
                                 <ng-template #activo>
-                                    <a class="btn btn-success btn-xs action" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.idCorreos )" role="button"><span class="ti-check"></span></a>
+                                    <a class="btn btn-warning btn-xs action" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.idCorreos )" role="button"><span class="ti-check"></span></a>
                                 </ng-template>
                             </td>
                         </tr>
@@ -91,4 +91,102 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Seccion de la modal -->
+
+<div class="modal" *ngIf="mostrarDetalle" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarDetalle ? 'block': 'hidden' }">
+    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Visualizacion de servicio realizado</h4>
+                <button type="button" class="close" (click)="mostrarDetalle = false;">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <table class="table table-no-bordered table-condensed table-sm" style="font-family: 'Courier New', Courier, monospace; font-size: 10pt">
+                        <thead>
+                            <tr>
+                                <td colspan="13"> {{ detalleServicio.mensaje }} </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4"> <strong> {{ detalleServicio.fechaServicio | date:"dd/MM//yyyy"}} </strong></td>
+                                <td colspan="9"></td>
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> DETALLES DE RECORRIDOS </strong> </th>
+                            </tr>
+                            <tr *ngFor="let recorrido of detalleServicio.r_recorridos; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{recorrido.origen}}</td>
+                                <td>-</td>
+                                <td>{{recorrido.destino}}</td>
+                                <td>=</td>
+                                <td colspan="2">{{ recorrido.cantidad }} {{ recorrido.concepto }}</td>
+                                <td>x</td>
+                                <td colspan="2">{{recorrido.recorrido | number:'.2-2'}} bs/{{ recorrido.concepto }}</td>
+                                <td>=</td>
+                                <td>{{ (recorrido.recorrido * recorrido.cantidad) | number:'.2-2' }}</td>
+                                <td>bs</td>
+
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> VALORES GENERALES </strong> </th>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_nocturno > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Nocturno </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.por_bono_nocturno | number:'.2-2'}} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_nocturno | number:'.2-2' }} bs</td>
+                                <td>=</td>
+                                <td> {{detalleServicio.r_tabulador.por_bono_nocturno * (detalleServicio.monto_nocturno / 100 ) | number:'.2-2'}} </td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_encomienda > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Encomienda </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.por_encomienda | number:'.2-2' }} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_encomienda | number:'.2-2'}} bs</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.r_tabulador.por_encomienda * ( detalleServicio.monto_encomienda / 100) | number: '.2-2'}}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.cantHoras > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Espera </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.cantHoras }} hrs</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.monto_horas | number:'.2-2'}} bs/hr</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.monto_horas | number: '.2-2' }}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="text-right">
+                                    <h3>Total a cancelar:</h3>
+                                </td>
+                                <td colspan="5">
+                                    <h3> <strong> ({{ detalleServicio.totalMonto | number: '.2-2'}} bs )</strong> </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-right" (click)="mostrarDetalle = false;">Cerrar</button>
+                <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

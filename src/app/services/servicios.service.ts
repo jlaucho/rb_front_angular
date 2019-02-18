@@ -18,8 +18,6 @@ export class ServiciosService {
       'Authorization': `Bearer ${ this.token }`
     });
 
-
-   
   }
 registrarServicio ( servicio: any ) {
   let url = `${ environment.basePath }/api/v1/servicio/store`;
@@ -28,6 +26,11 @@ registrarServicio ( servicio: any ) {
 
 listaServicio ( parametro: string ) {
   let url = `${ environment.basePath }/api/v1/servicio/${ parametro }`;
+  return this.http.get( url, {headers: this.headers} );
+}
+
+showServicio( idServicio: number ) {
+  let url = `${ environment.basePath }/api/v1/buscar/servicio/${ idServicio }`;
   return this.http.get( url, {headers: this.headers} );
 }
 

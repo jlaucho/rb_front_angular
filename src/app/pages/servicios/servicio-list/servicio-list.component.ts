@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiciosService } from '../../../services/servicios.service';
+import { Servicio } from '../../../interfaces/servicio';
+import { Tabulador } from '../../../interfaces/tabulador';
 
 declare function init_plugis();
 
@@ -20,6 +22,9 @@ export class ServicioListComponent implements OnInit {
   numeroPaginas: any = [];
   Ok: boolean = true;
   mensaje: string = '';
+  mostrarDetalle: boolean = false;
+  detalleServicio: Servicio;
+  tabulador: Tabulador;
 
   constructor( private activatedRoute: ActivatedRoute,
                private _ServicioService: ServiciosService ) { }
@@ -84,5 +89,17 @@ export class ServicioListComponent implements OnInit {
       this.numeroPaginas.push( index );
     }
     // console.log( this.numeroPaginas );
+  }
+
+  verDetalle( idServicio: number ) {
+    console.log('Le dio a mostrar detalle');
+    this._ServicioService.showServicio( idServicio )
+      .subscribe( (resp: any) => {
+        this.detalleServicio = resp.busqueda;
+        console.log(this.detalleServicio);
+        this.mostrarDetalle = true;
+      }, (err: any) => {
+        console.log(err);
+      });
   }
 }
