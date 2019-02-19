@@ -40,57 +40,65 @@
                                 </ng-template>
                             </td>
                             <td style="width: 15%;">
-                                <div *ngIf="servicio.ODC === 'SI'; else status_servicio"> En espera de ODC </div>
-                                <ng-template #status_servicio>
-                                    En espera por Facturar
-                                </ng-template>
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-success btn-xs action" title="Detalle de servicio" (click)="verDetalle(servicio.idCorreos)" role="button"><span class="ti-eye"></span></button>
-                                <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
-                                <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs action" style="color: #ffffff" (click)="borrarServicio( servicio.idCorreos )" role="button"><span class="ti-trash"></span></a>
-                                <ng-template #activo>
-                                    <a class="btn btn-warning btn-xs action" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.idCorreos )" role="button"><span class="ti-check"></span></a>
-                                </ng-template>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example" *ngIf="Ok">
-                    <ul class="pagination justify-content-center">
+                                <span *ngIf="servicio.ODC === 'SI'; else facturar_servicio">
 
-                        <li class="page-item">
-                            <div *ngIf="prev_page_url; else prevPageButton">
-                                <a class="page-link" (click)="nexPage( serviciosDB.correos.prev_page_url )">Previous</a>
-                            </div>
-                            <ng-template #prevPageButton>
-                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
-                            </ng-template>
-                        </li>
+                                    <div *ngIf="! servicio.ODC_number; else status_servicio">
+                                        <span style="cursor: pointer; color: cornflowerblue" title="haga click para registrar numero de ODC" (click)="datosServicio( servicio.idCorreos,'mostrarODC' )"> En espera de ODC </span>
+            </div>
+            <ng-template #status_servicio>
+                <strong> {{ servicio.ODC_number }} </strong>
+            </ng-template>
+            </span>
+            <ng-template #facturar_servicio>
+                Facturar
+            </ng-template>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-success btn-xs action" title="Detalle de servicio" (click)="datosServicio(servicio.idCorreos, 'mostrarDetalle')" role="button"><span class="ti-eye"></span></button>
+                <button class="btn btn-primary btn-xs action" [disabled]="servicio.deleted_at" [routerLink]="['/servicio-update', servicio.idCorreos]" role="button"><span class="ti-settings"></span></button>
+                <a *ngIf="!servicio.deleted_at; else activo" title="desactivar" class="btn btn-danger btn-xs action" style="color: #ffffff" (click)="borrarServicio( servicio.idCorreos )" role="button"><span class="ti-trash"></span></a>
+                <ng-template #activo>
+                    <a class="btn btn-warning btn-xs action" title="reactivar" style="color: #ffffff" (click)="reactivarServicio( servicio.idCorreos )" role="button"><span class="ti-check"></span></a>
+                </ng-template>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            <nav aria-label="Page navigation example" *ngIf="Ok">
+                <ul class="pagination justify-content-center">
 
-                        <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.correos.current_page}" *ngFor="let pagina of numeroPaginas">
-                            <button class="page-link " [disabled]="pagina === serviciosDB.correos.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
-                        </li>
+                    <li class="page-item">
+                        <div *ngIf="prev_page_url; else prevPageButton">
+                            <a class="page-link" (click)="nexPage( serviciosDB.correos.prev_page_url )">Previous</a>
+                        </div>
+                        <ng-template #prevPageButton>
+                            <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                        </ng-template>
+                    </li>
 
-                        <li class="page-item">
-                            <div *ngIf="next_page_url; else nexPageButton">
-                                <a class="page-link" (click)="nexPage( serviciosDB.correos.next_page_url )">Previous</a>
-                            </div>
-                            <ng-template #nexPageButton>
-                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
-                            </ng-template>
-                        </li>
-                    </ul>
-                </nav>
-                <h6 class="card-subtitle">Mostrando {{ servicios.length }} servicios de {{ total }} registros</h6>
-                <div *ngIf="!Ok">
-                    <div class="alert alert-primary" role="alert">
-                        <strong>{{ mensaje }}</strong>
-                    </div>
+                    <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.correos.current_page}" *ngFor="let pagina of numeroPaginas">
+                        <button class="page-link " [disabled]="pagina === serviciosDB.correos.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
+                    </li>
+
+                    <li class="page-item">
+                        <div *ngIf="next_page_url; else nexPageButton">
+                            <a class="page-link" (click)="nexPage( serviciosDB.correos.next_page_url )">Previous</a>
+                        </div>
+                        <ng-template #nexPageButton>
+                            <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                        </ng-template>
+                    </li>
+                </ul>
+            </nav>
+            <h6 class="card-subtitle">Mostrando {{ servicios.length }} servicios de {{ total }} registros</h6>
+            <div *ngIf="!Ok">
+                <div class="alert alert-primary" role="alert">
+                    <strong>{{ mensaje }}</strong>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Seccion de la modal -->
@@ -185,6 +193,33 @@
                 <button type="button" class="btn btn-danger waves-effect text-right" (click)="mostrarDetalle = false;">Cerrar</button>
                 <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
             </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal" *ngIf="mostrarODC" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarODC ? 'block': 'hidden' }">
+    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="forma" (ngSubmit)="enviarODC(detalleServicio.idCorreos)" class="floating-labels m-t-40" id="form-register">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Ingreso de ODC para la orden con monto {{ detalleServicio.totalMonto | number:'.2-2' }} Bs</h4>
+                    <button type="button" class="close" (click)="mostrarODC = false;">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <input type="text" formControlName="ODC_number" name="ODC_number" class="form-control" placeholder="Ingrese el Numero de ODC">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" [disabled]="forma.pending" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar ODC</button>
+                    <button type="button" class="btn btn-danger waves-effect text-right" (click)="mostrarODC = false;">Cerrar</button>
+                    <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
+                </div>
+            </form>
         </div>
         <!-- /.modal-content -->
     </div>

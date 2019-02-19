@@ -4,6 +4,7 @@ import { ServiciosService } from '../../../services/servicios.service';
 import { Servicio } from '../../../interfaces/servicio';
 import { Tabulador } from '../../../interfaces/tabulador';
 import Swal from 'sweetalert2';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 
 declare function init_plugis();
 
@@ -26,11 +27,18 @@ export class ServicioListComponent implements OnInit {
   mostrarDetalle: boolean = false;
   detalleServicio: Servicio;
   tabulador: Tabulador;
+  mostrarODC: boolean = false;
+  forma: FormGroup;
 
   constructor( private activatedRoute: ActivatedRoute,
                private _ServicioService: ServiciosService ) { }
 
   ngOnInit() {
+
+    this.forma = new FormGroup({
+      ODC_number: new FormControl(null, Validators.required)
+    });
+
     this.obtenerParametro();
     init_plugis();
   }
@@ -106,15 +114,31 @@ export class ServicioListComponent implements OnInit {
     // console.log( this.numeroPaginas );
   }
 
-  verDetalle( idServicio: number ) {
-    console.log('Le dio a mostrar detalle');
+  datosServicio ( idServicio: number, modalID: string) {
     this._ServicioService.showServicio( idServicio )
-      .subscribe( (resp: any) => {
-        this.detalleServicio = resp.busqueda[0];
-        console.log(this.detalleServicio);
+    .subscribe( (resp: any) => {
+      this.detalleServicio = resp.busqueda[0];
+      console.log(this.detalleServicio);
+      if (modalID === 'mostrarDetalle') {
         this.mostrarDetalle = true;
-      }, (err: any) => {
-        console.log(err);
-      });
+      }
+      if (modalID === 'mostrarODC') {
+        this.mostrarODC = true;
+      }
+    }, (err: any) => {
+      console.log(err);
+    });
   }
+
+  irA( pagina: any ): void {
+    console.log( pagina );
+  }
+
+  enviarODC(idCorreos) {
+    this.forma.value.push(idCorreos);
+    console.log(this.forma);
+    this._ServicioService.agregarODC( idCorreos )
+      .subscribe(  );
+  }
+
 }

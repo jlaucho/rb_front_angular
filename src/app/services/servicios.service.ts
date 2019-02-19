@@ -39,4 +39,9 @@ deleteServicio( idServicio: number ) {
   return this.http.delete( url, {headers: this.headers} );
 }
 
+agregarODC( body: any ) {
+  let url = `${ environment.basePath }/api/v1/servicio/agregarODC`;
+  return this.http.post( url, body, {headers: this.headers} );
+}
+
 }
