@@ -29,6 +29,9 @@ export class ServicioListComponent implements OnInit {
   tabulador: Tabulador;
   mostrarODC: boolean = false;
   forma: FormGroup;
+  caracterMin: number;
+  caracterMax: Number;
+  parametro: string;
 
   constructor( private activatedRoute: ActivatedRoute,
                private _ServicioService: ServiciosService ) { }
@@ -36,7 +39,9 @@ export class ServicioListComponent implements OnInit {
   ngOnInit() {
 
     this.forma = new FormGroup({
-      ODC_number: new FormControl(null, Validators.required)
+      ODC_number: new FormControl(null, [Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(11)])
     });
 
     this.obtenerParametro();
@@ -44,8 +49,8 @@ export class ServicioListComponent implements OnInit {
   }
   obtenerParametro () {
     this.activatedRoute.params.subscribe( (param: any) => {
-      // console.log( param.parametro );
-      this.obtenerLista( param.parametro );
+      this.parametro = param.parametro;
+      this.obtenerLista( this.parametro );
     });
   }
   obtenerLista ( parametro: string  ) {
@@ -135,10 +140,38 @@ export class ServicioListComponent implements OnInit {
   }
 
   enviarODC(idCorreos) {
-    this.forma.value.push(idCorreos);
-    console.log(this.forma);
-    this._ServicioService.agregarODC( idCorreos )
-      .subscribe(  );
+    this.forma.value.idServicio = idCorreos;
+    let body: EnviarODC = this.forma.value;
+    console.log( this.forma );
+
+    this._ServicioService.agregarODC( body )
+      .subscribe( (resp: any) => {
+            console.log(resp);
+            this.mostrarODC = false;
+            this.obtenerLista( this.parametro );
+            if (resp.ok) {
+              Swal(
+                'Asignaci&oacute;n de ODC',
+                `La asignacion del ODC bajo el numero ${ body.ODC_number } se realizo correctamente`,
+                'success'
+                );
+              }
+      }, (err: any) => {
+        console.log(err, 'Error al intentar asignar numero de ODC');
+        Swal(
+            'Error de signaci&oacute;n de ODC',
+            `La asignacion del ODC bajo el numero ${ body.ODC_number } no fue posible realizarla,
+             si el problema persiste coloquese en contacto con el administrador del sistema`,
+            'error'
+        );
+      }, () => {
+        console.log('siempre se ejecuta esta linea');
+      });
   }
 
+}
+
+interface EnviarODC {
+  idCorreo: Number,
+  ODC_number: string
 }

@@ -212,10 +212,11 @@
                 <div class="modal-body">
                     <div class="col-12">
                         <input type="text" formControlName="ODC_number" name="ODC_number" class="form-control" placeholder="Ingrese el Numero de ODC">
+                        <app-mensajes-forms [forma]="forma" selectorName="ODC_number" [caracterMin]="3" [caracterMax]="11"></app-mensajes-forms>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" [disabled]="forma.pending" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar ODC</button>
+                    <button type="submit" [disabled]="forma.pending || forma.invalid" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar ODC</button>
                     <button type="button" class="btn btn-danger waves-effect text-right" (click)="mostrarODC = false;">Cerrar</button>
                     <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
                 </div>

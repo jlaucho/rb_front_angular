@@ -20,4 +20,5 @@ export interface Servicio {
     monto_general?: number;
     r_tabulador?: any;
     totalMonto?: number;
+    idCorreos?: Number
 }

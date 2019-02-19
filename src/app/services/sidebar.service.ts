@@ -69,12 +69,16 @@ export class SidebarService {
               url: '/servicio-list/todos',
             },
             {
-              titulo: 'Pendientes con ODC',
+              titulo: 'Pendientes por ODC',
               url: '/servicio-list/ODC',
             },
             {
               titulo: 'Pendientes sin ODC',
               url: '/servicio-list/pendientes',
+            },
+            {
+              titulo: 'Pendientes por Facturar',
+              url: '/servicio-list/por_facturar',
             },
             {
               titulo: 'Facturados',
