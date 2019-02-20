@@ -24,6 +24,8 @@ import { FuncionesGenericasService } from '../services/funciones.service';
 import { EmpresaService } from '../services/empresa.service';
 import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.component';
 import { MensajesFormsComponent } from '../componentes/mensajes-forms/mensajes-forms.component';
+import { DetalleServicioComponent } from '../componentes/modals/detalle-servicio/detalle-servicio.component';
+import { AsignarODCComponent } from '../componentes/modals/asignar-odc/asignar-odc.component';
 
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { EmpresaUpdateComponent } from './empresa/empresa-update/empresa-update.component';
@@ -40,6 +42,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ServicioUpdateComponent } from './servicios/servicio-update/servicio-update.component';
 import { BusquedaColeccionService } from '../services/busqueda-coleccion.service';
+
 
 
 
@@ -90,7 +93,9 @@ import { BusquedaColeccionService } from '../services/busqueda-coleccion.service
     ServicioRegisterComponent,
     AlertComponent,
     ServicioListComponent,
-    ServicioUpdateComponent
+    ServicioUpdateComponent,
+    DetalleServicioComponent,
+    AsignarODCComponent,
   ],
   exports: [
     DashboardComponent,

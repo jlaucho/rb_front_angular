@@ -17,6 +17,10 @@ export interface Servicio {
     monto_nocturno?: number;
     monto_encomienda?: number;
     monto_espera?: number;
+    monto_horas?: number;
+    monto_bonoFinSemana?: number;
+    r_recorridos?: any;
+    monto_pernocta?: number;
     monto_general?: number;
     r_tabulador?: any;
     totalMonto?: number;

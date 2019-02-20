@@ -1,0 +1,26 @@
+<div class="modal" *ngIf="mostrarODC" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarODC ? 'block': 'hidden' }">
+    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="forma" (ngSubmit)="enviarODC(detalleServicio.idCorreos)" class="floating-labels m-t-40" id="form-register">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Ingreso de ODC para la orden con monto {{ detalleServicio.totalMonto | number:'.2-2' }} Bs</h4>
+                    <button type="button" class="close" (click)="cerrar();">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <input type="text" formControlName="ODC_number" name="ODC_number" class="form-control" placeholder="Ingrese el Numero de ODC">
+                        <app-mensajes-forms [forma]="forma" selectorName="ODC_number" [caracterMin]="3" [caracterMax]="11"></app-mensajes-forms>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" [disabled]="forma.pending || forma.invalid" class="btn btn-primary waves-effect text-left"> <span class="ti-save"></span> Registrar ODC</button>
+                    <button type="button" class="btn btn-danger waves-effect text-right" (click)="cerrar();">Cerrar</button>
+                    <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

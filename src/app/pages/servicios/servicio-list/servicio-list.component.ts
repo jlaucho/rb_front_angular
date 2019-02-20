@@ -135,43 +135,11 @@ export class ServicioListComponent implements OnInit {
     });
   }
 
+  actualizarLista( actualizar ) {
+    this.obtenerLista( this.parametro );
+  }
+
   irA( pagina: any ): void {
     console.log( pagina );
   }
-
-  enviarODC(idCorreos) {
-    this.forma.value.idServicio = idCorreos;
-    let body: EnviarODC = this.forma.value;
-    console.log( this.forma );
-
-    this._ServicioService.agregarODC( body )
-      .subscribe( (resp: any) => {
-            console.log(resp);
-            this.mostrarODC = false;
-            this.obtenerLista( this.parametro );
-            if (resp.ok) {
-              Swal(
-                'Asignaci&oacute;n de ODC',
-                `La asignacion del ODC bajo el numero ${ body.ODC_number } se realizo correctamente`,
-                'success'
-                );
-              }
-      }, (err: any) => {
-        console.log(err, 'Error al intentar asignar numero de ODC');
-        Swal(
-            'Error de signaci&oacute;n de ODC',
-            `La asignacion del ODC bajo el numero ${ body.ODC_number } no fue posible realizarla,
-             si el problema persiste coloquese en contacto con el administrador del sistema`,
-            'error'
-        );
-      }, () => {
-        console.log('siempre se ejecuta esta linea');
-      });
-  }
-
-}
-
-interface EnviarODC {
-  idCorreo: Number,
-  ODC_number: string
 }

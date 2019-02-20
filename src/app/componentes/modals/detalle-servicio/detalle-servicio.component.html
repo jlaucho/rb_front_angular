@@ -1,0 +1,117 @@
+<div class="modal" *ngIf="mostrarDetalle" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarDetalle ? 'block': 'hidden' }">
+    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Visualizacion de servicio realizado</h4>
+                <button type="button" class="close" (click)="ocultarModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <table class="table table-no-bordered table-condensed table-sm" style="font-family: 'Courier New', Courier, monospace; font-size: 10pt">
+                        <thead>
+                            <tr>
+                                <td colspan="13"> {{ detalleServicio.mensaje }} </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4"> <strong> {{ detalleServicio.fechaServicio | date:"dd/MM//yyyy"}} </strong></td>
+                                <td colspan="9"></td>
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> DETALLES DE RECORRIDOS </strong> </th>
+                            </tr>
+                            <tr *ngFor="let recorrido of detalleServicio.r_recorridos; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{recorrido.origen}}</td>
+                                <td>-</td>
+                                <td>{{recorrido.destino}}</td>
+                                <td>=</td>
+                                <td colspan="2">{{ recorrido.cantidad }} {{ recorrido.concepto }}</td>
+                                <td>x</td>
+                                <td colspan="2">{{recorrido.recorrido | number:'.2-2'}} bs/{{ recorrido.concepto }}</td>
+                                <td>=</td>
+                                <td>{{ (recorrido.recorrido * recorrido.cantidad) | number:'.2-2' }}</td>
+                                <td>bs</td>
+
+                            </tr>
+                            <tr>
+                                <th colspan="13" style="background-color: #007ACB; color: #ffffff"> <strong> VALORES GENERALES </strong> </th>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_nocturno > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Nocturno </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.por_bono_nocturno | number:'.2-2'}} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_nocturno | number:'.2-2' }} bs</td>
+                                <td>=</td>
+                                <td> {{detalleServicio.r_tabulador.por_bono_nocturno * (detalleServicio.monto_nocturno / 100 ) | number:'.2-2'}} </td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_encomienda > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Encomienda </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.por_encomienda | number:'.2-2' }} %</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.monto_encomienda | number:'.2-2'}} bs</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.r_tabulador.por_encomienda * ( detalleServicio.monto_encomienda / 100) | number: '.2-2'}}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.cantHoras > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Espera </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.cantHoras }} hrs</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.monto_horas | number:'.2-2'}} bs/hr</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.monto_horas | number: '.2-2' }}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_pernocta > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Bono fin de semana </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.cantPernocta }} pernc</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.monto_pernocta | number:'.2-2'}} bs/pernc</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.monto_pernocta | number: '.2-2' }}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr *ngIf="detalleServicio.monto_bonoFinSemana > 0">
+                                <td colspan="3"></td>
+                                <td colspan="1"> Bono fin de semana </td>
+                                <td>=</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.cantHoras }} hrs</td>
+                                <td>x</td>
+                                <td class="text-center" colspan="2">{{ detalleServicio.r_tabulador.por_fin_semana | number:'.2-2'}} %</td>
+                                <td>=</td>
+                                <td>{{ detalleServicio.monto_bonoFinSemana | number: '.2-2' }}</td>
+                                <td>bs</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="text-right">
+                                    <h3>Total a cancelar:</h3>
+                                </td>
+                                <td colspan="5">
+                                    <h3> <strong> ({{ detalleServicio.totalMonto | number: '.2-2'}} bs )</strong> </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-right" (click)="ocultarModal()">Cerrar</button>
+                <!-- <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button> -->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
