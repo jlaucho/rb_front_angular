@@ -1,0 +1,58 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Contact Emplyee list</h4>
+                <h6 class="card-subtitle"></h6>
+                <div class="table-responsive">
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                                <th>usuario</th>
+                                <th>ODC</th>
+                                <th>Conductor</th>
+                                <th>Check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let servicio of servicios; let i=index">
+                                <td>{{ i }}</td>
+                                <td>
+                                    {{servicio.fechaServicio}}
+                                </td>
+                                <td>genelia@gmail.com</td>
+                                <td>+123 456 789</td>
+                                <td><span class="label label-danger">Designer</span> </td>
+                                <td>23</td>
+                                <td>12-10-2014</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="button" class="btn btn-info btn-rounded" (click)="show_modal()">Generar factura</button>
+                                </td>
+
+                                <td colspan="7">
+                                    <div class="text-right">
+                                        <ul class="pagination"> </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <app-factura-generar [showModal]="showModal" (cerrar_modal)="close_modal($event)"></app-factura-generar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

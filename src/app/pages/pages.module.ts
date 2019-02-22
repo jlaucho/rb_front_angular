@@ -42,6 +42,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ServicioUpdateComponent } from './servicios/servicio-update/servicio-update.component';
 import { BusquedaColeccionService } from '../services/busqueda-coleccion.service';
+import { FacturaRegisterComponent } from './factura/factura-register/factura-register.component';
+import { FacturaGenerarComponent } from '../componentes/modals/factura-generar/factura-generar.component';
+
 
 
 
@@ -96,6 +99,8 @@ import { BusquedaColeccionService } from '../services/busqueda-coleccion.service
     ServicioUpdateComponent,
     DetalleServicioComponent,
     AsignarODCComponent,
+    FacturaRegisterComponent,
+    FacturaGenerarComponent,
   ],
   exports: [
     DashboardComponent,

@@ -25,6 +25,7 @@ import { ServicioRegisterComponent } from './pages/servicios/servicio-register/s
 import { ServicioListComponent } from './pages/servicios/servicio-list/servicio-list.component';
 import { ServicioUpdateComponent } from './pages/servicios/servicio-update/servicio-update.component';
 import { VerifyTokenGuard } from './services/guards/verify-token.guard';
+import { FacturaRegisterComponent } from './pages/factura/factura-register/factura-register.component';
 
 
 const appRoutes: Routes = [
@@ -63,6 +64,8 @@ const appRoutes: Routes = [
                 {title: 'Actualizacion de Servicio', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Actualizar'} },
         { path: 'servicio-list/:parametro', component: ServicioListComponent, data:
                 {title: 'Listado de Servicios', izquierda: 'Pagina', medio: 'Servicio', derecha: 'Lista'} },
+        { path: 'factura-register', component: FacturaRegisterComponent, data:
+                {title: 'Registro de factura', izquierda: 'Pagina', medio: 'Factura', derecha: 'Registrar'} },
         { path: '', component: DashboardComponent },
     ] },
     { path: '**', component: NopagefoundComponent },
