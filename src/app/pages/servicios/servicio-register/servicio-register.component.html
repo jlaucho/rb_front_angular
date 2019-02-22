@@ -227,9 +227,9 @@
         </div>
     </div>
 </div>
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-responsive">{{ mostrarDetalle }} Sacar Modal </button> -->
-<div class="modal" *ngIf="mostrarDetalle" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarDetalle ? 'block': 'hidden' }">
-    <!-- <div *ngIf="mostrarDetalle" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"> -->
+<app-detalle-servicio (cerrarModal)="mostrarDetalle = $event" (sendFormulario)="enviarFormularioModal($event)" [btnRegistro]="btnRegistro" [mostrarDetalle]="mostrarDetalle" [detalleServicio]="detalleServicio"></app-detalle-servicio>
+
+<!-- <div class="modal" *ngIf="mostrarDetalle" tabindex="-1" role="dialog" [ngStyle]="{'display': mostrarDetalle ? 'block': 'hidden' }">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -319,7 +319,7 @@
                 <button type="button" class="btn btn-success waves-effect text-left" (click)="enviarFormulario();"> <span class="ti-save"></span> Guardar Servicio</button>
             </div>
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+         /.modal-content -->
+<!-- </div> -->
+<!-- /.modal-dialog -->
+<!-- </div> -->

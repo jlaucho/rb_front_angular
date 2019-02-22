@@ -31,6 +31,7 @@ export class ServicioRegisterComponent implements OnInit {
   Datepicker: string = '';
   clientes: User[];
   cliente: any;
+  btnRegistro: boolean = true;
 
   constructor(
     private _servicioService: ServiciosService,
@@ -81,9 +82,9 @@ export class ServicioRegisterComponent implements OnInit {
     let datosFormulario = {
       // tslint:disable-next-line:max-line-length
       cliente: 'cliente',
-      fechaServicio: '2018-08-10',
-      cantHoras: 0,
-      cantPernocta: 0,
+      fechaServicio: '23-02-2019',
+      cantHoras: 1,
+      cantPernocta: 1,
       cantCorreos: 1,
       bono_finSemana: 'NO',
       ODC: 'SI',
@@ -129,15 +130,19 @@ export class ServicioRegisterComponent implements OnInit {
     this.detalleServicio = this.forma.value;
     // tslint:disable-next-line:max-line-length
     this.detalleServicio.mensaje = `Por medio de la presente se detalla el servicio prestado a ${ cliente.name } ${ cliente.apellido }, sin mas a que hacer refecrecia.`;
-    let monto_nocturno: number = 0;
+    let monto_nocturno: number   = 0;
     let monto_encomienda: number = 0;
-    let monto_espera: number = 0;
+    let monto_horas: number     = 0;
     let monto_recorridos: number = 0;
+    let r_recorridos             = new Array();
+
     // tslint:disable-next-line:forin
     for (const key in this.detalleServicio.origen) {
       monto_recorridos += Number( this.detalleServicio.recorrido[key] );
+
      // tslint:disable-next-line:no-unused-expression
      if (this.detalleServicio.nocturno[key] === 'SI') {
+
         monto_nocturno += Number(this.detalleServicio.recorrido[key]);
      }
      if (this.detalleServicio.encomienda[key] === 'SI') {
@@ -145,20 +150,39 @@ export class ServicioRegisterComponent implements OnInit {
      }
     }
     if (this.detalleServicio.cantHoras > 0) {
-    monto_espera = Number(this.detalleServicio.cantHoras * this.tabulador.monto_horas);
+    monto_horas = Number(this.detalleServicio.cantHoras * this.tabulador.monto_horas);
     }
     //  Se asignan los valores de las sumas obtenidas
     this.detalleServicio.monto_nocturno = monto_nocturno;
     this.detalleServicio.monto_encomienda = monto_encomienda;
-    this.detalleServicio.monto_espera = monto_espera;
+    this.detalleServicio.monto_horas = monto_horas;
 
     // tslint:disable-next-line:max-line-length
-    this.detalleServicio.monto_general = (monto_nocturno * (this.tabulador.por_bono_nocturno / 100))
-                                        + monto_espera + (monto_encomienda * (this.tabulador.por_encomienda / 100))
+    this.detalleServicio.totalMonto = (monto_nocturno * (this.tabulador.por_bono_nocturno / 100))
+                                        + monto_horas + (monto_encomienda * (this.tabulador.por_encomienda / 100))
                                         + monto_recorridos;
 
+    for (const key in this.forma.controls['origen'].value) {
+      if (this.forma.controls['origen'].value.hasOwnProperty(key)) {
+        let recorrido: number = 0;
+          recorrido = ( this.forma.controls['concepto'].value[key] == 'DesvExter') 
+            ? this.tabulador.monto_desv_exter
+            : this.tabulador.monto_desv_inter;
 
-    // console.log( this.forma.value );
+        r_recorridos.push({
+          origen: this.forma.controls['origen'].value[key],
+          destino: this.forma.controls['destino'].value[key],
+          cantidad: this.forma.controls['cantidad'].value[key],
+          concepto: this.forma.controls['concepto'].value[key],
+          recorrido: recorrido
+        });
+      }
+    }
+    console.log(r_recorridos);
+
+    this.detalleServicio.r_recorridos = r_recorridos;
+    this.detalleServicio.r_tabulador = this.tabulador;
+    console.log( this.detalleServicio );
 
     this.mostrarDetalle = true;
   }
@@ -293,7 +317,6 @@ export class ServicioRegisterComponent implements OnInit {
     this._userService.userCliente()
       .subscribe( (resp: any) => {
         this.clientes = resp.users;
-        console.log(this.clientes);
       });
   }
 
@@ -306,5 +329,10 @@ export class ServicioRegisterComponent implements OnInit {
   }
   mostrarFormulario () {
     console.log(this.forma.controls);
+  }
+  enviarFormularioModal(event: boolean){
+    if(event){
+      this.enviarFormulario();
+    }
   }
 }

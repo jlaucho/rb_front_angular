@@ -9,8 +9,10 @@ export class DetalleServicioComponent implements OnInit {
 
   @Input() mostrarDetalle: boolean;
   @Input() detalleServicio: any;
+  @Input() btnRegistro: boolean = null;
 
   @Output('cerrarModal') cerrar: EventEmitter<boolean> = new EventEmitter();
+  @Output('sendFormulario') enviarFormulario: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
 
@@ -21,6 +23,11 @@ export class DetalleServicioComponent implements OnInit {
   ocultarModal() {
     this.mostrarDetalle = false;
     this.cerrar.emit( this.mostrarDetalle );
+  }
+
+  send_form() {
+
+    this.enviarFormulario.emit( true );
   }
 
 }
