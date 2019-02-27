@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../services/servicios.service';
 import { HttpClient } from '@angular/common/http';
-import { Servicio } from 'src/app/interfaces/servicio';
+import { Servicio } from '../../../interfaces/servicio';
 
 @Component({
   selector: 'app-factura-register',

@@ -165,10 +165,15 @@ export class ServicioRegisterComponent implements OnInit {
     for (const key in this.forma.controls['origen'].value) {
       if (this.forma.controls['origen'].value.hasOwnProperty(key)) {
         let recorrido: number = 0;
-          recorrido = ( this.forma.controls['concepto'].value[key] == 'DesvExter') 
-            ? this.tabulador.monto_desv_exter
-            : this.tabulador.monto_desv_inter;
-
+        if (this.forma.controls['concepto'].value[key] === 'DesvExter') {
+            recorrido = this.tabulador.monto_desv_exter;
+        }
+        if (this.forma.controls['concepto'].value[key] === 'DesvInter') {
+            recorrido = this.tabulador.monto_desv_inter;
+        }
+        if (this.forma.controls['concepto'].value[key] === 'Traslado') {
+          recorrido = this.forma.controls['recorrido'].value[key];
+      }
         r_recorridos.push({
           origen: this.forma.controls['origen'].value[key],
           destino: this.forma.controls['destino'].value[key],
@@ -178,7 +183,7 @@ export class ServicioRegisterComponent implements OnInit {
         });
       }
     }
-    console.log(r_recorridos);
+    // console.log(r_recorridos);
 
     this.detalleServicio.r_recorridos = r_recorridos;
     this.detalleServicio.r_tabulador = this.tabulador;
