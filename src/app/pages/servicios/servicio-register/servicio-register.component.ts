@@ -215,17 +215,17 @@ export class ServicioRegisterComponent implements OnInit {
              `${ resp.mensaje }`,
               'success'
               );
-          console.log( '=======================================', resp );
         },
           (error: any) => {
+            console.log(error);
             Swal(
-              'Completado',
-              `Se completo el registro del usurio ${ error } correctamente`,
+              'Error',
+              `Se completo el registro del usurio ${ error.error.error.error } correctamente`,
                'error'
                );
             this.mostrarDetalle = false;
             this.quitar( true );
-            this.limpiar();
+            // this.limpiar();
             console.log(error.error.error);
           }
         );

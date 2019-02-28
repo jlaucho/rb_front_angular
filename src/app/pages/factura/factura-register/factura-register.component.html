@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-8 m-t-20">
-                    <h6 class="card-subtitle">Lista de servicios registrados es el sistema (123123) Total Facturado (1233212 Bs) </h6>
+                    <h6 class="card-subtitle">Lista de servicios registrados por facturar ({{ total }}) Total pendiente ({{totalFacturado | number: '.2-2'}} Bs) </h6>
                 </div>
                 <div class="col-4 floating-labels m-t-10">
                     <div class="form-group m-b-5">
@@ -28,38 +28,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="width: 5%;">1</td>
+                        <tr *ngFor="let servicio of servicios; index as i">
+                            <td style="width: 5%;">{{ i + 1 }}</td>
                             <td>
-                                <app-check></app-check>
+                                <app-check [idServicio]="servicio.idCorreos" (idSeleccionado)="seleccionServicio($event)"></app-check>
                             </td>
-                            <td style="width: 12%;">15-02-2019</td>
-                            <td style="width: 15%;">123456789</td>
-                            <td style="width: 12%;">68.5689,25</td>
-                            <td style="width: 25%;">Monica Apellido</td>
-                            <td style="width: 25%;">Florinda Rangel</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 5%;">1</td>
-                            <td>
-                                <app-check></app-check>
-                            </td>
-                            <td style="width: 12%;">15-02-2019</td>
-                            <td style="width: 15%;">123456789</td>
-                            <td style="width: 12%;">99.3336</td>
-                            <td style="width: 25%;">Monica Apellido</td>
-                            <td style="width: 25%;">Florinda Rangel</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 5%;">1</td>
-                            <td>
-                                <app-check></app-check>
-                            </td>
-                            <td style="width: 12%;">15-02-2019</td>
-                            <td style="width: 15%;">123456789</td>
-                            <td style="width: 12%;">68.5689,25</td>
-                            <td style="width: 25%;">Monica Apellido</td>
-                            <td style="width: 25%;">Florinda Rangel</td>
+                            <td style="width: 12%;">{{ servicio.fechaServicio | date:'dd-MM-yyyy' }}</td>
+                            <td style="width: 15%;">{{ servicio.ODC === 'SI' ? servicio.ODC_number : 'N/A' }}</td>
+                            <td style="width: 12%;">{{ servicio.totalMonto | number: '.2-2' }}</td>
+                            <td style="width: 25%;">{{ servicio.r_usuario.name }} {{ servicio.r_usuario.apellido }}</td>
+                            <td style="width: 25%;">{{ servicio.r_realizado.name }} {{ servicio.r_realizado.apellido }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -92,7 +70,7 @@
                         </li>
                     </ul>
                 </nav>
-                <h6 class="card-subtitle">Mostrando {{ 4 }} servicios de 123132 registros</h6>
+                <h5 class="card-subtitle"> <strong> Servicios seleccionados {{ 0 }} con un monto total de {{ 123123 }} </strong> </h5>
                 <div *ngIf="!Ok">
                     <div class="alert alert-primary" role="alert">
                         <strong>{{ mensaje }}</strong>

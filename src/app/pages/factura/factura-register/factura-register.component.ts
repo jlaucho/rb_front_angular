@@ -13,10 +13,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class FacturaRegisterComponent implements OnInit {
 
   showModal: boolean;
-  $servicios: any;
+  serviciosDB: any;
   total: any;
   servicios: Servicio[];
-  serviciosDB: any;
+  totalFacturado: number;
   prev_page_url: boolean;
   next_page_url: boolean;
   Ok: boolean;
@@ -25,6 +25,7 @@ export class FacturaRegisterComponent implements OnInit {
   busquedaPalabra: string;
   forma: FormGroup;
   colorCheck: string = 'cornsilk';
+  seleccionadas: any[];
 
   constructor(
     private _ServiciosService: ServiciosService,
@@ -51,13 +52,13 @@ export class FacturaRegisterComponent implements OnInit {
     this._ServiciosService.listaServicio ( "por_facturar" )
     .subscribe( ( resp: any ) => {
       this.total = resp.correos.total;
-      this.serviciosDB = resp;
+      this.totalFacturado = resp.total;
       this.servicios = resp.correos.data;
-      this.prev_page_url = (this.serviciosDB.correos.prev_page_url) ? true : false;
-      this.next_page_url = (this.serviciosDB.correos.next_page_url) ? true : false;
+      this.serviciosDB = resp;
+      this.prev_page_url = (resp.correos.prev_page_url) ? true : false;
+      this.next_page_url = (resp.correos.next_page_url) ? true : false;
       this.numeroPagina();
       this.Ok = true;
-      console.log( this.servicios );
       },
       (error: any) => {
         this.Ok = false;
@@ -99,4 +100,26 @@ export class FacturaRegisterComponent implements OnInit {
     console.log(id, element);
   }
 
+  seleccionServicio( event ) {
+    console.log(this.servicios);
+    if( event.status ) {
+      let seleccion = this.servicios.filter(function(servicio){
+        if(event.idServicio === servicio.idCorreos){
+          return servicio;
+        }
+      });
+      console.log(seleccion[0]);
+      this.seleccionadas.push(seleccion[0]);
+    } else {
+      for (const key in this.seleccionadas) {
+        if (this.seleccionadas.hasOwnProperty(key)) {
+          const element = this.seleccionadas[key];
+          if(element.idServicio === event.idServicio){
+            this.seleccionadas.splice(key, 1);
+          }
+        }
+      }
+    }
+    console.log(this.seleccionadas);
+  }
 }

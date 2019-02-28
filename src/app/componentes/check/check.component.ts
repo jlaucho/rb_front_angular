@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
 @Component({
@@ -9,6 +9,10 @@ import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 export class CheckComponent implements OnInit {
 
   colorCkeck: string = 'cornsilk';
+  check: boolean = false;
+
+  @Input() idServicio: number;
+  @Output() idSeleccionado: EventEmitter<object> = new EventEmitter();
 
   constructor() { }
 
@@ -16,8 +20,13 @@ export class CheckComponent implements OnInit {
   }
 
   agregarComponente() {
-    this.colorCkeck = 'black';
-    console.log('desde el composnete de checkAndUpdateBinding');
+    this.check = this.check ? false : true;
+    let seleccionado = {
+      idServicio: this.idServicio,
+      status: this.check
+    }
+    this.idSeleccionado.emit( seleccionado );
+    console.log(this.idServicio);
   }
 
 }
