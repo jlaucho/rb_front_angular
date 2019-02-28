@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../services/servicios.service';
 import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../../interfaces/servicio';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-factura-register',
   templateUrl: './factura-register.component.html',
-  styleUrls: ['./factura-register.component.css']
+  styleUrls: ['../../empresa/empresa-list/empresa.css']
 })
 export class FacturaRegisterComponent implements OnInit {
 
@@ -20,6 +22,9 @@ export class FacturaRegisterComponent implements OnInit {
   Ok: boolean;
   mensaje: any;
   numeroPaginas: any[];
+  busquedaPalabra: string;
+  forma: FormGroup;
+  colorCheck: string = 'cornsilk';
 
   constructor(
     private _ServiciosService: ServiciosService,
@@ -27,6 +32,9 @@ export class FacturaRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.getServicios();
+    this.forma = new FormGroup({
+      firstName: new FormControl(null)
+    });
   }
 
   show_modal() {
@@ -73,6 +81,22 @@ export class FacturaRegisterComponent implements OnInit {
       this.numeroPaginas.push( index );
     }
     // console.log( this.numeroPaginas );
+  }
+
+  busqueda (parametro: string) {
+    console.log( parametro );
+  }
+  nexPage ( url: string ) {
+    console.log( url );
+  }
+
+  enviarFormulario() {
+    console.log(this.forma.value);
+  }
+
+  agregar( id: number, element ) {
+    this.colorCheck = '#000';
+    console.log(id, element);
   }
 
 }

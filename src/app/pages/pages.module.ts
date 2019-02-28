@@ -44,6 +44,7 @@ import { ServicioUpdateComponent } from './servicios/servicio-update/servicio-up
 import { BusquedaColeccionService } from '../services/busqueda-coleccion.service';
 import { FacturaRegisterComponent } from './factura/factura-register/factura-register.component';
 import { FacturaGenerarComponent } from '../componentes/modals/factura-generar/factura-generar.component';
+import { CheckComponent } from '../componentes/check/check.component';
 
 
 
@@ -101,6 +102,7 @@ import { FacturaGenerarComponent } from '../componentes/modals/factura-generar/f
     AsignarODCComponent,
     FacturaRegisterComponent,
     FacturaGenerarComponent,
+    CheckComponent,
   ],
   exports: [
     DashboardComponent,

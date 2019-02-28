@@ -1,58 +1,109 @@
-<!-- ============================================================== -->
-<!-- Start Page Content -->
-<!-- ============================================================== -->
-<div class="row">
+<div class="card">
+    <div class="col-1"></div>
     <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Contact Emplyee list</h4>
-                <h6 class="card-subtitle"></h6>
-                <div class="table-responsive">
-                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Fecha</th>
-                                <th>Monto</th>
-                                <th>usuario</th>
-                                <th>ODC</th>
-                                <th>Conductor</th>
-                                <th>Check</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let servicio of servicios; let i=index">
-                                <td>{{ i }}</td>
-                                <td>
-                                    {{servicio.fechaServicio}}
-                                </td>
-                                <td>genelia@gmail.com</td>
-                                <td>+123 456 789</td>
-                                <td><span class="label label-danger">Designer</span> </td>
-                                <td>23</td>
-                                <td>12-10-2014</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">
-                                    <button type="button" class="btn btn-info btn-rounded" (click)="show_modal()">Generar factura</button>
-                                </td>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-8 m-t-20">
+                    <h6 class="card-subtitle">Lista de servicios registrados es el sistema (123123) Total Facturado (1233212 Bs) </h6>
+                </div>
+                <div class="col-4 floating-labels m-t-10">
+                    <div class="form-group m-b-5">
+                        <!-- <input type="text" #palabra [(ngModel)]="busquedaPalabra" (keyup)="busqueda(palabra.value)" id="palabra" name="busqueda" class="form-control"> -->
+                        <span class="bar"></span>
+                        <label for="" class="card-subtitle">Buscar...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table color-table success-table table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Check</th>
+                            <th>{{'Fecha' | uppercase }}</th>
+                            <th>{{'ODC' | uppercase}}</th>
+                            <th>{{'Monto' | uppercase}}</th>
+                            <th>{{'Usuario' | uppercase}}</th>
+                            <th>{{'Conductor' | uppercase}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 5%;">1</td>
+                            <td>
+                                <app-check></app-check>
+                            </td>
+                            <td style="width: 12%;">15-02-2019</td>
+                            <td style="width: 15%;">123456789</td>
+                            <td style="width: 12%;">68.5689,25</td>
+                            <td style="width: 25%;">Monica Apellido</td>
+                            <td style="width: 25%;">Florinda Rangel</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 5%;">1</td>
+                            <td>
+                                <app-check></app-check>
+                            </td>
+                            <td style="width: 12%;">15-02-2019</td>
+                            <td style="width: 15%;">123456789</td>
+                            <td style="width: 12%;">99.3336</td>
+                            <td style="width: 25%;">Monica Apellido</td>
+                            <td style="width: 25%;">Florinda Rangel</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 5%;">1</td>
+                            <td>
+                                <app-check></app-check>
+                            </td>
+                            <td style="width: 12%;">15-02-2019</td>
+                            <td style="width: 15%;">123456789</td>
+                            <td style="width: 12%;">68.5689,25</td>
+                            <td style="width: 25%;">Monica Apellido</td>
+                            <td style="width: 25%;">Florinda Rangel</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tfoot>
+                    <button class="btn btn-info btn-rounded" (click)="showModal = true">Generar Factura</button>
+                </tfoot>
+                <nav aria-label="Page navigation example" *ngIf="Ok">
+                    <ul class="pagination justify-content-center">
 
-                                <td colspan="7">
-                                    <div class="text-right">
-                                        <ul class="pagination"> </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <app-factura-generar [showModal]="showModal" (cerrar_modal)="close_modal($event)"></app-factura-generar>
+                        <li class="page-item">
+                            <div *ngIf="prev_page_url; else prevPageButton">
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.prev_page_url )">Previous</a>
+                            </div>
+                            <ng-template #prevPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
+                        </li>
+
+                        <li class="page-item" [ngClass]="{'active': pagina === serviciosDB.correos.current_page}" *ngFor="let pagina of numeroPaginas">
+                            <button class="page-link " [disabled]="pagina === serviciosDB.correos.current_page" #paginaActual (click)="irA( pagina )"> {{ pagina }} </button>
+                        </li>
+
+                        <li class="page-item">
+                            <div *ngIf="next_page_url; else nexPageButton">
+                                <a class="page-link" (click)="nexPage( serviciosDB.correos.next_page_url )">Previous</a>
+                            </div>
+                            <ng-template #nexPageButton>
+                                <button class="page-link btn btn-link" disabled="disabled">Previous</button>
+                            </ng-template>
+                        </li>
+                    </ul>
+                </nav>
+                <h6 class="card-subtitle">Mostrando {{ 4 }} servicios de 123132 registros</h6>
+                <div *ngIf="!Ok">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>{{ mensaje }}</strong>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- ============================================================== -->
-<!-- End PAge Content -->
-<!-- ============================================================== -->
+
+<!-- Seccion de la modal -->
+
+
+<app-factura-generar [showModal]="showModal" (cerrar_modal)="close_modal($event)"></app-factura-generar>
