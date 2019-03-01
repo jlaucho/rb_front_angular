@@ -3,6 +3,7 @@ import { ServiciosService } from '../../../services/servicios.service';
 import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../../interfaces/servicio';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmpresaService } from '../../../services/empresa.service';
 
 
 @Component({
@@ -27,9 +28,11 @@ export class FacturaRegisterComponent implements OnInit {
   colorCheck: string = 'cornsilk';
   seleccionadas: any[] = new Array();
   totalFactura: number;
+  empresas: Empresa[];
 
   constructor(
     private _ServiciosService: ServiciosService,
+    private _EmpresasService: EmpresaService
   ) { }
 
   ngOnInit() {
@@ -37,17 +40,16 @@ export class FacturaRegisterComponent implements OnInit {
     this.forma = new FormGroup({
       firstName: new FormControl(null)
     });
+    this.empresasRegistradas();
   }
 
   show_modal() {
     console.log('cliak');
     this.showModal = true;
-    console.log(this.showModal);
   }
 
   close_modal(event) {
     this.showModal = false;
-    console.log(this.showModal);
   }
   getServicios() {
     this._ServiciosService.listaServicio ( "por_facturar" )
@@ -78,11 +80,9 @@ export class FacturaRegisterComponent implements OnInit {
   numeroPagina() {
     this.numeroPaginas = [];
     let totalPaginas = this.serviciosDB.correos.last_page;
-    // console.log( 'ultima pagina', this.usuariosDB.users.last_page );
     for (let index = 1; index < (totalPaginas + 1); index++) {
       this.numeroPaginas.push( index );
     }
-    // console.log( this.numeroPaginas );
   }
 
   busqueda (parametro: string) {
@@ -98,7 +98,6 @@ export class FacturaRegisterComponent implements OnInit {
 
   agregar( id: number, element ) {
     this.colorCheck = '#000';
-    console.log(id, element);
   }
 
   seleccionServicio( event ) {
@@ -126,6 +125,26 @@ export class FacturaRegisterComponent implements OnInit {
         this.totalFactura += element.totalMonto;
       }
     }
-    console.log(this.seleccionadas.length, "Length");
   }
+  empresasRegistradas() {
+    this._EmpresasService.listarEmpresas()
+      .subscribe((resp: any) =>{
+        this.empresas = resp.empresas;
+        console.log(this.empresas);
+      }, (err: any) =>{
+        console.log("error al intentar buscar las empresas", err);
+      });
+  }
+}
+
+interface Empresa {
+  RIF: String;
+  created_at: String;
+  deleted_at: String;
+  descripcion: String;
+  direccion: String;
+  idEmpresas: Number;
+  name: String;
+  telefono: String;
+  update_at: String;
 }

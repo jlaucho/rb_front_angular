@@ -12,6 +12,7 @@ export class CheckComponent implements OnInit {
   check: boolean = false;
 
   @Input() idServicio: number;
+  @Input() iteration: number;
   @Output() idSeleccionado: EventEmitter<object> = new EventEmitter();
 
   constructor() { }
@@ -26,7 +27,6 @@ export class CheckComponent implements OnInit {
       status: this.check
     }
     this.idSeleccionado.emit( seleccionado );
-    console.log(this.idServicio);
   }
 
 }

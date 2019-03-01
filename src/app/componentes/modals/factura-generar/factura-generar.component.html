@@ -8,15 +8,15 @@
                 <div class="form-horizontal form-material">
                     <div class="form-group">
                         <div class="col-md-12 m-b-20">
-                            <select class="custom-select col-12" id="inlineFormCustomSelect">
+                            <select (change)="buscar_empresa(empresaSeleccionada.value)" class="custom-select col-12" id="inlineFormCustomSelect" #empresaSeleccionada>
+
                                 <option selected="">Seleccione la Empresa...</option>
-                                <option value="1">CERVECERIA POLAR, C.A</option>
-                                <option value="2">PEPSI</option>
-                                <option value="3">ALIMENTOS POLAR</option>
+                                <option *ngFor="let empresa of empresas" value="{{ empresa.idEmpresas }}"> {{ empresa.name | uppercase }} </option>
+
                             </select>
                         </div>
                         <div class="col-md-12 m-b-20">
-                            Direcci&oacute;n: <strong class="pull-right">    Aguna parte de caracas</strong>
+                            Direcci&oacute;n: <strong class="pull-right">    Aguna parte de caracas  </strong>
                         </div>
                         <div class="col-md-12 m-b-20">
                             Telefono: <strong class="pull-right"> 0212-202-3111</strong>
@@ -25,7 +25,7 @@
                             RIF: <strong class="pull-right"> j-00006390-5 </strong>
                         </div>
                         <div class="col-md-12 m-b-20">
-                            Base Imponible: <strong class="pull-right"> 96,223.12 </strong>
+                            Base Imponible: <strong class="pull-right"> {{ totalFactura | number: '.2-2' }} </strong>
                         </div>
                         <div class="col-md-12 m-b-20">
                             IVA 16 %:<strong class="pull-right">  23.56</strong>

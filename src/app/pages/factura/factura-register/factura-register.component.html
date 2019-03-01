@@ -32,9 +32,7 @@
                         <tr *ngFor="let servicio of servicios; index as i">
                             <td style="width: 5%;">{{ i + 1 }}</td>
                             <td>
-                                <input type="checkbox" id="check{{i + 1 }}">
-                                <label for="check{{i + 1 }}"> Recuerdame </label>
-                                <app-check [idServicio]="servicio.idCorreos" (idSeleccionado)="seleccionServicio($event)"></app-check>
+                                <app-check [idServicio]="servicio.idCorreos" [iteration]="i" (idSeleccionado)="seleccionServicio($event)"></app-check>
                             </td>
                             <td style="width: 12%;">{{ servicio.fechaServicio | date:'dd-MM-yyyy' }}</td>
                             <td style="width: 15%;">{{ servicio.ODC === 'SI' ? servicio.ODC_number : 'N/A' }}</td>
@@ -89,4 +87,4 @@
 <!-- Seccion de la modal -->
 
 
-<app-factura-generar [showModal]="showModal" (cerrar_modal)="close_modal($event)"></app-factura-generar>
+<app-factura-generar [empresas]="empresas" [totalFactura]="totalFactura" [showModal]="showModal" (cerrar_modal)="close_modal($event)"></app-factura-generar>

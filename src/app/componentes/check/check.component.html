@@ -1,4 +1,4 @@
-<button (click)="agregarComponente()" 
-    style="height: 1.5em;" [style.color]="check ? 'black' : colorCkeck" 
-    value="2" #valor2><span class="fa fa-check"></span>
-</button>
+<input type="checkbox" (click)="agregarComponente()" #check id="check{{iteration}}">
+<label for="check{{iteration}}"></label>
+<!-- <button (click)="agregarComponente()" style="height: 1.5em;" [style.color]="check ? 'black' : colorCkeck" value="2" #valor2><span class="fa fa-check"></span> -->
+<!-- </button> -->
