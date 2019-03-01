@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Empresa } from '../../../interfaces/empresa';
+import { BusquedaColeccionService } from '../../../services/busqueda-coleccion.service';
+
 
 @Component({
   selector: 'app-factura-generar',
@@ -12,9 +14,13 @@ export class FacturaGenerarComponent implements OnInit {
   @Input() totalFactura: number;
   @Input() empresas: Empresa[];
 
+  empresa_seleccionada: Empresa;
+  montoIVA: number = 0;
+  totalGeneral: number = 0;
+
   @Output() cerrar_modal: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor( private _busquedaService: BusquedaColeccionService) { }
 
   ngOnInit() {
   }
@@ -23,6 +29,17 @@ export class FacturaGenerarComponent implements OnInit {
     this.cerrar_modal.emit(false);
   }
   buscar_empresa( idEmpresa: number ) {
-    console.log( idEmpresa, "ID de la empresa" );
+    this._busquedaService.buscarRegistro('empresa', idEmpresa)
+      .subscribe( (resp: any) => {
+        this.empresa_seleccionada = resp.busqueda[0];
+        console.log(this.empresa_seleccionada);
+      }, (err: any) => {
+        console.log('error', err);
+      });
+  }
+
+  calcularTotalGeneral(iva: number) {
+    this.montoIVA = this.totalFactura * (iva / 100);
+    this.totalGeneral = this.totalFactura + this.montoIVA;
   }
 }

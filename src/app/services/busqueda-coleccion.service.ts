@@ -15,7 +15,7 @@ export class BusquedaColeccionService {
   }
 
   buscarRegistro (colleccion: String, id: Number) {
-    let url = `${ environment.basePath }/api/v1/buscar/tabulador/${ colleccion }/${ id }`;
+    let url = `${ environment.basePath }/api/v1/buscar/${ colleccion }/${ id }`;
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${ this.token }`
     });

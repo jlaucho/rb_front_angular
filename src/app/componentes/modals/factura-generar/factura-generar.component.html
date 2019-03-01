@@ -15,29 +15,37 @@
 
                             </select>
                         </div>
-                        <div class="col-md-12 m-b-20">
-                            Direcci&oacute;n: <strong class="pull-right">    Aguna parte de caracas  </strong>
-                        </div>
-                        <div class="col-md-12 m-b-20">
-                            Telefono: <strong class="pull-right"> 0212-202-3111</strong>
-                        </div>
-                        <div class="col-md-12 m-b-20">
-                            RIF: <strong class="pull-right"> j-00006390-5 </strong>
-                        </div>
-                        <div class="col-md-12 m-b-20">
-                            Base Imponible: <strong class="pull-right"> {{ totalFactura | number: '.2-2' }} </strong>
-                        </div>
-                        <div class="col-md-12 m-b-20">
-                            IVA 16 %:<strong class="pull-right">  23.56</strong>
-                        </div>
-                        <div class="col-md-12 m-b-20">
-                            Total General: <strong class="pull-right"> 100.569,12 </strong>
-                        </div>
-                        <div class="col-md-12 m-b-20 form-group">
-                            <input type="text" class="form-control" placeholder="Ingrese numero de factura">
-                        </div>
-                        <div class="col-md-12 m-b-20 form-group">
-                            <input type="text" class="form-control" placeholder="Ingrese fecha de factura">
+                        <div *ngIf="empresa_seleccionada">
+                            <div class="col-md-12 m-b-20">
+                                Direcci&oacute;n: <strong class="pull-right">{{empresa_seleccionada.direccion}}</strong>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                Telefono: <strong class="pull-right">{{ empresa_seleccionada.telefono }}</strong>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                RIF: <strong class="pull-right"> {{empresa_seleccionada.RIF}} </strong>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                Base Imponible: <strong class="pull-right"> {{ totalFactura | number: '.2-2' }} </strong>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                IVA:<strong class="">
+                                    <input style="width: 70px; text-align: right"
+                                            type="text"
+                                            #IVA
+                                            (keyup)="calcularTotalGeneral(IVA.value)">%
+                                    <span class="pull-right">{{ montoIVA | number: '.2-2' }}</span>
+                                </strong>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                Total General: <strong class="pull-right"> {{ totalGeneral | number: '.2-2' }} </strong>
+                            </div>
+                            <div class="col-md-12 m-b-20 form-group">
+                                <input type="text" class="form-control" placeholder="Ingrese numero de factura">
+                            </div>
+                            <div class="col-md-12 m-b-20 form-group">
+                                <input type="text" class="form-control" placeholder="Ingrese fecha de factura">
+                            </div>
                         </div>
                     </div>
                 </div>

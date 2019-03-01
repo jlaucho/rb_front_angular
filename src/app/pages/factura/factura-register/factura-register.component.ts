@@ -28,7 +28,7 @@ export class FacturaRegisterComponent implements OnInit {
   colorCheck: string = 'cornsilk';
   seleccionadas: any[] = new Array();
   totalFactura: number;
-  empresas: Empresa[];
+  empresas: Empresa[] = new Array();
 
   constructor(
     private _ServiciosService: ServiciosService,
@@ -45,6 +45,7 @@ export class FacturaRegisterComponent implements OnInit {
 
   show_modal() {
     console.log('cliak');
+    console.log(this.empresas.length);
     this.showModal = true;
   }
 
@@ -52,7 +53,7 @@ export class FacturaRegisterComponent implements OnInit {
     this.showModal = false;
   }
   getServicios() {
-    this._ServiciosService.listaServicio ( "por_facturar" )
+    this._ServiciosService.listaServicio ( 'por_facturar' )
     .subscribe( ( resp: any ) => {
       this.total = resp.correos.total;
       this.totalFacturado = resp.total;
@@ -132,7 +133,7 @@ export class FacturaRegisterComponent implements OnInit {
         this.empresas = resp.empresas;
         console.log(this.empresas);
       }, (err: any) =>{
-        console.log("error al intentar buscar las empresas", err);
+        console.log('error al intentar buscar las empresas', err);
       });
   }
 }

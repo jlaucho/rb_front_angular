@@ -43,7 +43,7 @@
                     </tbody>
                 </table>
                 <tfoot>
-                    <button class="btn btn-info btn-rounded" (click)="showModal = true">Generar Factura</button>
+                    <button class="btn btn-info btn-rounded" [disabled]="!empresas.length || !seleccionadas.length" (click)="show_modal()">Generar Factura</button>
                 </tfoot>
                 <nav aria-label="Page navigation example" *ngIf="Ok">
                     <ul class="pagination justify-content-center">
