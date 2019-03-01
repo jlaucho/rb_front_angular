@@ -14,7 +14,8 @@
                     </div>
                 </div>
             </div>
-            <div class="table-responsive">
+            <div class="">
+
                 <table class="table color-table success-table table-sm">
                     <thead>
                         <tr>
@@ -31,6 +32,8 @@
                         <tr *ngFor="let servicio of servicios; index as i">
                             <td style="width: 5%;">{{ i + 1 }}</td>
                             <td>
+                                <input type="checkbox" id="check{{i + 1 }}">
+                                <label for="check{{i + 1 }}"> Recuerdame </label>
                                 <app-check [idServicio]="servicio.idCorreos" (idSeleccionado)="seleccionServicio($event)"></app-check>
                             </td>
                             <td style="width: 12%;">{{ servicio.fechaServicio | date:'dd-MM-yyyy' }}</td>
@@ -70,7 +73,9 @@
                         </li>
                     </ul>
                 </nav>
-                <h5 class="card-subtitle"> <strong> Servicios seleccionados {{ 0 }} con un monto total de {{ 123123 }} </strong> </h5>
+                <h5 class="card-subtitle">
+                    <strong *ngIf="seleccionadas.length"> Servicios seleccionados {{ seleccionadas.length }} con un monto total de {{ totalFactura |number: '.2-2'}} </strong>
+                </h5>
                 <div *ngIf="!Ok">
                     <div class="alert alert-primary" role="alert">
                         <strong>{{ mensaje }}</strong>

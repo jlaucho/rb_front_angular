@@ -25,7 +25,8 @@ export class FacturaRegisterComponent implements OnInit {
   busquedaPalabra: string;
   forma: FormGroup;
   colorCheck: string = 'cornsilk';
-  seleccionadas: any[];
+  seleccionadas: any[] = new Array();
+  totalFactura: number;
 
   constructor(
     private _ServiciosService: ServiciosService,
@@ -101,25 +102,30 @@ export class FacturaRegisterComponent implements OnInit {
   }
 
   seleccionServicio( event ) {
-    console.log(this.servicios);
-    if( event.status ) {
-      let seleccion = this.servicios.filter(function(servicio){
-        if(event.idServicio === servicio.idCorreos){
+    if ( event.status ) {
+      let seleccion = this.servicios.filter(function(servicio) {
+        if (event.idServicio === servicio.idCorreos) {
           return servicio;
         }
       });
-      console.log(seleccion[0]);
       this.seleccionadas.push(seleccion[0]);
     } else {
-      for (const key in this.seleccionadas) {
+      for (let key in this.seleccionadas) {
         if (this.seleccionadas.hasOwnProperty(key)) {
-          const element = this.seleccionadas[key];
-          if(element.idServicio === event.idServicio){
-            this.seleccionadas.splice(key, 1);
+          let element = this.seleccionadas[key];
+          if (element.idCorreos === event.idServicio) {
+            this.seleccionadas.splice(Number(key), 1);
           }
         }
       }
     }
-    console.log(this.seleccionadas);
+    this.totalFactura = 0;
+    for (let key in this.seleccionadas) {
+      if (this.seleccionadas.hasOwnProperty(key)) {
+        let element = this.seleccionadas[key];
+        this.totalFactura += element.totalMonto;
+      }
+    }
+    console.log(this.seleccionadas.length, "Length");
   }
 }

@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FacturaGenerarComponent implements OnInit {
 
   @Input() showModal: boolean;
+  @Input() totalFactura: number;
   @Output() cerrar_modal: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
