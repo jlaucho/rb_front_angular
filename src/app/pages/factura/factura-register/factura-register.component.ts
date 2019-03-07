@@ -136,6 +136,15 @@ export class FacturaRegisterComponent implements OnInit {
         console.log('error al intentar buscar las empresas', err);
       });
   }
+
+  generarFactura(event){
+    console.log('evento', event);
+    if (!event) {
+      return;
+    }
+    
+    console.log('estamos en generar factura, las seleccionadas son: ', this.seleccionadas);
+  }
 }
 
 interface Empresa {

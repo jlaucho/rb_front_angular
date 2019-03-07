@@ -1,59 +1,60 @@
 <div class="modal" *ngIf="showModal" [ngStyle]="{'display': showModal ? 'block': 'hidden' }" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Generaci&oacute;n de Factura</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal form-material">
-                    <div class="form-group">
-                        <div class="col-md-12 m-b-20">
-                            <select (change)="buscar_empresa(empresaSeleccionada.value)" class="custom-select col-12" id="inlineFormCustomSelect" #empresaSeleccionada>
-
+            <form action="">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Generaci&oacute;n de Factura</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal form-material">
+                        <div class="form-group">
+                            <div class="col-md-12 m-b-20">
+                                <select (change)="buscar_empresa(empresaSeleccionada.value)" class="custom-select col-12" id="inlineFormCustomSelect" #empresaSeleccionada>
                                 <option selected="">Seleccione la Empresa...</option>
                                 <option *ngFor="let empresa of empresas" value="{{ empresa.idEmpresas }}"> {{ empresa.name | uppercase }} </option>
 
                             </select>
-                        </div>
-                        <div *ngIf="empresa_seleccionada">
-                            <div class="col-md-12 m-b-20">
-                                Direcci&oacute;n: <strong class="pull-right">{{empresa_seleccionada.direccion}}</strong>
                             </div>
-                            <div class="col-md-12 m-b-20">
-                                Telefono: <strong class="pull-right">{{ empresa_seleccionada.telefono }}</strong>
-                            </div>
-                            <div class="col-md-12 m-b-20">
-                                RIF: <strong class="pull-right"> {{empresa_seleccionada.RIF}} </strong>
-                            </div>
-                            <div class="col-md-12 m-b-20">
-                                Base Imponible: <strong class="pull-right"> {{ totalFactura | number: '.2-2' }} </strong>
-                            </div>
-                            <div class="col-md-12 m-b-20">
-                                IVA:<strong class="">
+                            <div *ngIf="empresa_seleccionada">
+                                <div class="col-md-12 m-b-20">
+                                    Direcci&oacute;n: <strong class="pull-right">{{empresa_seleccionada.direccion}}</strong>
+                                </div>
+                                <div class="col-md-12 m-b-20">
+                                    Telefono: <strong class="pull-right">{{ empresa_seleccionada.telefono }}</strong>
+                                </div>
+                                <div class="col-md-12 m-b-20">
+                                    RIF: <strong class="pull-right"> {{empresa_seleccionada.RIF}} </strong>
+                                </div>
+                                <div class="col-md-12 m-b-20">
+                                    Base Imponible: <strong class="pull-right"> {{ totalFactura | number: '.2-2' }} </strong>
+                                </div>
+                                <div class="col-md-12 m-b-20">
+                                    IVA:<strong class="">
                                     <input style="width: 70px; text-align: right"
                                             type="text"
                                             #IVA
                                             (keyup)="calcularTotalGeneral(IVA.value)">%
                                     <span class="pull-right">{{ montoIVA | number: '.2-2' }}</span>
                                 </strong>
-                            </div>
-                            <div class="col-md-12 m-b-20">
-                                Total General: <strong class="pull-right"> {{ totalGeneral | number: '.2-2' }} </strong>
-                            </div>
-                            <div class="col-md-12 m-b-20 form-group">
-                                <input type="text" class="form-control" placeholder="Ingrese numero de factura">
-                            </div>
-                            <div class="col-md-12 m-b-20 form-group">
-                                <input type="text" class="form-control" placeholder="Ingrese fecha de factura">
+                                </div>
+                                <div class="col-md-12 m-b-20">
+                                    Total General: <strong class="pull-right"> {{ totalGeneral | number: '.2-2' }} </strong>
+                                </div>
+                                <div class="col-md-12 m-b-20 form-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese numero de factura">
+                                </div>
+                                <div class="col-md-12 m-b-20 form-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese fecha de factura">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info waves-effect">Generar Factura</button>
-                <button type="button" class="btn btn-default waves-effect" (click)="cerraModal()">Cancelar</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info waves-effect" (click)="generarFactura()">Generar Factura</button>
+                    <button type="button" class="btn btn-default waves-effect" (click)="cerraModal()">Cancelar</button>
+                </div>
+            </form>
         </div>
         <!-- /.modal-content -->
     </div>

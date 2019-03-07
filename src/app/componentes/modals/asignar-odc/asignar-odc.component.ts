@@ -22,7 +22,8 @@ export class AsignarODCComponent implements OnInit {
 
   ngOnInit() {
     this.forma = new FormGroup({
-      ODC_number: new FormControl(null, Validators.required)
+      ODC_number: new FormControl(null, Validators.required),
+      descripcion: new FormControl(null, Validators.required)
     });
   }
 
@@ -34,15 +35,14 @@ export class AsignarODCComponent implements OnInit {
   enviarODC(idCorreos) {
     this.forma.value.idServicio = idCorreos;
     let body: EnviarODC = this.forma.value;
-    console.log( this.forma );
-
+    console.log( body );
     this._ServicioService.agregarODC( body )
       .subscribe( (resp: any) => {
             console.log(resp);
             this.mostrarODC = false;
             this.cerrarModal.emit( this.mostrarODC );
             this.actualizarLista.emit(true);
-            
+
             if (resp.ok) {
               Swal(
                 'Asignaci&oacute;n de ODC',
@@ -66,7 +66,8 @@ export class AsignarODCComponent implements OnInit {
 
 
 interface EnviarODC {
-  idCorreo: Number,
-  ODC_number: string
+  idCorreo: Number;
+  ODC_number: string;
+  descripcion: string;
 }
 

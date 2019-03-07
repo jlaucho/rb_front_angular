@@ -8,9 +8,15 @@
                     <button type="button" class="close" (click)="cerrar();">×</button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-12">
-                        <input type="text" formControlName="ODC_number" name="ODC_number" class="form-control" placeholder="Ingrese el Numero de ODC">
-                        <app-mensajes-forms [forma]="forma" selectorName="ODC_number" [caracterMin]="3" [caracterMax]="11"></app-mensajes-forms>
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" style="width: 100%" formControlName="ODC_number" name="ODC_number" class="" placeholder="Ingrese el Numero de ODC">
+                            <app-mensajes-forms [forma]="forma" selectorName="ODC_number" [caracterMin]="3" [caracterMax]="11"></app-mensajes-forms>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" style="width: 100%" formControlName="descripcion" name="descripcion" class="pull-right" placeholder="Ingrese la descripcion de la ODC ODC">
+                            <app-mensajes-forms [forma]="forma" selectorName="descripcion" [caracterMin]="3" [caracterMax]="100"></app-mensajes-forms>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

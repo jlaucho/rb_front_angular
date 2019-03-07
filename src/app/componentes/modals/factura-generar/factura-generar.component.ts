@@ -19,6 +19,7 @@ export class FacturaGenerarComponent implements OnInit {
   totalGeneral: number = 0;
 
   @Output() cerrar_modal: EventEmitter<boolean> = new EventEmitter();
+  @Output() event_generar: EventEmitter<any> = new EventEmitter();
 
   constructor( private _busquedaService: BusquedaColeccionService) { }
 
@@ -27,6 +28,7 @@ export class FacturaGenerarComponent implements OnInit {
 
   cerraModal() {
     this.cerrar_modal.emit(false);
+    this.event_generar.emit(false);
   }
   buscar_empresa( idEmpresa: number ) {
     this._busquedaService.buscarRegistro('empresa', idEmpresa)
@@ -41,5 +43,12 @@ export class FacturaGenerarComponent implements OnInit {
   calcularTotalGeneral(iva: number) {
     this.montoIVA = this.totalFactura * (iva / 100);
     this.totalGeneral = this.totalFactura + this.montoIVA;
+  }
+
+  generarFactura(){
+    console.log('Le dio clik en generar factura');
+    this.cerrar_modal.emit(false);
+    this.event_generar.emit(true);
+
   }
 }
