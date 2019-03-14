@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../../services/servicios.service';
-import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../../interfaces/servicio';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EmpresaService } from '../../../services/empresa.service';
+import { FacturaService } from '../../../services/factura.service';
 
 
 @Component({
@@ -29,10 +29,12 @@ export class FacturaRegisterComponent implements OnInit {
   seleccionadas: any[] = new Array();
   totalFactura: number;
   empresas: Empresa[] = new Array();
+  empresaID: Number;
 
   constructor(
     private _ServiciosService: ServiciosService,
-    private _EmpresasService: EmpresaService
+    private _EmpresasService: EmpresaService,
+    private _FacturaService: FacturaService
   ) { }
 
   ngOnInit() {
@@ -142,8 +144,15 @@ export class FacturaRegisterComponent implements OnInit {
     if (!event) {
       return;
     }
-    
     console.log('estamos en generar factura, las seleccionadas son: ', this.seleccionadas);
+    console.log('---------------------------------------------------', this.empresaID);
+    this._FacturaService.generarFactura(this.seleccionadas)
+      .subscribe( (resp: any) =>{
+        console.log("desde el Backend", resp);
+      }, (err: any) =>{
+        console.error("error desde el Backend", err);
+      });
+
   }
 }
 

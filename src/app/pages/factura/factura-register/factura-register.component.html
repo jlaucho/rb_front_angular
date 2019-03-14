@@ -87,4 +87,7 @@
 <!-- Seccion de la modal -->
 
 
-<app-factura-generar [empresas]="empresas" [totalFactura]="totalFactura" [showModal]="showModal" (event_generar)="generarFactura( $event )" (cerrar_modal)="close_modal($event)"></app-factura-generar>
+<app-factura-generar [empresas]="empresas" [totalFactura]="totalFactura" 
+    [showModal]="showModal" (event_generar)="generarFactura( $event )" 
+    (empresa_id)="empresaID"
+    (cerrar_modal)="close_modal($event)"></app-factura-generar>

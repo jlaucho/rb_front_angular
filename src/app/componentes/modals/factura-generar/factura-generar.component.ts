@@ -20,6 +20,7 @@ export class FacturaGenerarComponent implements OnInit {
 
   @Output() cerrar_modal: EventEmitter<boolean> = new EventEmitter();
   @Output() event_generar: EventEmitter<any> = new EventEmitter();
+  @Output() empresa_id: EventEmitter<any> = new EventEmitter();
 
   constructor( private _busquedaService: BusquedaColeccionService) { }
 
@@ -47,8 +48,10 @@ export class FacturaGenerarComponent implements OnInit {
 
   generarFactura(){
     console.log('Le dio clik en generar factura');
+    let empresaID = this.empresa_seleccionada.idEmpresas;
     this.cerrar_modal.emit(false);
     this.event_generar.emit(true);
+    this.empresa_id.emit(empresaID);
 
   }
 }
