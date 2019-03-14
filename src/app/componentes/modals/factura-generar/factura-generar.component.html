@@ -1,7 +1,7 @@
 <div class="modal" *ngIf="showModal" [ngStyle]="{'display': showModal ? 'block': 'hidden' }" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="">
+            <form [formGroup]="forma" (ngSubmit)=generarFactura()>
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Generaci&oacute;n de Factura</h4>
                 </div>
@@ -32,6 +32,7 @@
                                     IVA:<strong class="">
                                     <input style="width: 70px; text-align: right"
                                             type="text"
+                                            formControlName="IVA_por"
                                             #IVA
                                             (keyup)="calcularTotalGeneral(IVA.value)">%
                                     <span class="pull-right">{{ montoIVA | number: '.2-2' }}</span>
@@ -41,17 +42,17 @@
                                     Total General: <strong class="pull-right"> {{ totalGeneral | number: '.2-2' }} </strong>
                                 </div>
                                 <div class="col-md-12 m-b-20 form-group">
-                                    <input type="text" class="form-control" placeholder="Ingrese numero de factura">
+                                    <input type="text" formControlName="numFactura" class="form-control" placeholder="Ingrese numero de factura">
                                 </div>
                                 <div class="col-md-12 m-b-20 form-group">
-                                    <input type="text" class="form-control" placeholder="Ingrese fecha de factura">
+                                    <input type="text" class="form-control" formControlName="fechaFactura" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" placeholder="Ingrese fecha de factura">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info waves-effect" (click)="generarFactura()">Generar Factura</button>
+                    <button type="submit" class="btn btn-info waves-effect">Generar Factura</button>
                     <button type="button" class="btn btn-default waves-effect" (click)="cerraModal()">Cancelar</button>
                 </div>
             </form>

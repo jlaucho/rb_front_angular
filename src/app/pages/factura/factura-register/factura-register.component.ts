@@ -29,7 +29,7 @@ export class FacturaRegisterComponent implements OnInit {
   seleccionadas: any[] = new Array();
   totalFactura: number;
   empresas: Empresa[] = new Array();
-  empresaID: Number;
+  empresaID: any;
 
   constructor(
     private _ServiciosService: ServiciosService,
@@ -140,13 +140,30 @@ export class FacturaRegisterComponent implements OnInit {
   }
 
   generarFactura(event){
-    console.log('evento', event);
     if (!event) {
       return;
     }
-    console.log('estamos en generar factura, las seleccionadas son: ', this.seleccionadas);
-    console.log('---------------------------------------------------', this.empresaID);
-    this._FacturaService.generarFactura(this.seleccionadas)
+
+    let body = event;
+    let correo_id = [];
+    let cantServicios = [];
+    let codigo = [];
+    for (const key in this.seleccionadas) {
+      if (this.seleccionadas.hasOwnProperty(key)) {
+        const element = this.seleccionadas[key];
+
+        console.log(element.idCorreos);
+
+        correo_id.push(element.idCorreos);
+        cantServicios.push(1);
+        codigo.push('TR005');
+      }
+    }
+    body.correo_id = correo_id;
+    body.cantServicios = cantServicios;
+    body.codigo = codigo;
+
+    this._FacturaService.generarFactura(body)
       .subscribe( (resp: any) =>{
         console.log("desde el Backend", resp);
       }, (err: any) =>{
